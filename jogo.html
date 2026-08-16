@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafio | Primeiros Socorros — Livro-Jogo</title>
+    <meta name="author" content="FRANCIVAL ALVES FARIAS">
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body onload="iniciarDesafio()">
+    <div class="container">
+        
+        <!-- Cabeçalho Fixo -->
+        <header class="cabecalho">
+            <button class="btn-terceiro" style="width:auto; padding:8px 12px; margin:0;" onclick="voltarMenu()">← Voltar</button>
+            <p class="autor" style="margin-top:10px;">Autor: <span>FRANCIVAL ALVES FARIAS</span></p>
+            <h2 id="titulo-volume">Volume 1 — Primeiros Socorros</h2>
+            <div class="progresso-barra">
+                <div class="progresso-preenchimento" id="barraProgresso"></div>
+            </div>
+            <div style="display:flex; justify-content:space-between; margin:8px 0;">
+                <span id="contadorDesafio">001 / 060</span>
+                <span class="pontos">⭐ <span id="pontos">0</span> pts</span>
+            </div>
+        </header>
+
+        <!-- Categoria -->
+        <span class="categoria" id="categoria">Segurança da Cena</span>
+
+        <!-- Cenário -->
+        <div class="cenario" id="cenario">
+            Você chega a um acidente. Há uma pessoa caída no chão e fios elétricos caídos próximos a ela...
+        </div>
+
+        <!-- Risco -->
+        <div class="aviso-risco">
+            ⚠️ <strong>Risco Imediato:</strong> <span id="risco">Choque elétrico fatal</span>
+        </div>
+
+        <!-- Pergunta -->
+        <h3 class="pergunta">Qual é a sua PRIMEIRA atitude?</h3>
+
+        <!-- Alternativas -->
+        <div id="alternativas">
+            <!-- Carregadas pelo JavaScript -->
+            <p style="text-align:center; color:#94a3b8;">Carregando desafio...</p>
+        </div>
+
+        <!-- Aviso Legal -->
+        <div class="aviso-legal">
+            ⚠️ Não substitui atendimento médico, SAMU (192) ou Bombeiros (193).
+        </div>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
