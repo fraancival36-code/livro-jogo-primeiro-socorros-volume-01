@@ -1,0 +1,29 @@
+livro-jogo-primeiros-socorros/   ← RAIZ (FIXA)
+│
+├── index.html                    ← Tela inicial (FIXA) ✅ já no ar!
+├── menu-volumes.html             ← Escolha do volume (FIXA)
+├── jogo.html                     ← Tela do desafio (FIXA)
+├── resultado.html                ← Tela de consequência (FIXA)
+├── guia-emergencia.html          ← Números e guia (FIXA)
+│
+├── estilo.css                    ← Design visual (FIXO)
+├── app.js                        ← Lógica do jogo (FIXA)
+│
+├── volumes/                      ← 📂 AQUI ENTRA O CONTEÚDO (TROCAVÉL)
+│   ├── volume-01/
+│   │   ├── dados.json            ← Título, capa, 60 desafios
+│   │   └── capa.jpg
+│   │
+│   ├── volume-02/                ← Futuro — só copiar a pasta!
+│   │   ├── dados.json
+│   │   └── capa.jpg
+│   │
+│   └── volume-03/...
+│
+├── public/
+│   ├── imagens/
+│   └── icones/
+│
+├── README.md
+├── LICENSE
+└── docs/
