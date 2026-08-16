@@ -258,6 +258,112 @@
             font-size: 1.8rem;
             font-weight: bold;
             color: #fbbf24;
-        }
+        } <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primeiros Socorros — Livro-Jogo</title>
+    
+    <!-- ✅ AQUI DENTRO É O LUGAR CERTO! -->
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: #e2e8f0;
+    min-height: 100vh;
+    padding: 15px;
+}
+
+.container {
+    max-width: 480px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.cabecalho {
+    background: rgba(30, 41, 59, 0.9);
+    border: 2px solid #475569;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.barra-vida {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.coracao {
+    font-size: 1.5rem;
+}
+
+.barra-fundo {
+    flex: 1;
+    height: 12px;
+    background: #334155;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.barra-preenchimento {
+    height: 100%;
+    background: linear-gradient(90deg, #dc2626, #ef4444);
+    width: 100%;
+    transition: width 0.3s ease;
+    border-radius: 6px;
+}
+
+.info-cena {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #94a3b8;
+    margin-top: 5px;
+}
+
+.caixa-pergunta {
+    background: rgba(30, 41, 59, 0.9);
+    border: 2px solid #4f46e5;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.categoria {
+    display: inline-block;
+    background: rgba(79, 70, 229, 0.2);
+    color: #a5b4fc;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+}
+
+.titulo-pergunta {
+    font-size: 1.3rem;
+    color: #fbbf24;
+    margin-bottom: 15px;
+}
+
+.texto-cenario {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #e2e8f0;
+    margin-bottom: 15px;
+}
+
+.aviso-risco {
+    background: rgba(239, 68, 68, 0.1);
+    border-left: 3px solid #ef4444;
+    padding: 10px;
+    border-radius: 0 8px
+
     </style>
 </head>
