@@ -4,7 +4,7 @@
   "subtitulo": "O Que Fazer?",
   "autor": "FRANCIVAL ALVES FARIAS",
   "capa": "capa.jpg",
-  "totalDesafios": 60,
+  "totalCenas": 60,
   "categorias": [
     "Segurança da Cena",
     "Avaliação Primária",
@@ -13,30 +13,86 @@
     "Acidentes Diversos",
     "Teste Final"
   ],
-  "desafios": [
+  "cenas": [
     {
       "id": "PS-V1-001",
       "categoria": "Segurança da Cena",
-      "titulo": "A Regra de Ouro",
-      "cenario": "Você chega a um acidente. Há uma pessoa caída no chão e fios elétricos caídos próximos a ela. Outras pessoas estão se aproximando sem perceber o perigo.",
-      "riscoImediato": "Choque elétrico fatal para quem tocar no fio ou na vítima.",
+      "titulo": "O Primeiro Passo",
+      "cenario": "Você chega a um local onde acabou de acontecer um acidente. Há uma pessoa caída no chão e algumas pessoas ao redor estão assustadas. Antes de correr para atender a vítima, você precisa verificar se o local é seguro.",
+      "risco": "Aproximar-se sem verificar pode colocar você e outras pessoas em perigo: trânsito, fios elétricos, fogo, estruturas instáveis.",
+      "imagem": "cena_01.jpg",
+      "procedimentoCorreto": "✅ Correto! A segurança da cena vem sempre primeiro. Não adianta tentar ajudar colocando a própria vida em risco. Podem existir perigos como trânsito, eletricidade, fogo, fumaça, produtos químicos ou estruturas instáveis. O SAMU orienta que a cena seja avaliada antes de qualquer atendimento.",
       "alternativas": [
-        { "letra": "A", "texto": "Corro até a vítima e a puxo para longe dos fios." },
-        { "letra": "B", "texto": "Grito para todo mundo PARAR, não deixo ninguém se aproximar e ligo 193 (Bombeiros)." },
-        { "letra": "C", "texto": "Piso nos fios com os pés secos para afastá-los." },
-        { "letra": "D", "texto": "Dou água para a vítima enquanto espero ajuda." },
-        { "letra": "E", "texto": "Saio correndo para buscar uma vara de madeira." }
-      ],
-      "respostaCorreta": "B",
-      "consequencias": {
-        "sucesso": "✅ Excelente decisão! Você protegeu a cena, evitou mais vítimas e acionou o socorro correto. A segurança vem SEMPRE em primeiro lugar!",
-        "parcial": "⚠️ A intenção é boa, mas aproximar-se sem ter certeza pode colocar VOCÊ em risco. Ligue 193 antes de qualquer movimento.",
-        "erro": "❌ Decisão perigosa! Tocar nos fios ou na vítima pode causar choque fatal. Lembre-se: PARAR → OBSERVAR → PROTEGER → ACIONAR → AJUDAR."
-      },
-      "procedimentoCorreto": "1. Ordene que todos parem e se afastem. 2. Não toque nos fios nem na vítima. 3. Ligue 193 (Bombeiros) e 192 (SAMU). 4. Mantenha todos afastados até a chegada da equipe.",
-      "oQueNaoFazer": "❌ Nunca toque em fios elétricos caídos. ❌ Nunca dê água ou comida a pessoa caída/ferida. ❌ Não corra sem avaliar o perigo.",
-      "quandoChamarEmergencia": "Imediatamente! Ligue 193 por causa do risco elétrico e 192 pela vítima.",
-      "explicacaoTecnica": "Fios elétricos caídos podem estar energizados. A corrente passa pelo solo e pela vítima — tocar nela pode eletrocutar você também. A primeira ação SEMPRE é controlar o acesso e acionar quem sabe desligar a energia."
+        { "texto": "Correr imediatamente até a vítima.", "hp": -2, "perfil": "" },
+        { "texto": "Verificar se existe algum perigo para você, para a vítima e para outras pessoas.", "hp": 2, "perfil": "prudencia" },
+        { "texto": "Dar água para a vítima.", "hp": -1, "perfil": "" },
+        { "texto": "Levantar a vítima rapidamente.", "hp": -2, "perfil": "" },
+        { "texto": "Pedir para alguém tirar uma fotografia do acidente.", "hp": -1, "perfil": "" }
+      ]
+    },
+    {
+      "id": "PS-V1-002",
+      "categoria": "Segurança da Cena",
+      "titulo": "Pedindo Ajuda",
+      "cenario": "Depois de verificar que o local é seguro, você percebe que a vítima não responde quando você pergunta se está tudo bem. Há outra pessoa próxima.",
+      "risco": "A demora em acionar o socorro pode agravar o estado da vítima.",
+      "imagem": "cena_02.jpg",
+      "procedimentoCorreto": "✅ Correto! Quando houver mais de uma pessoa, uma permanece com a vítima e a outra aciona o SAMU 192. O atendimento especializado deve ser acionado o mais rápido possível. O SAMU também pode fornecer orientações por telefone enquanto a equipe chega.",
+      "alternativas": [
+        { "texto": "Mandar a pessoa embora para evitar confusão.", "hp": -2, "perfil": "" },
+        { "texto": "Pedir ajuda e orientar alguém a ligar para o SAMU 192.", "hp": 2, "perfil": "comunicacao" },
+        { "texto": "Dar água para a vítima.", "hp": -1, "perfil": "" },
+        { "texto": "Colocar a vítima imediatamente sentada.", "hp": -2, "perfil": "" },
+        { "texto": "Esperar alguns minutos para ver se ela melhora sozinha.", "hp": -1, "perfil": "" }
+      ]
+    },
+    {
+      "id": "PS-V1-003",
+      "categoria": "Avaliação Primária",
+      "titulo": "A Vítima Não Responde",
+      "cenario": "Você chama a vítima: 'Você está bem?' Ela não responde. Você percebe que ela permanece imóvel.",
+      "risco": "A ausência de resposta e de respiração pode indicar parada cardiorrespiratória — situação de risco de vida.",
+      "imagem": "cena_03.jpg",
+      "procedimentoCorreto": "✅ Correto! Verificar resposta e respiração é a primeira avaliação. A ausência de resposta e alteração ou ausência da respiração são sinais de gravidade. Uma vítima que não responde precisa de avaliação rápida e acionamento imediato do serviço de emergência.",
+      "alternativas": [
+        { "texto": "A cor da roupa da vítima.", "hp": -1, "perfil": "" },
+        { "texto": "Se a vítima responde e se está respirando normalmente.", "hp": 2, "perfil": "conhecimento" },
+        { "texto": "Quanto dinheiro ela possui.", "hp": -2, "perfil": "" },
+        { "texto": "Se ela estava usando celular.", "hp": -1, "perfil": "" },
+        { "texto": "Se existem outras pessoas olhando.", "hp": -1, "perfil": "" }
+      ]
+    },
+    {
+      "id": "PS-V1-004",
+      "categoria": "Acionamento de Emergência",
+      "titulo": "Acionando o SAMU",
+      "cenario": "Você pega o telefone para chamar o serviço de emergência.",
+      "risco": "Usar o número errado atrasa o atendimento.",
+      "imagem": "cena_04.jpg",
+      "procedimentoCorreto": "✅ Correto! O SAMU — Serviço de Atendimento Móvel de Urgência — é acionado pelo número 192. A ligação é gratuita e o serviço funciona 24 horas por dia. Durante o atendimento, a equipe coleta informações e pode orientar as primeiras ações enquanto a equipe é enviada.",
+      "alternativas": [
+        { "texto": "190 — Polícia.", "hp": -1, "perfil": "" },
+        { "texto": "191 — Não existe este serviço.", "hp": -2, "perfil": "" },
+        { "texto": "192 — SAMU.", "hp": 2, "perfil": "conhecimento" },
+        { "texto": "193 — Bombeiros.", "hp": -1, "perfil": "" },
+        { "texto": "199 — Defesa Civil.", "hp": -1, "perfil": "" }
+      ]
+    },
+    {
+      "id": "PS-V1-005",
+      "categoria": "Acionamento de Emergência",
+      "titulo": "O Que Informar ao 192?",
+      "cenario": "Você liga para o SAMU 192. A pessoa que atende começa a fazer perguntas sobre o acidente.",
+      "risco": "Informações incompletas ou erradas dificultam a chegada e a preparação da equipe de socorro.",
+      "imagem": "cena_05.jpg",
+      "procedimentoCorreto": "✅ Correto! Informar o local exato, o que aconteceu, quantidade de vítimas e estado aparente delas. Essas informações ajudam a central a compreender a ocorrência e determinar a resposta adequada. Mantenha a calma, responda às perguntas e siga as orientações do atendente.",
+      "alternativas": [
+        { "texto": "Apenas o nome da vítima.", "hp": -1, "perfil": "" },
+        { "texto": "Apenas a idade da vítima.", "hp": -1, "perfil": "" },
+        { "texto": "O local da ocorrência, o que aconteceu, quantidade de vítimas e estado aparente delas.", "hp": 2, "perfil": "comunicacao,conhecimento" },
+        { "texto": "Somente o número do telefone de quem está ligando.", "hp": -2, "perfil": "" },
+        { "texto": "Apenas o horário em que aconteceu.", "hp": -1, "perfil": "" }
+      ]
     }
   ]
 }
