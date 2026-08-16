@@ -1,369 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Primeiros Socorros — Livro-Jogo</title>
-    <link rel="manifest" href="manifest.json">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: #e2e8f0;
-            min-height: 100vh;
-            padding: 15px;
-        }
-
-        .container {
-            max-width: 480px;
-            width: 100%;
-            margin: 0 auto;
-        }
-
-        /* Cabeçalho — Vida e Progresso */
-        .cabecalho {
-            background: rgba(30, 41, 59, 0.9);
-            border: 2px solid #475569;
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 20px;
-        }
-
-        .barra-vida {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-
-        .coracao {
-            font-size: 1.5rem;
-        }
-
-        .barra-fundo {
-            flex: 1;
-            height: 12px;
-            background: #334155;
-            border-radius: 6px;
-            overflow: hidden;
-        }
-
-        .barra-preenchimento {
-            height: 100%;
-            background: linear-gradient(90deg, #dc2626, #ef4444);
-            width: 100%;
-            transition: width 0.3s ease;
-            border-radius: 6px;
-        }
-
-        .info-cena {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-            color: #94a3b8;
-            margin-top: 5px;
-        }
-
-        /* Caixa da Pergunta */
-        .caixa-pergunta {
-            background: rgba(30, 41, 59, 0.9);
-            border: 2px solid #4f46e5;
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .categoria {
-            display: inline-block;
-            background: rgba(79, 70, 229, 0.2);
-            color: #a5b4fc;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            margin-bottom: 15px;
-        }
-
-        .titulo-pergunta {
-            font-size: 1.3rem;
-            color: #fbbf24;
-            margin-bottom: 15px;
-        }
-
-        .texto-cenario {
-            font-size: 1rem;
-            line-height: 1.7;
-            color: #e2e8f0;
-            margin-bottom: 15px;
-        }
-
-        .aviso-risco {
-            background: rgba(239, 68, 68, 0.1);
-            border-left: 3px solid #ef4444;
-            padding: 10px;
-            border-radius: 0 8px 8px 0;
-            color: #fca5a5;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-        }
-
-        /* ==============================================
-           ✅ BOTÕES AJUSTADOS — MENORES, MAIS PRECISOS!
-           ============================================== */
-        .alternativa {
-            width: 100%;
-            padding: 12px 14px;       /* ↓ Mais compacto */
-            margin: 8px 0;            /* ↓ Espaço entre botões */
-            border-radius: 12px;
-            border: 2px solid #4f46e5;
-            background: rgba(15, 23, 42, 0.8);
-            color: #e0e7ff;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: left;
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            min-height: auto;         /* ↓ Altura automática */
-        }
-
-        .alternativa .letra {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 32px;          /* ↓ Letra menor */
-            height: 32px;
-            border-radius: 50%;
-            background: #4f46e5;
-            color: white;
-            font-weight: bold;
-            font-size: 0.9rem;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        .alternativa:active {
-            transform: scale(0.98);   /* ↓ Feedback ao tocar */
-            border-color: #fbbf24;
-            background: rgba(79, 70, 229, 0.25);
-        }
-
-        .alternativa:hover {
-            border-color: #a5b4fc;
-            background: rgba(79, 70, 229, 0.15);
-        }
-
-        /* Caixa de Resposta e Explicação */
-        .feedback {
-            background: rgba(30, 41, 59, 0.9);
-            border-radius: 12px;
-            padding: 15px;
-            margin-top: 20px;
-            display: none;
-        }
-
-        .feedback.visivel {
-            display: block;
-        }
-
-        .feedback-correto {
-            border: 2px solid #22c55e;
-            background: rgba(34, 197, 94, 0.1);
-        }
-
-        .feedback-errado {
-            border: 2px solid #ef4444;
-            background: rgba(239, 68, 68, 0.1);
-        }
-
-        .feedback-titulo {
-            font-size: 1.1rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .feedback-correto .feedback-titulo {
-            color: #4ade80;
-        }
-
-        .feedback-errado .feedback-titulo {
-            color: #fca5a5;
-        }
-
-        .feedback-texto {
-            line-height: 1.6;
-            color: #cbd5e1;
-        }
-
-        /* Botões de Navegação */
-        .botoes-navegacao {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 25px;
-            gap: 10px;
-        }
-
-        .btn {
-            padding: 12px 20px;
-            border-radius: 10px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 0.95rem;
-        }
-
-        .btn-sair {
-            background: rgba(107, 114, 128, 0.2);
-            color: #9ca3af;
-            border: 2px solid #4b5563;
-        }
-
-        .btn-sair:hover {
-            background: rgba(107, 114, 128, 0.3);
-        }
-
-        .btn-proximo {
-            background: linear-gradient(135deg, #4f46e5, #4338ca);
-            color: white;
-        }
-
-        .btn-proximo:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
-        }
-
-        .btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        /* Pontuação */
-        .pontuacao {
-            text-align: center;
-            margin-top: 20px;
-            padding: 15px;
-            background: rgba(30, 41, 59, 0.9);
-            border-radius: 12px;
-            border: 1px solid #334155;
-        }
-
-        .pontuacao-valor {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #fbbf24;
-        } <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Primeiros Socorros — Livro-Jogo</title>
-    
-    <!-- ✅ AQUI DENTRO É O LUGAR CERTO! -->
-    <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    color: #e2e8f0;
-    min-height: 100vh;
-    padding: 15px;
-}
-
-.container {
-    max-width: 480px;
-    width: 100%;
-    margin: 0 auto;
-}
-
-.cabecalho {
-    background: rgba(30, 41, 59, 0.9);
-    border: 2px solid #475569;
-    border-radius: 12px;
-    padding: 15px;
-    margin-bottom: 20px;
-}
-
-.barra-vida {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-.coracao {
-    font-size: 1.5rem;
-}
-
-.barra-fundo {
-    flex: 1;
-    height: 12px;
-    background: #334155;
-    border-radius: 6px;
-    overflow: hidden;
-}
-
-.barra-preenchimento {
-    height: 100%;
-    background: linear-gradient(90deg, #dc2626, #ef4444);
-    width: 100%;
-    transition: width 0.3s ease;
-    border-radius: 6px;
-}
-
-.info-cena {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.9rem;
-    color: #94a3b8;
-    margin-top: 5px;
-}
-
-.caixa-pergunta {
-    background: rgba(30, 41, 59, 0.9);
-    border: 2px solid #4f46e5;
-    border-radius: 16px;
-    padding: 20px;
-    margin-bottom: 20px;
-}
-
-.categoria {
-    display: inline-block;
-    background: rgba(79, 70, 229, 0.2);
-    color: #a5b4fc;
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    margin-bottom: 15px;
-}
-
-.titulo-pergunta {
-    font-size: 1.3rem;
-    color: #fbbf24;
-    margin-bottom: 15px;
-}
-
-.texto-cenario {
-    font-size: 1rem;
-    line-height: 1.7;
-    color: #e2e8f0;
-    margin-bottom: 15px;
-}
-
-.aviso-risco {
-    background: rgba(239, 68, 68, 0.1);
-    border-left: 3px solid #ef4444;
-    padding: 10px;
-    border-radius: 0 8px
-
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Primeiros Socorros — Jogo</title>
+  <link rel="stylesheet" href="estilo.css">
 </head>
+<body>
+
+  <!-- 📊 BARRA SUPERIOR — HP + PROGRESSO -->
+  <header class="barra-superior">
+    <div class="hp-container">
+      <span class="hp-icone">❤️</span>
+      <div class="hp-barra-fundo">
+        <div id="hpBarra" class="hp-barra" style="width: 100%"></div>
+      </div>
+      <span id="hpTexto" class="hp-texto">10/10</span>
+    </div>
+    
+    <div class="progresso-container">
+      <span class="cena-texto">Cena <span id="cenaAtual">1</span> de <span id="totalCenas">60</span></span>
+      <div class="barra-progresso-fundo">
+        <div id="barraProgresso" class="barra-progresso" style="width: 0%"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="conteudo-jogo">
+    <!-- 📂 CATEGORIA -->
+    <div class="categoria">
+      <span id="categoria">Segurança da Cena</span>
+    </div>
+
+    <!-- 📸 IMAGEM DA CENA -->
+    <div class="container-imagem">
+      <img id="imagemCena" src="" alt="Cena da situação" class="imagem-cena">
+    </div>
+
+    <!-- 📖 TÍTULO + SITUAÇÃO -->
+    <h2 id="tituloCena" class="titulo-cena">Situação de Emergência</h2>
+    <p id="cenario" class="texto-cenario">Carregando...</p>
+
+    <!-- ⚠️ AVISO DE RISCO -->
+    <div id="avisoRisco" class="aviso-risco">
+      ⚠️ Atenção ao risco!
+    </div>
+
+    <!-- ✅ CONSEQUÊNCIA (aparece após escolha) -->
+    <div id="consequencia" class="consequencia" style="display: none;"></div>
+
+    <!-- 🅰️🅱️🅲🅳🅴 ALTERNATIVAS — ORDEM FIXA! -->
+    <div id="alternativas" class="container-alternativas">
+      <!-- Botões gerados pelo sistema.js -->
+    </div>
+
+    <!-- 💾 PONTOS + MENU INFERIOR -->
+    <footer class="barra-inferior">
+      <div class="pontos">💾 <span id="pontos">0</span> pontos</div>
+      <div class="botoes-inferiores">
+        <button onclick="window.location.href='index.html'" class="btn-inferior">🏠 Sair</button>
+        <button class="btn-inferior" style="display:none;">💡 Dica</button>
+      </div>
+    </footer>
+  </main>
+
+  <script src="sistema.js"></script>
+  <script>
+    window.onload = iniciarJogo;
+  </script>
+</body>
+</html>
