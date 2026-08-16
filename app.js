@@ -1,73 +1,111 @@
-// SISTEMA RAIZ — LÊ QUALQUER VOLUME SEM PRECISAR MEXER AQUI
+// app.js — CORRIGIDO com caminhos certos
 let volumeAtual = 1;
 let desafioAtual = 0;
-let pontos = 0;
 let dados = null;
+let pontos = 0;
 
-// Carrega o volume automaticamente
-async function carregarVolume(numero) {
-    const caminho = `volumes/volume-0${numero}/dados.json`;
+// Caminho CERTO para o conteúdo
+const caminhoDados = "volumes/volume-01/dados.json";
+const caminhoCapa = "volumes/volume-01/capa.jpg";
+
+async function carregarVolume(numeroVolume) {
     try {
-        const resposta = await fetch(caminho);
+        const resposta = await fetch(caminhoDados);
+        if (!resposta.ok) throw new Error("Não encontrou o arquivo");
         dados = await resposta.json();
-        volumeAtual = numero;
+        volumeAtual = numeroVolume;
         desafioAtual = 0;
         pontos = 0;
-        atualizarTela();
+        mostrarDesafio();
+        atualizarProgresso();
     } catch (erro) {
-        console.error("Erro ao carregar volume:", erro);
-        alert("Volume não encontrado!");
+        console.error("Erro ao carregar:", erro);
+        alert("Não foi possível carregar o conteúdo. Verifique se os arquivos estão no lugar certo!");
     }
 }
 
-function atualizarTela() {
+function mostrarDesafio() {
+    if (!dados || !dados.desafios[desafioAtual]) {
+        alert("Parabéns! Você completou este volume!");
+        return;
+    }
+
     const desafio = dados.desafios[desafioAtual];
-    document.getElementById('categoria').textContent = desafio.categoria;
-    document.getElementById('titulo-desafio').textContent = desafio.titulo;
-    document.getElementById('cenario').textContent = desafio.cenario;
-    document.getElementById('risco').textContent = desafio.riscoImediato;
-    document.getElementById('numero-desafio').textContent = `${String(desafioAtual+1).padStart(3,'0')}/${String(dados.desafios.length).padStart(3,'0')}`;
-    document.getElementById('pontos').textContent = pontos;
+    
+    // Atualiza os elementos na tela
+    const elCategoria = document.getElementById("categoria");
+    const elCenario = document.getElementById("cenario");
+    const elRisco = document.getElementById("riscoImediato");
+    const elAlternativas = document.getElementById("alternativas");
+    const elContador = document.getElementById("contadorDesafio");
+    const elPontos = document.getElementById("pontos");
+    const elTitulo = document.getElementById("titulo-volume");
+    const elBarra = document.getElementById("barraProgresso");
+
+    if (elTitulo) elTitulo.textContent = dados.titulo;
+    if (elCategoria) elCategoria.textContent = desafio.categoria;
+    if (elCenario) elCenario.textContent = desafio.cenario;
+    if (elRisco) elRisco.textContent = desafio.riscoImediato;
+    if (elContador) elContador.textContent = `${desafioAtual + 1} / ${dados.totalDesafios}`;
+    if (elPontos) elPontos.textContent = pontos;
     
     // Barra de progresso
-    const progresso = ((desafioAtual + 1) / dados.desafios.length) * 100;
-    document.getElementById('barra').style.width = `${progresso}%`;
-    
-    // Carrega alternativas
-    const container = document.getElementById('alternativas');
-    container.innerHTML = '';
-    desafio.alternativas.forEach((alt, idx) => {
-        const letra = String.fromCharCode(65 + idx); // A, B, C, D, E
-        container.innerHTML += `
-            <div class="alternativa" onclick="responder('${letra}')">
-                <span class="letra">${letra})</span> ${alt.texto}
-            </div>
-        `;
-    });
+    if (elBarra) elBarra.style.width = `${((desafioAtual + 1) / dados.totalDesafios) * 100}%`;
+
+    // Monta as alternativas
+    if (elAlternativas) {
+        elAlternativas.innerHTML = "";
+        desafio.alternativas.forEach((alt, indice) => {
+            const botao = document.createElement("button");
+            botao.className = "btn";
+            botao.style.width = "100%";
+            botao.style.margin = "8px 0";
+            botao.style.textAlign = "left";
+            botao.style.padding = "14px 18px";
+            botao.innerHTML = `<strong>${alt.letra}.</strong> ${alt.texto}`;
+            botao.onclick = () => responder(alt.letra, desafio.respostaCorreta);
+            elAlternativas.appendChild(botao);
+        });
+    }
 }
 
-function responder(letraEscolhida) {
+function responder(letraEscolhida, letraCorreta) {
     const desafio = dados.desafios[desafioAtual];
-    const correta = desafio.respostaCorreta;
-    
-    if (letraEscolhida === correta) {
+    let mensagem = "";
+    let acertou = false;
+
+    if (letraEscolhida === letraCorreta) {
+        mensagem = desafio.consequencias.sucesso;
         pontos += 10;
-        alert("✅ Correto! +10 pontos\n\n" + desafio.consequencias.sucesso);
+        acertou = true;
     } else {
-        alert("❌ Atenção!\n\n" + desafio.consequencias.erro + 
-              "\n\n✅ O procedimento correto:\n" + desafio.procedimentoCorreto);
+        mensagem = desafio.consequencias.erro;
     }
-    
-    // Avança ou termina
-    if (desafioAtual < dados.desafios.length - 1) {
-        desafioAtual++;
-        atualizarTela();
-    } else {
-        alert(`🏆 VOLUME CONCLUÍDO!\n\nPontuação final: ${pontos} pontos\n\nParabéns! Você completou o Volume 1 de Primeiros Socorros!`);
-        window.location.href = "menu-volumes.html";
-    }
+
+    // Mostra o resultado
+    setTimeout(() => {
+        if (confirm(`${mensagem}\n\n📖 O que fazer:\n${desafio.procedimentoCorreto}\n\nQuer continuar?`)) {
+            proximoDesafio();
+        }
+    }, 300);
+}
+
+function proximoDesafio() {
+    desafioAtual++;
+    mostrarDesafio();
+}
+
+function atualizarProgresso() {
+    // Atualiza barra de progresso se existir
 }
 
 function voltarMenu() {
     window.location.href = "menu-volumes.html";
 }
+
+// Inicia automaticamente
+document.addEventListener("DOMContentLoaded", () => {
+    const url = new URLSearchParams(window.location.search);
+    const volume = url.get("volume") || 1;
+    carregarVolume(parseInt(volume));
+});
