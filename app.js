@@ -1,111 +1,144 @@
-// app.js — CORRIGIDO com caminhos certos
+// app.js — SISTEMA DE PONTOS + NÍVEIS + PROGRESSO COMPLETO
 let volumeAtual = 1;
 let desafioAtual = 0;
 let dados = null;
 let pontos = 0;
+let nivel = 1;
+let acertos = 0;
+let erros = 0;
 
-// Caminho CERTO para o conteúdo
+// Caminho CERTO
 const caminhoDados = "volumes/volume-01/dados.json";
-const caminhoCapa = "volumes/volume-01/capa.jpg";
+
+// Níveis conforme pontos
+const niveis = [
+  { min: 0, nome: "Iniciante", icone: "🌱" },
+  { min: 50, nome: "Aprendiz", icone: "📖" },
+  { min: 150, nome: "Socorrista", icone: "🩺" },
+  { min: 300, nome: "Especialista", icone: "⭐" },
+  { min: 500, nome: "Mestre dos Socorros", icone: "👑" }
+];
 
 async function carregarVolume(numeroVolume) {
-    try {
-        const resposta = await fetch(caminhoDados);
-        if (!resposta.ok) throw new Error("Não encontrou o arquivo");
-        dados = await resposta.json();
-        volumeAtual = numeroVolume;
-        desafioAtual = 0;
-        pontos = 0;
-        mostrarDesafio();
-        atualizarProgresso();
-    } catch (erro) {
-        console.error("Erro ao carregar:", erro);
-        alert("Não foi possível carregar o conteúdo. Verifique se os arquivos estão no lugar certo!");
-    }
+  try {
+    const resposta = await fetch(caminhoDados);
+    if (!resposta.ok) throw new Error("Arquivo não encontrado");
+    dados = await resposta.json();
+    volumeAtual = numeroVolume;
+    desafioAtual = 0;
+    pontos = 0;
+    nivel = 1;
+    acertos = 0;
+    erros = 0;
+    mostrarDesafio();
+    atualizarInterface();
+  } catch (erro) {
+    console.error("Erro:", erro);
+    alert("❌ Não encontrou o conteúdo. Verifique se dados.json está em volumes/volume-01/");
+  }
 }
 
 function mostrarDesafio() {
-    if (!dados || !dados.desafios[desafioAtual]) {
-        alert("Parabéns! Você completou este volume!");
-        return;
-    }
+  if (!dados || !dados.desafios[desafioAtual]) {
+    mostrarResultadoFinal();
+    return;
+  }
 
-    const desafio = dados.desafios[desafioAtual];
-    
-    // Atualiza os elementos na tela
-    const elCategoria = document.getElementById("categoria");
-    const elCenario = document.getElementById("cenario");
-    const elRisco = document.getElementById("riscoImediato");
-    const elAlternativas = document.getElementById("alternativas");
-    const elContador = document.getElementById("contadorDesafio");
-    const elPontos = document.getElementById("pontos");
-    const elTitulo = document.getElementById("titulo-volume");
-    const elBarra = document.getElementById("barraProgresso");
+  const d = dados.desafios[desafioAtual];
+  
+  // Atualiza todos os elementos
+  el("categoria").textContent = d.categoria;
+  el("titulo-desafio").textContent = d.titulo;
+  el("cenario").textContent = d.cenario;
+  el("riscoImediato").textContent = d.riscoImediato;
+  el("contadorDesafio").textContent = `${desafioAtual + 1} / ${dados.totalDesafios}`;
+  
+  // Barra de progresso
+  const progresso = ((desafioAtual + 1) / dados.totalDesafios) * 100;
+  el("barraProgresso").style.width = `${progresso}%`;
 
-    if (elTitulo) elTitulo.textContent = dados.titulo;
-    if (elCategoria) elCategoria.textContent = desafio.categoria;
-    if (elCenario) elCenario.textContent = desafio.cenario;
-    if (elRisco) elRisco.textContent = desafio.riscoImediato;
-    if (elContador) elContador.textContent = `${desafioAtual + 1} / ${dados.totalDesafios}`;
-    if (elPontos) elPontos.textContent = pontos;
-    
-    // Barra de progresso
-    if (elBarra) elBarra.style.width = `${((desafioAtual + 1) / dados.totalDesafios) * 100}%`;
+  // Monta alternativas
+  const container = el("alternativas");
+  container.innerHTML = "";
+  d.alternativas.forEach(alt => {
+    const btn = document.createElement("button");
+    btn.className = "btn alternativa";
+    btn.innerHTML = `<strong>${alt.letra}.</strong> ${alt.texto}`;
+    btn.onclick = () => responder(alt.letra, d.respostaCorreta);
+    container.appendChild(btn);
+  });
 
-    // Monta as alternativas
-    if (elAlternativas) {
-        elAlternativas.innerHTML = "";
-        desafio.alternativas.forEach((alt, indice) => {
-            const botao = document.createElement("button");
-            botao.className = "btn";
-            botao.style.width = "100%";
-            botao.style.margin = "8px 0";
-            botao.style.textAlign = "left";
-            botao.style.padding = "14px 18px";
-            botao.innerHTML = `<strong>${alt.letra}.</strong> ${alt.texto}`;
-            botao.onclick = () => responder(alt.letra, desafio.respostaCorreta);
-            elAlternativas.appendChild(botao);
-        });
-    }
+  atualizarInterface();
 }
 
 function responder(letraEscolhida, letraCorreta) {
-    const desafio = dados.desafios[desafioAtual];
-    let mensagem = "";
-    let acertou = false;
+  const d = dados.desafios[desafioAtual];
+  let mensagem = "";
+  let ganhouPontos = 0;
 
-    if (letraEscolhida === letraCorreta) {
-        mensagem = desafio.consequencias.sucesso;
-        pontos += 10;
-        acertou = true;
-    } else {
-        mensagem = desafio.consequencias.erro;
+  if (letraEscolhida === letraCorreta) {
+    ganhouPontos = 10;
+    pontos += ganhouPontos;
+    acertos++;
+    mensagem = `✅ ACERTOU! +${ganhouPontos} pontos!\n\n${d.consequencias.sucesso}`;
+  } else {
+    erros++;
+    mensagem = `❌ ERROU!\n\n${d.consequencias.erro}`;
+  }
+
+  // Verifica subida de nível
+  const nivelAntigo = nivel;
+  atualizarNivel();
+  let avisoNivel = "";
+  if (nivel > nivelAntigo) {
+    avisoNivel = `\n\n🎉 PARABÉNS! Você subiu para o Nível ${nivel} — ${niveis[nivel-1].nome}!`;
+  }
+
+  // Mostra resultado
+  setTimeout(() => {
+    alert(`${mensagem}\n\n📖 O que fazer:\n${d.procedimentoCorreto}${avisoNivel}`);
+    proximoDesafio();
+  }, 300);
+}
+
+function atualizarNivel() {
+  for (let i = niveis.length - 1; i >= 0; i--) {
+    if (pontos >= niveis[i].min) {
+      nivel = i + 1;
+      return;
     }
+  }
+  nivel = 1;
+}
 
-    // Mostra o resultado
-    setTimeout(() => {
-        if (confirm(`${mensagem}\n\n📖 O que fazer:\n${desafio.procedimentoCorreto}\n\nQuer continuar?`)) {
-            proximoDesafio();
-        }
-    }, 300);
+function atualizarInterface() {
+  el("pontos").textContent = pontos;
+  el("nivel").textContent = `${niveis[nivel-1].icone} Nível ${nivel} — ${niveis[nivel-1].nome}`;
+  el("acertos").textContent = acertos;
+  el("erros").textContent = erros;
+}
+
+function mostrarResultadoFinal() {
+  const aproveitamento = Math.round((acertos / dados.totalDesafios) * 100);
+  alert(`🏆 VOLUME CONCLUÍDO!\n\n📊 Pontuação Final: ${pontos} pontos\n🎖️ Nível Final: ${niveis[nivel-1].icone} ${niveis[nivel-1].nome}\n✅ Acertos: ${acertos} | ❌ Erros: ${erros}\n📈 Aproveitamento: ${aproveitamento}%\n\nParabéns por completar o Volume 1!`);
+  window.location.href = "index.html";
 }
 
 function proximoDesafio() {
-    desafioAtual++;
-    mostrarDesafio();
-}
-
-function atualizarProgresso() {
-    // Atualiza barra de progresso se existir
+  desafioAtual++;
+  mostrarDesafio();
 }
 
 function voltarMenu() {
+  if (confirm("⚠️ O progresso atual será perdido. Tem certeza?")) {
     window.location.href = "menu-volumes.html";
+  }
 }
 
-// Inicia automaticamente
+function el(id) { return document.getElementById(id); }
+
+// Inicia
 document.addEventListener("DOMContentLoaded", () => {
-    const url = new URLSearchParams(window.location.search);
-    const volume = url.get("volume") || 1;
-    carregarVolume(parseInt(volume));
+  const url = new URLSearchParams(window.location.search);
+  carregarVolume(parseInt(url.get("volume") || 1));
 });
