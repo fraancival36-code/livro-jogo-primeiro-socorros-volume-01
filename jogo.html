@@ -6,33 +6,118 @@
     <title>Desafio — Primeiros Socorros</title>
     <meta name="author" content="FRANCIVAL ALVES FARIAS">
     <link rel="stylesheet" href="estilo.css">
+    <style>
+        .pontuacao {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+            padding: 12px;
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 10px;
+            border: 1px solid rgba(129, 140, 248, 0.2);
+        }
+        .pontuacao div { text-align: center; flex: 1; min-width: 80px; }
+        .pontuacao .valor { font-size: 1.3rem; font-weight: bold; color: #fbbf24; }
+        .pontuacao .rotulo { font-size: 0.75rem; color: #94a3b8; }
+        .nivel-badge {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+        .progresso-barra {
+            height: 10px;
+            background: #1e293b;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 10px 0 20px 0;
+        }
+        .progresso-preenchimento {
+            height: 100%;
+            background: linear-gradient(90deg, #22c55e, #16a34a);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        .alternativa {
+            text-align: left;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: rgba(30, 41, 59, 0.8);
+            border: 2px solid rgba(129, 140, 248, 0.2);
+            border-radius: 10px;
+            color: #e2e8f0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .alternativa:hover {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: rgba(129, 140, 248, 0.5);
+            transform: translateX(5px);
+        }
+        .categoria-tag {
+            display: inline-block;
+            background: rgba(139, 92, 246, 0.2);
+            color: #c4b5fd;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+        .risco-box {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 10px;
+            padding: 12px;
+            margin: 15px 0;
+            color: #fca5a5;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <header class="cabecalho">
-            <button class="btn-terceiro" style="width:auto; padding:8px 12px; margin:0;" onclick="voltarMenu()">← Voltar</button>
+            <button class="btn-terceiro" style="width:auto; padding:8px 12px; margin:0;" onclick="voltarMenu()">← Sair</button>
             <p class="autor" style="margin-top:10px;">Autor: <span>FRANCIVAL ALVES FARIAS</span></p>
-            <h2 id="titulo-volume">Volume 1 — Primeiros Socorros</h2>
-            <div class="progresso-barra">
-                <div class="progresso-preenchimento" id="barraProgresso" style="width:0%"></div>
+            
+            <!-- Nível do Jogador -->
+            <div id="nivel" class="nivel-badge">🌱 Nível 1 — Iniciante</div>
+            
+            <!-- Pontuação em Tempo Real -->
+            <div class="pontuacao">
+                <div><div class="valor" id="pontos">0</div><div class="rotulo">Pontos</div></div>
+                <div><div class="valor" id="acertos">0</div><div class="rotulo">Acertos</div></div>
+                <div><div class="valor" id="erros">0</div><div class="rotulo">Erros</div></div>
+                <div><div class="valor" id="contadorDesafio">1/60</div><div class="rotulo">Progresso</div></div>
             </div>
-            <div style="display:flex; justify-content:space-between; margin:8px 0;">
-                <span id="contadorDesafio">001 / 060</span>
-                <span class="pontos">⭐ <span id="pontos">0</span> pts</span>
+
+            <!-- Barra de Progresso Geral -->
+            <div class="progresso-barra">
+                <div id="barraProgresso" class="progresso-preenchimento"></div>
             </div>
         </header>
 
-        <span class="categoria" id="categoria">Segurança da Cena</span>
-        <div class="cenario" id="cenario">Carregando...</div>
-        <div class="aviso-risco">
-            ⚠️ <strong>Risco Imediato:</strong> <span id="riscoImediato">Carregando...</span>
+        <!-- Desafio -->
+        <span id="categoria" class="categoria-tag">Segurança da Cena</span>
+        <h3 id="titulo-desafio">A Regra de Ouro</h3>
+        <p id="cenario" style="font-size:1.05rem; line-height:1.6; margin:15px 0;">Carregando...</p>
+        
+        <div class="risco-box">
+            ⚠️ <strong>Risco:</strong> <span id="riscoImediato">Carregando...</span>
         </div>
-        <h3 class="pergunta">Qual é a sua decisão?</h3>
+
+        <h4 style="margin:25px 0 15px 0; color:#cbd5e1;">Qual é a sua decisão?</h4>
         <div id="alternativas">
-            <p style="text-align:center; color:#94a3b8;">Carregando desafio...</p>
+            <p style="text-align:center; color:#94a3b8;">Carregando alternativas...</p>
         </div>
-        <div class="aviso-legal">
-            ⚠️ Não substitui atendimento médico, SAMU (192) ou Bombeiros (193).
+
+        <div class="aviso-legal" style="margin-top:30px; font-size:0.85rem; color:#64748b; text-align:center;">
+            ⚠️ Não substitui atendimento médico. Emergência → ligue 192 (SAMU) ou 193 (Bombeiros)
         </div>
     </div>
     <script src="app.js"></script>
