@@ -1,72 +1,51 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Primeiros Socorros — Jogo</title>
-  <link rel="stylesheet" href="estilo.css">
-</head>
-<body>
+/* ==============================================
+   BOTÕES DAS ALTERNATIVAS — AJUSTADOS!
+   Menores, mais compactos, toque mais preciso!
+   ============================================== */
+.alternativa {
+  width: 100%;
+  padding: 12px 14px;           /* ↓ Menor que antes */
+  margin: 8px 0;               /* ↓ Espaçamento bom entre eles */
+  border-radius: 12px;         /* ↓ Cantos arredondados */
+  border: 2px solid #4f46e5;
+  background: rgba(15, 23, 42, 0.8);
+  color: #e0e7ff;
+  font-size: 0.95rem;          /* ↓ Fonte um pouco menor */
+  line-height: 1.5;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  min-height: auto;            /* ↓ Altura automática — não fica gigante */
+}
 
-  <!-- 📊 BARRA SUPERIOR — HP + PROGRESSO -->
-  <header class="barra-superior">
-    <div class="hp-container">
-      <span class="hp-icone">❤️</span>
-      <div class="hp-barra-fundo">
-        <div id="hpBarra" class="hp-barra" style="width: 100%"></div>
-      </div>
-      <span id="hpTexto" class="hp-texto">10/10</span>
-    </div>
-    
-    <div class="progresso-container">
-      <span class="cena-texto">Cena <span id="cenaAtual">1</span> de <span id="totalCenas">60</span></span>
-      <div class="barra-progresso-fundo">
-        <div id="barraProgresso" class="barra-progresso" style="width: 0%"></div>
-      </div>
-    </div>
-  </header>
+/* Letra A/B/C/D/E — destaque sem exagerar */
+.alternativa .letra {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;             /* ↓ Menor */
+  height: 32px;
+  border-radius: 50%;
+  background: #4f46e5;
+  color: white;
+  font-weight: bold;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
 
-  <main class="conteudo-jogo">
-    <!-- 📂 CATEGORIA -->
-    <div class="categoria">
-      <span id="categoria">Segurança da Cena</span>
-    </div>
+/* Efeito ao apertar — feedback visual */
+.alternativa:active {
+  transform: scale(0.98);      /* ↓ Leve redução ao tocar */
+  border-color: #fbbf24;
+  background: rgba(79, 70, 229, 0.25);
+}
 
-    <!-- 📸 IMAGEM DA CENA -->
-    <div class="container-imagem">
-      <img id="imagemCena" src="" alt="Cena da situação" class="imagem-cena">
-    </div>
-
-    <!-- 📖 TÍTULO + SITUAÇÃO -->
-    <h2 id="tituloCena" class="titulo-cena">Situação de Emergência</h2>
-    <p id="cenario" class="texto-cenario">Carregando...</p>
-
-    <!-- ⚠️ AVISO DE RISCO -->
-    <div id="avisoRisco" class="aviso-risco">
-      ⚠️ Atenção ao risco!
-    </div>
-
-    <!-- ✅ CONSEQUÊNCIA (aparece após escolha) -->
-    <div id="consequencia" class="consequencia" style="display: none;"></div>
-
-    <!-- 🅰️🅱️🅲🅳🅴 ALTERNATIVAS — ORDEM FIXA! -->
-    <div id="alternativas" class="container-alternativas">
-      <!-- Botões gerados pelo sistema.js -->
-    </div>
-
-    <!-- 💾 PONTOS + MENU INFERIOR -->
-    <footer class="barra-inferior">
-      <div class="pontos">💾 <span id="pontos">0</span> pontos</div>
-      <div class="botoes-inferiores">
-        <button onclick="window.location.href='index.html'" class="btn-inferior">🏠 Sair</button>
-        <button class="btn-inferior" style="display:none;">💡 Dica</button>
-      </div>
-    </footer>
-  </main>
-
-  <script src="sistema.js"></script>
-  <script>
-    window.onload = iniciarJogo;
-  </script>
-</body>
-</html>
+/* Efeito ao passar o dedo */
+.alternativa:hover {
+  border-color: #a5b4fc;
+  background: rgba(79, 70, 229, 0.15);
+}
