@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha o Volume | Primeiros Socorros</title>
+    <meta name="author" content="FRANCIVAL ALVES FARIAS">
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <div class="container">
+        <header class="cabecalho">
+            <p class="autor">Autor: <span>FRANCIVAL ALVES FARIAS</span></p>
+            <h1>📚 Escolha o Volume</h1>
+        </header>
+
+        <div class="lista-volumes">
+            <div class="card-volume disponivel" onclick="abrirVolume(1)">
+                <span class="numero-volume">01</span>
+                <h3>Primeiros Socorros</h3>
+                <p>Acidentes e Emergências — O Que Fazer?</p>
+                <span class="status">✅ Disponível</span>
+            </div>
+            <div class="card-volume em-breve">
+                <span class="numero-volume">02</span>
+                <h3>Em Breve</h3>
+                <p>Novo conteúdo em preparação</p>
+                <span class="status">🔔 Em breve</span>
+            </div>
+        </div>
+
+        <button class="btn btn-terceiro" onclick="window.location.href='index.html'">← Voltar ao Início</button>
+    </div>
+    <script>
+        function abrirVolume(numero) {
+            window.location.href = `jogo.html?volume=${numero}`;
+        }
+    </script>
+</body>
+</html>
