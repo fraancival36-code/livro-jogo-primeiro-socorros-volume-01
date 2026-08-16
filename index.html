@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="FRANCIVAL ALVES FARIAS">
+    <meta name="description" content="Primeiros Socorros — Livro-Jogo, Volume 1. Preparação e orientação para os primeiros minutos de uma emergência. Não substitui atendimento profissional.">
+    <title>Primeiros Socorros — Livro-Jogo | Francival Alves Farias</title>
+    
+    <!-- Estilos -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #fff;
+            padding: 20px;
+        }
+
+        /* Container Principal */
+        .container {
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Autor */
+        .autor {
+            font-size: 1rem;
+            color: #fbbf24;
+            margin-bottom: 15px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .autor span {
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* Capa do Livro */
+        .capa-container {
+            background: #000;
+            border-radius: 16px;
+            padding: 10px;
+            box-shadow: 0 0 40px rgba(220, 38, 38, 0.3), 
+                        0 0 80px rgba(251, 191, 36, 0.15);
+            margin-bottom: 25px;
+            border: 2px solid #374151;
+        }
+
+        .capa {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+        }
+
+        /* Título */
+        .titulo-principal {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .titulo-principal span {
+            color: #ef4444;
+        }
+
+        .subtitulo {
+            font-size: 1.1rem;
+            color: #fbbf24;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        /* Botões */
+        .botoes {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            padding: 16px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .btn-principal {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+        }
+
+        .btn-principal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.5);
+        }
+
+        .btn-secundario {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: #000;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-secundario:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-terceiro {
+            background: #1e293b;
+            color: #e2e8f0;
+            border: 2px solid #475569;
+        }
+
+        .btn-terceiro:hover {
+            background: #334155;
+            border-color: #64748b;
+        }
+
+        /* Aviso */
+        .aviso {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid #ef4444;
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 0.9rem;
+            color: #fca5a5;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .aviso strong {
+            color: #fff;
+        }
+
+        /* Números de Emergência */
+        .emergencia {
+            background: rgba(251, 191, 36, 0.1);
+            border: 1px solid #fbbf24;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .emergencia h3 {
+            color: #fbbf24;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .emergencia-numeros {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .emergencia-item {
+            color: #e2e8f0;
+        }
+
+        .emergencia-item strong {
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        /* Rodapé */
+        .rodape {
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-top: 20px;
+        }
+
+        .rodape p {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Autor -->
+        <p class="autor">Autor: <span>FRANCIVAL ALVES FARIAS</span></p>
+
+        <!-- Capa do Livro -->
+        <div class="capa-container">
+            <img src="public/imagens/capa-livro.jpg" alt="Capa — Primeiros Socorros: Livro-Jogo, Volume 1" class="capa" loading="lazy">
+        </div>
+
+        <!-- Título -->
+        <h1 class="titulo-principal">PRIMEIROS <span>SOCORROS</span></h1>
+        <p class="subtitulo">Livro-Jogo — Volume 1 · O Que Fazer?</p>
+
+        <!-- Botões de Ação -->
+        <div class="botoes">
+            <a href="src/app/jogo.html" class="btn btn-principal">▶ INICIAR JOGO</a>
+            <a href="src/livro/introducao.html" class="btn btn-secundario">📖 LER O LIVRO</a>
+            <a href="src/emergencias/guia.html" class="btn btn-terceiro">📞 GUIA DE EMERGÊNCIA</a>
+        </div>
+
+        <!-- Aviso Importante -->
+        <div class="aviso">
+            ⚠️ <strong>AVISO IMPORTANTE:</strong> Este conteúdo é apenas para fins educacionais. <strong>Não substitui atendimento médico, SAMU ou Bombeiros.</strong> Em caso de emergência, ligue imediatamente.
+        </div>
+
+        <!-- Números de Emergência -->
+        <div class="emergencia">
+            <h3>📞 NÚMEROS DE EMERGÊNCIA</h3>
+            <div class="emergencia-numeros">
+                <div class="emergencia-item">🚑 SAMU → <strong>192</strong></div>
+                <div class="emergencia-item">🚒 Bombeiros → <strong>193</strong></div>
+                <div class="emergencia-item">👮 Polícia → <strong>190</strong></div>
+                <div class="emergencia-item">🛡️ Defesa Civil → <strong>199</strong></div>
+            </div>
+        </div>
+
+        <!-- Rodapé -->
+        <div class="rodape">
+            <p>© 2026 Francival Alves Farias — Todos os direitos reservados.</p>
+            <p>Preparação e confiança. Os primeiros minutos podem depender de você.</p>
+        </div>
+
+    </div>
+
+</body>
+</html>
