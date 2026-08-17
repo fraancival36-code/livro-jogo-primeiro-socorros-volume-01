@@ -2,98 +2,141 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="author" content="FRANCIVAL ALVES FARIAS">
   <title>PRIME — Primeiros Socorros</title>
   <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
 
-<!-- 📢 1. BANNER SUPERIOR — 5% DA TELA -->
-<div class="banner-superior" style="height: 5vh; background: #111; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid #333;">
-  <span style="color:#888; font-size:12px;">📢 ESPAÇO PUBLICITÁRIO — Google AdSense</span>
+<div class="tela-jogo">
+
+<!-- 📢 1. BANNER SUPERIOR Google AdSense -->
+<div class="banner-topo">
+  <div class="logo">
+    <span>🎨 Google AdSense</span>
+  </div>
+  <button>INSTALAR</button>
 </div>
 
-<!-- 🏷️ 2. CABEÇALHO — 12% DA TELA -->
-<header style="height: 12vh; display: flex; flex-direction: column; align-items: center; justify-content: center; border-bottom: 1px solid #222; position: relative;">
-  <button style="position:absolute; left:15px; top:50%; transform:translateY(-50%); background:none; border:none; color:white; font-size:22px;">☰</button>
-  <button style="position:absolute; right:15px; top:50%; transform:translateY(-50%); background:none; border:none; color:white; font-size:20px;">⚙️</button>
+<!-- 🏷️ 2. CABEÇALHO -->
+<div class="cabecalho">
+  <button class="menu">☰</button>
+  <button class="config">⚙️</button>
+  <h1>PRIME</h1>
+  <h2>PRIMEIROS SOCORROS</h2>
+  <div class="linha-pulso">❤️〰️〰️〰️❤️</div>
+  <p class="slogan">APRENDA · DECIDA · SALVE VIDAS</p>
+</div>
+
+<!-- 📊 3. BARRA DE STATUS -->
+<div class="barra-status">
+  <div class="status-card hp-col">
+    <div class="hp-top"><span>❤️</span> HP</div>
+    <div class="hp-valor">8/10</div>
+    <div class="hp-bar"><div class="hp-fill"></div></div>
+  </div>
+  <div class="status-card cena-col">
+    <span class="label">CENA</span>
+    <span class="valor">1 DE 60</span>
+  </div>
+  <div class="status-card perfil-col">
+    <span class="label">🧠 PERFIL</span>
+    <span class="valor">ESTRATEGISTA</span>
+  </div>
+</div>
+
+<!-- 📸 4. IMAGEM PRINCIPAL -->
+<div class="imagem-cena">
+  <span class="cruz-neon">➕</span>
+</div>
+
+<!-- ❓ 5. ÁREA DE PERGUNTA E ALTERNATIVAS -->
+<div class="area-pergunta">
+  <div class="pergunta-cabecalho">
+    <span class="cena-num">CENA 1</span>
+    <span class="oq-faz">O QUE VOCÊ FAZ?</span>
+  </div>
+  <p class="situacao-texto">Você chega ao local de um acidente de trânsito. Há uma pessoa caída no chão e fios de energia elétrica caídos próximos. O que você faz primeiro?</p>
   
-  <h1 style="font-size: 32px; font-weight: 900; letter-spacing: 2px; color: #fff; line-height: 1;">PRIME</h1>
-  <h2 style="font-size: 14px; color: #ccc; margin-top: 2px;">PRIMEIROS SOCORROS</h2>
-  <p style="font-size: 11px; color: var(--dourado); margin-top: 3px; font-weight: bold;">FRANCIVAL ALVES FARIAS — AUTOR E CRIADOR</p>
-  <p style="font-size: 10px; color: #888; margin-top: 2px;">APRENDA · DECIDA · SALVE VIDAS</p>
-</header>
-
-<!-- 📊 3. BARRA DE STATUS — 8% DA TELA -->
-<div style="height: 8vh; display: flex; border-bottom: 1px solid #222;">
-  <!-- HP -->
-  <div style="width: 33.33%; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid #222;">
-    <span style="font-size:12px; color:var(--vermelho);">❤️ HP</span>
-    <span style="font-size:16px; font-weight:bold;">8/10</span>
-    <div style="width:80%; height:6px; background:#333; border-radius:3px; margin-top:3px;">
-      <div style="width:80%; height:100%; background:var(--vermelho); border-radius:3px;"></div>
-    </div>
-  </div>
-  <!-- CENA -->
-  <div style="width: 33.33%; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid #222;">
-    <span style="font-size:12px; color:#888;">CENA</span>
-    <span style="font-size:18px; font-weight:bold;">2 DE 60</span>
-  </div>
-  <!-- PERFIL -->
-  <div style="width: 33.33%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-    <span style="font-size:12px; color:#888;">🧠 PERFIL</span>
-    <span style="font-size:14px; font-weight:bold;">ESTRATEGISTA</span>
-  </div>
-</div>
-
-<!-- 📸 4. IMAGEM DA CENA — 25% DA TELA · ÁREA SAGRADA! -->
-<div style="height: 25vh; background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid #222;">
-  <span style="font-size:60px; color:var(--vermelho); opacity:0.8;">➕</span>
-  <!-- COLOCAR IMAGEM DEPOIS: <img src="volumes/volume-01/imagens/cena-02.jpg" style="width:100%; height:100%; object-fit:cover;"> -->
-</div>
-
-<!-- ❓ 5. CAIXA DE DECISÕES — 30% DA TELA -->
-<div style="height: 30vh; padding: 10px 15px; border-bottom: 1px solid #222;">
-  <div style="background: #12121f; border: 1px solid var(--borda); border-radius: 8px; padding: 12px; height: 100%; display: flex; flex-direction: column;">
-    <h3 style="color:var(--vermelho); font-size:15px; margin-bottom:6px;">CENA 2 — O QUE VOCÊ FAZ?</h3>
-    <p style="font-size:12px; color:#ccc; margin-bottom:8px;">Situação da cena aparece aqui...</p>
+  <div class="alternativas">
+    <button class="alternativa-btn alt-a" onclick="escolherA(0)">
+      <div class="alt-esq">
+        <span class="alt-bola">A</span>
+        <span class="alt-texto">Aproximar-se imediatamente para ajudar.</span>
+      </div>
+      <span class="alt-hp">HP -1</span>
+    </button>
     
-    <div style="display: flex; flex-direction: column; gap: 6px; flex: 1; justify-content: center;">
-      <button style="background:#2a1515; border:1px solid var(--vermelho); color:white; padding:8px 12px; border-radius:6px; text-align:left; font-size:13px;">🔴 A) Tentar cortar o fluxo principal <span style="float:right; color:var(--vermelho);">HP -1</span></button>
-      <button style="background:#152a15; border:1px solid var(--verde); color:white; padding:8px 12px; border-radius:6px; text-align:left; font-size:13px;">🟢 B) Redirecionar energia <span style="float:right; color:var(--verde);">HP +1 ✅</span></button>
-      <button style="background:#2a2415; border:1px solid var(--laranja); color:white; padding:8px 12px; border-radius:6px; text-align:left; font-size:13px;">🟠 C) Manter fluxo e monitorar <span style="float:right; color:var(--laranja);">HP 0</span></button>
-      <button style="background:#15202a; border:1px solid var(--azul); color:white; padding:8px 12px; border-radius:6px; text-align:left; font-size:13px;">🔵 D) Usar aterramento de emergência <span style="float:right; color:var(--azul);">HP +1</span></button>
-      <button style="background:#2a1515; border:1px solid var(--vermelho); color:white; padding:8px 12px; border-radius:6px; text-align:left; font-size:13px;">🔴 E) Ignorar e aumentar potência <span style="float:right; color:var(--vermelho);">HP -1</span></button>
+    <button class="alternativa-btn alt-b" onclick="escolherA(1)">
+      <div class="alt-esq">
+        <span class="alt-bola">B</span>
+        <span class="alt-texto">Afastar pessoas e acionar a energia.</span>
+      </div>
+      <span class="alt-hp">HP +1</span>
+    </button>
+    
+    <button class="alternativa-btn alt-c" onclick="escolherA(2)">
+      <div class="alt-esq">
+        <span class="alt-bola">C</span>
+        <span class="alt-texto">Puxar a vítima para longe dos fios.</span>
+      </div>
+      <span class="alt-hp">HP 0</span>
+    </button>
+    
+    <button class="alternativa-btn alt-d" onclick="escolherA(3)">
+      <div class="alt-esq">
+        <span class="alt-bola">D</span>
+        <span class="alt-texto">Pedir para alguém ligar o carro.</span>
+      </div>
+      <span class="alt-hp">HP +1</span>
+    </button>
+    
+    <button class="alternativa-btn alt-e" onclick="escolherA(4)">
+      <div class="alt-esq">
+        <span class="alt-bola">E</span>
+        <span class="alt-texto">Tirar foto e postar nas redes.</span>
+      </div>
+      <span class="alt-hp">HP -1</span>
+    </button>
+  </div>
+</div>
+
+<!-- 📢 6. BANNER MEIO Google AdSense -->
+<div class="banner-meio">
+  <div class="logo">
+    <span>🎨 Google AdSense</span>
+  </div>
+  <button>INSTALAR</button>
+</div>
+
+<!-- 📊 7. RODAPÉ — PERFIL + RANKING -->
+<div class="rodape">
+  <div class="rodape-col">
+    <p class="rodape-titulo">SEU PERFIL · PROGRESSO</p>
+    <div class="perfil-corpo">
+      <span class="perfil-icone">👤</span>
+      <div class="perfil-info">
+        <p>ESTRATEGISTA SUPREMO · NÍVEL 1</p>
+        <div class="perfil-barra"><div class="perfil-barra-fill"></div></div>
+      </div>
     </div>
   </div>
-</div>
-
-<!-- 📢 6. BANNER MEIO — 5% DA TELA -->
-<div style="height: 5vh; background: #111; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid #222;">
-  <span style="color:#888; font-size:12px;">📢 ESPAÇO PUBLICITÁRIO — Google AdSense</span>
-</div>
-
-<!-- 📊 7. PERFIL + RANKING — 10% DA TELA -->
-<div style="height: 10vh; display: flex; border-bottom: 1px solid #222;">
-  <div style="width:50%; padding:8px 12px; border-right:1px solid #222;">
-    <p style="font-size:11px; color:#888;">SEU PERFIL · PROGRESSO</p>
-    <p style="font-size:13px; font-weight:bold;">ESTRATEGISTA SUPREMO · NÍVEL 12</p>
-    <div style="width:100%; height:5px; background:#333; border-radius:3px; margin-top:4px;">
-      <div style="width:78%; height:100%; background:linear-gradient(90deg, var(--azul), var(--verde)); border-radius:3px;"></div>
-    </div>
-  </div>
-  <div style="width:50%; padding:8px 12px;">
-    <p style="font-size:11px; color:#888;">🏆 RANKING GLOBAL</p>
-    <p style="font-size:12px;">1. Toella Master — 9.850</p>
-    <p style="font-size:12px;">2. Alex_88 — 9.420</p>
-    <p style="font-size:12px;">3. MariaMed — 9.100</p>
+  <div class="rodape-col">
+    <p class="rodape-titulo">🏆 RANKING GLOBAL</p>
+    <ul class="ranking-lista">
+      <li>1. Toella Master <span>9.850 pts</span></li>
+      <li>2. Alex_88 <span>9.420 pts</span></li>
+      <li>3. MariaMed <span>9.100 pts</span></li>
+    </ul>
   </div>
 </div>
 
-<!-- 📢 8. BANNER INFERIOR — 5% DA TELA -->
-<div style="height: 5vh; background: #111; display: flex; align-items: center; justify-content: center;">
-  <span style="color:#888; font-size:12px;">📢 ESPAÇO PUBLICITÁRIO — Google AdSense</span>
+<!-- 📢 8. BANNER INFERIOR Google AdSense -->
+<div class="banner-baixo">
+  <span>🎨 Google AdSense</span>
+</div>
+
 </div>
 
 <script src="app.js"></script>
