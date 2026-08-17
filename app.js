@@ -1,51 +1,29 @@
 // ==============================================
-// PRIME — Primeiros Socorros · LÓGICA DO JOGO
+// PRIME — Primeiros Socorros · LÓGICA COMPLETA
 // Autor: FRANCIVAL ALVES FARIAS
 // ==============================================
 
 let estado = {
-  cenaAtual: 0, // ✅ COMEÇA NA CENA 1!
-  hp: 10,
+  cenaAtual: 0,
+  hp: 8,
   hpMax: 10,
-  pontos: 0,
-  nivel: 1,
-  cenasJogadas: []
+  totalCenas: 60
 };
 
-// Carrega os dados do Volume 1
-let desafios = [];
+const ganhoHP = [-1, 1, 0, 1, -1];
 
-// Inicializa ao abrir
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('✅ PRIME Carregado — Cena 1 de 60');
-  // Aqui carrega dados.json depois
+  console.log('✅ PRIME INICIADO — Cena 1 de 60');
 });
 
-// Função chamada ao clicar em uma alternativa
-function escolherA(indice) {
-  const respostasCorretas = [1, 3, 1, 2, 0]; // exemplo
-  const ganhoHP = [0, 2, 0, 1, -1]; // exemplo
-
-  // Atualiza HP
+function escolher(indice) {
   estado.hp = Math.max(0, Math.min(estado.hpMax, estado.hp + ganhoHP[indice]));
-  
-  // Avança cena
   estado.cenaAtual++;
-  
-  // Atualiza a tela
   atualizarTela();
-  
-  alert(`✅ Resposta registrada! Cena ${estado.cenaAtual} de 60`);
+  alert(`✅ Cena ${estado.cenaAtual + 1} de ${estado.totalCenas} | HP: ${estado.hp}/${estado.hpMax}`);
 }
 
 function atualizarTela() {
-  // Atualiza número da cena
-  const elementos = document.querySelectorAll('.valor');
-  if (elementos[1]) elementos[1].textContent = `${estado.cenaAtual + 1} DE 60`;
-  
-  // Atualiza barra de HP
-  const hpFill = document.querySelector('.hp-fill');
-  if (hpFill) hpFill.style.width = `${(estado.hp / estado.hpMax) * 100}%`;
-  
-  console.log(`Cena: ${estado.cenaAtual + 1} | HP: ${estado.hp}/${estado.hpMax}`);
+  const vals = document.querySelectorAll('.status-val');
+  if (vals[1]) vals[1].textContent = `${estado.cenaAtual + 1} DE ${estado.totalCenas}`;
 }
