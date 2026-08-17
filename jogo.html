@@ -9,122 +9,97 @@
 </head>
 <body>
 
-<div class="tela-jogo">
+<div class="tela">
 
-<!-- 📢 1. BANNER SUPERIOR Google AdSense -->
+<!-- 📢 1. BANNER TOPO -->
 <div class="banner-topo">
-  <div class="logo">
-    <span>🎨 Google AdSense</span>
-  </div>
+  <span>🎨 Google AdSense</span>
   <button>INSTALAR</button>
 </div>
 
 <!-- 🏷️ 2. CABEÇALHO -->
 <div class="cabecalho">
-  <button class="menu">☰</button>
-  <button class="config">⚙️</button>
+  <span class="menu">☰</span>
+  <span class="config">⚙️</span>
   <h1>PRIME</h1>
   <h2>PRIMEIROS SOCORROS</h2>
-  <div class="linha-pulso">❤️〰️〰️〰️❤️</div>
-  <p class="slogan">APRENDA · DECIDA · SALVE VIDAS</p>
+  <div class="ecg">❤️〰️❤️</div>
+  <p>APRENDA · DECIDA · SALVE VIDAS</p>
 </div>
 
-<!-- 📊 3. BARRA DE STATUS -->
-<div class="barra-status">
-  <div class="status-card hp-col">
+<!-- 📊 3. STATUS -->
+<div class="status">
+  <div class="status-card hp-card">
     <div class="hp-top"><span>❤️</span> HP</div>
-    <div class="hp-valor">8/10</div>
+    <div class="hp-val">8/10</div>
     <div class="hp-bar"><div class="hp-fill"></div></div>
   </div>
-  <div class="status-card cena-col">
-    <span class="label">CENA</span>
-    <span class="valor">1 DE 60</span>
+  <div class="status-card">
+    <span class="status-label">CENA</span>
+    <span class="status-val">1 DE 60</span>
   </div>
-  <div class="status-card perfil-col">
-    <span class="label">🧠 PERFIL</span>
-    <span class="valor">ESTRATEGISTA</span>
+  <div class="status-card">
+    <span class="status-label">🧠 PERFIL</span>
+    <span class="status-val" style="font-size:13px;">ESTRATEGISTA</span>
   </div>
 </div>
 
-<!-- 📸 4. IMAGEM PRINCIPAL -->
-<div class="imagem-cena">
-  <span class="cruz-neon">➕</span>
+<!-- 📸 4. IMAGEM -->
+<div class="imagem">
+  <span class="cruz">➕</span>
 </div>
 
-<!-- ❓ 5. ÁREA DE PERGUNTA E ALTERNATIVAS -->
-<div class="area-pergunta">
-  <div class="pergunta-cabecalho">
+<!-- ❓ 5. PERGUNTA E ALTERNATIVAS -->
+<div class="pergunta">
+  <div class="perg-top">
     <span class="cena-num">CENA 1</span>
     <span class="oq-faz">O QUE VOCÊ FAZ?</span>
   </div>
-  <p class="situacao-texto">Você chega ao local de um acidente de trânsito. Há uma pessoa caída no chão e fios de energia elétrica caídos próximos. O que você faz primeiro?</p>
+  <p class="texto-cena">Você chega ao local de um acidente de trânsito. Há uma pessoa caída no chão e fios de energia elétrica caídos próximos. O que você faz primeiro?</p>
   
-  <div class="alternativas">
-    <button class="alternativa-btn alt-a" onclick="escolherA(0)">
-      <div class="alt-esq">
-        <span class="alt-bola">A</span>
-        <span class="alt-texto">Aproximar-se imediatamente para ajudar.</span>
-      </div>
-      <span class="alt-hp">HP -1</span>
-    </button>
-    
-    <button class="alternativa-btn alt-b" onclick="escolherA(1)">
-      <div class="alt-esq">
-        <span class="alt-bola">B</span>
-        <span class="alt-texto">Afastar pessoas e acionar a energia.</span>
-      </div>
-      <span class="alt-hp">HP +1</span>
-    </button>
-    
-    <button class="alternativa-btn alt-c" onclick="escolherA(2)">
-      <div class="alt-esq">
-        <span class="alt-bola">C</span>
-        <span class="alt-texto">Puxar a vítima para longe dos fios.</span>
-      </div>
-      <span class="alt-hp">HP 0</span>
-    </button>
-    
-    <button class="alternativa-btn alt-d" onclick="escolherA(3)">
-      <div class="alt-esq">
-        <span class="alt-bola">D</span>
-        <span class="alt-texto">Pedir para alguém ligar o carro.</span>
-      </div>
-      <span class="alt-hp">HP +1</span>
-    </button>
-    
-    <button class="alternativa-btn alt-e" onclick="escolherA(4)">
-      <div class="alt-esq">
-        <span class="alt-bola">E</span>
-        <span class="alt-texto">Tirar foto e postar nas redes.</span>
-      </div>
-      <span class="alt-hp">HP -1</span>
-    </button>
+  <div class="alt alt-a" onclick="escolher(0)">
+    <div class="alt-esq"><span class="bola">A</span><span class="alt-texto">Aproximar-se imediatamente para ajudar.</span></div>
+    <span class="alt-hp">HP -1</span>
+  </div>
+  <div class="alt alt-b" onclick="escolher(1)">
+    <div class="alt-esq"><span class="bola">B</span><span class="alt-texto">Afastar pessoas e acionar a energia.</span></div>
+    <span class="alt-hp">HP +1</span>
+  </div>
+  <div class="alt alt-c" onclick="escolher(2)">
+    <div class="alt-esq"><span class="bola">C</span><span class="alt-texto">Puxar a vítima para longe dos fios.</span></div>
+    <span class="alt-hp">HP 0</span>
+  </div>
+  <div class="alt alt-d" onclick="escolher(3)">
+    <div class="alt-esq"><span class="bola">D</span><span class="alt-texto">Pedir para alguém ligar o carro.</span></div>
+    <span class="alt-hp">HP +1</span>
+  </div>
+  <div class="alt alt-e" onclick="escolher(4)">
+    <div class="alt-esq"><span class="bola">E</span><span class="alt-texto">Tirar foto e postar nas redes.</span></div>
+    <span class="alt-hp">HP -1</span>
   </div>
 </div>
 
-<!-- 📢 6. BANNER MEIO Google AdSense -->
+<!-- 📢 6. BANNER MEIO -->
 <div class="banner-meio">
-  <div class="logo">
-    <span>🎨 Google AdSense</span>
-  </div>
+  <span>🎨 Google AdSense</span>
   <button>INSTALAR</button>
 </div>
 
-<!-- 📊 7. RODAPÉ — PERFIL + RANKING -->
+<!-- 📊 7. RODAPÉ -->
 <div class="rodape">
-  <div class="rodape-col">
-    <p class="rodape-titulo">SEU PERFIL · PROGRESSO</p>
-    <div class="perfil-corpo">
-      <span class="perfil-icone">👤</span>
-      <div class="perfil-info">
-        <p>ESTRATEGISTA SUPREMO · NÍVEL 1</p>
-        <div class="perfil-barra"><div class="perfil-barra-fill"></div></div>
+  <div class="rod-card">
+    <p class="rod-tit">SEU PERFIL · PROGRESSO</p>
+    <div class="perfil-linha">
+      <div class="avatar"><span class="coroa">👑</span>👤</div>
+      <div>
+        <p class="perfil-nome">ESTRATEGISTA · NÍVEL 1</p>
+        <div class="barra-prog"><div class="barra-fill"></div></div>
       </div>
     </div>
   </div>
-  <div class="rodape-col">
-    <p class="rodape-titulo">🏆 RANKING GLOBAL</p>
-    <ul class="ranking-lista">
+  <div class="rod-card">
+    <p class="rod-tit">🏆 RANKING GLOBAL</p>
+    <ul class="rank-lista">
       <li>1. Toella Master <span>9.850 pts</span></li>
       <li>2. Alex_88 <span>9.420 pts</span></li>
       <li>3. MariaMed <span>9.100 pts</span></li>
@@ -132,7 +107,7 @@
   </div>
 </div>
 
-<!-- 📢 8. BANNER INFERIOR Google AdSense -->
+<!-- 📢 8. BANNER INFERIOR -->
 <div class="banner-baixo">
   <span>🎨 Google AdSense</span>
 </div>
