@@ -1,7 +1,227 @@
-html, body {
-  height: 100vh !important;
-  max-height: 100vh !important;
-  overflow: hidden !important;
-  margin: 0 !important;
-  padding: 0 !important;
+/* ==============================================
+   PRIME — Primeiros Socorros · MODELO DEFINITIVO
+   Autor: FRANCIVAL ALVES FARIAS
+   ============================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
+html, body {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden; /* ✅ TUDO CABE — NÃO ROLA! */
+  background: #050510;
+  color: #fff;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+:root {
+  --vermelho: #ff2020;
+  --verde: #00dd44;
+  --laranja: #ff9900;
+  --azul: #0099ff;
+  --dourado: #d4af37;
+  --preto: #050510;
+  --borda: #ff3333;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  font-family: inherit;
+  color: white;
+  text-align: left;
+  padding: 10px 14px;
+  font-size: 14px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+button:last-child { margin-bottom: 0; }
+
+.tela-completa {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* 📢 BANNER SUPERIOR — 5% */
+.banner-topo {
+  height: 5vh;
+  background: #fff;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+  flex-shrink: 0;
+}
+
+.banner-topo span:first-child { font-weight: 600; font-size: 16px; }
+.banner-topo button {
+  background: #4285f4;
+  color: white;
+  padding: 6px 16px;
+  border-radius: 4px;
+  width: auto;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* 🏷️ CABEÇALHO — 13% */
+.cabecalho {
+  height: 13vh;
+  background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-bottom: 1px solid #222;
+  flex-shrink: 0;
+}
+
+.cabecalho .menu { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); font-size: 24px; }
+.cabecalho .config { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); font-size: 22px; }
+.cabecalho h1 { font-size: 36px; font-weight: 900; letter-spacing: 3px; }
+.cabecalho h2 { font-size: 16px; color: #ddd; margin-top: 2px; }
+.cabecalho .linha { display: flex; align-items: center; gap: 10px; margin-top: 5px; }
+.cabecalho .linha span { color: var(--vermelho); font-size: 20px; }
+.cabecalho p { font-size: 12px; color: #aaa; margin-top: 3px; }
+
+/* 📊 BARRA DE STATUS — 8% */
+.barra-status {
+  height: 8vh;
+  display: flex;
+  background: rgba(0,0,0,0.6);
+  border-bottom: 1px solid #222;
+  flex-shrink: 0;
+}
+
+.status-col {
+  width: 33.33%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid #333;
+}
+
+.status-col:last-child { border-right: none; }
+.status-col .label { font-size: 12px; color: #ccc; }
+.status-col .valor { font-size: 20px; font-weight: bold; }
+.hp-bar { width: 80%; height: 6px; background: #333; border-radius: 3px; margin-top: 4px; }
+.hp-fill { width: 80%; height: 100%; background: var(--vermelho); border-radius: 3px; }
+
+/* 📸 IMAGEM DE FUNDO — 27% */
+.area-imagem {
+  height: 27vh;
+  background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%), #1a1a2e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.area-imagem .cruz { font-size: 80px; color: var(--vermelho); opacity: 0.8; }
+/* Colocar imagem real depois: background: url('volumes/volume-01/imagens/cena-02.jpg') center/cover no-repeat; */
+
+/* ❓ CAIXA DE PERGUNTA — 32% */
+.area-pergunta {
+  flex: 1;
+  min-height: 32vh;
+  background: rgba(10,10,18,0.95);
+  padding: 12px 15px;
+  border-top: 2px solid var(--borda);
+  display: flex;
+  flex-direction: column;
+}
+
+.pergunta-titulo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.pergunta-titulo h3 { font-size: 18px; font-weight: bold; color: var(--vermelho); }
+.pergunta-titulo .oq { font-size: 18px; font-weight: bold; color: var(--vermelho); }
+
+.situacao {
+  font-size: 13px; color: #ccc;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.alt-a { background: rgba(255,32,32,0.2); border: 1px solid var(--vermelho); }
+.alt-b { background: rgba(0,221,68,0.2); border: 1px solid var(--verde); }
+.alt-c { background: rgba(255,153,0,0.2); border: 1px solid var(--laranja); }
+.alt-d { background: rgba(0,153,255,0.2); border: 1px solid var(--azul); }
+.alt-e { background: rgba(255,32,32,0.2); border: 1px solid var(--vermelho); }
+
+.hp-valor { font-weight: bold; font-size: 13px; }
+.a-hp { color: var(--vermelho); }
+.b-hp { color: var(--verde); }
+.c-hp { color: var(--laranja); }
+.d-hp { color: var(--azul); }
+.e-hp { color: var(--vermelho); }
+
+/* 📢 BANNER MEIO — 5% */
+.banner-meio {
+  height: 5vh;
+  background: #fff;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+  border-top: 1px solid #ddd;
+  flex-shrink: 0;
+}
+
+.banner-meio span { font-size: 16px; }
+.banner-meio button {
+  background: #4285f4;
+  color: white;
+  padding: 6px 16px;
+  border-radius: 4px;
+  width: auto;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* 📊 RODAPÉ — PERFIL + RANKING — 10% */
+.rodape {
+  height: 10vh;
+  display: flex;
+  background: rgba(0,0,0,0.8);
+  border-top: 1px solid #333;
+  flex-shrink: 0;
+}
+
+.rodape-esq, .rodape-dir {
+  width: 50%;
+  padding: 8px 12px;
+}
+
+.rodape-esq { border-right: 1px solid #333; }
+.rodape h4 { font-size: 11px; color: #888; margin-bottom: 4px; }
+.rodape p { font-size: 12px; font-weight: bold; margin-bottom: 4px; }
+.rodape .barra { width: 100%; height: 5px; background: #333; border-radius: 3px; }
+.rodape .barra-fill { width: 78%; height: 100%; background: linear-gradient(90deg, var(--azul), var(--verde)); border-radius: 3px; }
+.rodape ul { list-style: none; }
+.rodape li { font-size: 11px; margin-bottom: 2px; }
+.rodape li span { float: right; color: #aaa; }
