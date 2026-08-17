@@ -1,42 +1,7 @@
-/* ==============================================
-   PRIME — Primeiros Socorros · Estilo Definitivo
-   Autor: FRANCIVAL ALVES FARIAS
-   ============================================== */
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 html, body {
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden; /* ✅ TUDO CABE — NÃO ROLA! */
-  background: #0a0a12;
-  color: #ffffff;
-  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-}
-
-/* Paleta de cores OFICIAL — NÃO MUDAR! */
-:root {
-  --vermelho: #ff2020;
-  --verde: #00dd44;
-  --laranja: #ff9900;
-  --azul: #0099ff;
-  --dourado: #d4af37;
-  --preto: #0a0a12;
-  --cinza: #1a1a2e;
-  --borda: #ff3333;
-}
-
-button {
-  cursor: pointer;
-  border: none;
-  border-radius: 6px;
-  font-family: inherit;
-}
-
-button:active {
-  transform: scale(0.98);
+  height: 100vh !important;
+  max-height: 100vh !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
