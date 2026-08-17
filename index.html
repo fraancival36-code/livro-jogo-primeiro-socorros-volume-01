@@ -1,249 +1,161 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="FRANCIVAL ALVES FARIAS">
-    <meta name="description" content="Primeiros Socorros — Livro-Jogo, Volume 1. Preparação e orientação para os primeiros minutos de uma emergência. Não substitui atendimento profissional.">
-    <title>Primeiros Socorros — Livro-Jogo | Francival Alves Farias</title>
-    
-    <!-- Estilos -->
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #fff;
-            padding: 20px;
-        }
-
-        /* Container Principal */
-        .container {
-            max-width: 420px;
-            width: 100%;
-            text-align: center;
-        }
-
-        /* Autor */
-        .autor {
-            font-size: 1rem;
-            color: #fbbf24;
-            margin-bottom: 15px;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-
-        .autor span {
-            color: #fff;
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        /* Capa do Livro */
-        .capa-container {
-            background: #000;
-            border-radius: 16px;
-            padding: 10px;
-            box-shadow: 0 0 40px rgba(220, 38, 38, 0.3), 
-                        0 0 80px rgba(251, 191, 36, 0.15);
-            margin-bottom: 25px;
-            border: 2px solid #374151;
-        }
-
-        .capa {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            display: block;
-        }
-
-        /* Título */
-        .titulo-principal {
-            font-size: 2rem;
-            font-weight: 900;
-            color: #fff;
-            margin-bottom: 8px;
-            line-height: 1.2;
-        }
-
-        .titulo-principal span {
-            color: #ef4444;
-        }
-
-        .subtitulo {
-            font-size: 1.1rem;
-            color: #fbbf24;
-            margin-bottom: 30px;
-            font-weight: 500;
-        }
-
-        /* Botões */
-        .botoes {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .btn {
-            padding: 16px 24px;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: block;
-        }
-
-        .btn-principal {
-            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-            color: #fff;
-            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
-        }
-
-        .btn-principal:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.5);
-        }
-
-        .btn-secundario {
-            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-            color: #000;
-            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
-        }
-
-        .btn-secundario:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
-        }
-
-        .btn-terceiro {
-            background: #1e293b;
-            color: #e2e8f0;
-            border: 2px solid #475569;
-        }
-
-        .btn-terceiro:hover {
-            background: #334155;
-            border-color: #64748b;
-        }
-
-        /* Aviso */
-        .aviso {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid #ef4444;
-            border-radius: 10px;
-            padding: 15px;
-            font-size: 0.9rem;
-            color: #fca5a5;
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-
-        .aviso strong {
-            color: #fff;
-        }
-
-        /* Números de Emergência */
-        .emergencia {
-            background: rgba(251, 191, 36, 0.1);
-            border: 1px solid #fbbf24;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 20px;
-        }
-
-        .emergencia h3 {
-            color: #fbbf24;
-            font-size: 1rem;
-            margin-bottom: 10px;
-        }
-
-        .emergencia-numeros {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            font-size: 0.9rem;
-        }
-
-        .emergencia-item {
-            color: #e2e8f0;
-        }
-
-        .emergencia-item strong {
-            color: #fff;
-            font-size: 1rem;
-        }
-
-        /* Rodapé */
-        .rodape {
-            font-size: 0.8rem;
-            color: #6b7280;
-            margin-top: 20px;
-        }
-
-        .rodape p {
-            margin-bottom: 5px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="FRANCIVAL ALVES FARIAS">
+  <title>PRIME — Estante de Volumes</title>
+  <link rel="stylesheet" href="estilo.css">
+  <style>
+    .estante { padding: 15px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    .volume-card { background: #1a1a2e; border-radius: 10px; padding: 10px; aspect-ratio: 3/4; display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: transform 0.2s; }
+    .volume-card:active { transform: scale(0.97); }
+    .liberado { border: 2px solid #ff2020; }
+    .bloqueado { border: 2px solid #333; opacity: 0.7; }
+    .btn-jogar { margin-top: auto; background: #ff2020; color: white; border: none; padding: 6px 16px; border-radius: 5px; font-weight: bold; cursor: pointer; }
+    .btn-bloqueado { margin-top: auto; background: #333; color: #888; border: none; padding: 6px 16px; border-radius: 5px; cursor: not-allowed; }
+    .cabecalho { text-align: center; padding: 15px; border-bottom: 1px solid #222; }
+  </style>
 </head>
 <body>
 
-    <div class="container">
-        
-        <!-- Autor -->
-        <p class="autor">Autor: <span>FRANCIVAL ALVES FARIAS</span></p>
+<!-- CABEÇALHO DA ESTANTE -->
+<div class="cabecalho">
+  <h1 style="font-size:28px; font-weight:900;">📚 ESTANTE PRIME</h1>
+  <p style="font-size:12px; color:#888; margin-top:5px;">APRENDA · DECIDA · SALVE VIDAS</p>
+  <p style="font-size:11px; color:#d4af37; margin-top:8px; font-weight:bold;">FRANCIVAL ALVES FARIAS — AUTOR E CRIADOR</p>
+</div>
 
-        <!-- Capa do Livro — CAMINHO CORRIGIDO ✅ -->
-        <div class="capa-container">
-            <img src="volumes/volume-01/imagens/capa.jpg" alt="Capa — Primeiros Socorros: Livro-Jogo, Volume 1" class="capa" loading="lazy">
-        </div>
+<!-- A PRATELEIRA — 3 por linha -->
+<div class="estante">
 
-        <!-- Título -->
-        <h1 class="titulo-principal">PRIMEIROS <span>SOCORROS</span></h1>
-        <p class="subtitulo">Livro-Jogo — Volume 1 · O Que Fazer?</p>
+  <!-- VOLUME 01 — CIDADE ✅ LIBERADO -->
+  <div class="volume-card liberado" onclick="window.location.href='jogo.html'">
+    <span style="font-size:40px; margin:10px 0;">🏙️</span>
+    <h3 style="color:#ff2020; font-size:16px; font-weight:bold;">VOL. 01</h3>
+    <p style="font-size:13px;">CIDADE</p>
+    <p style="font-size:10px; color:#888; margin-top:5px;">60 CENÁRIOS</p>
+    <p style="font-size:10px; color:#888;">300 DECISÕES</p>
+    <button class="btn-jogar">▶️ JOGAR</button>
+  </div>
 
-        <!-- Botões de Ação — CAMINHOS CORRIGIDOS ✅ -->
-        <div class="botoes">
-            <a href="jogo.html" class="btn btn-principal">▶ INICIAR JOGO</a>
-            <a href="menu-volumes.html" class="btn btn-secundario">📖 LER O LIVRO</a>
-            <a href="guia-emergencia.html" class="btn btn-terceiro">📞 GUIA DE EMERGÊNCIA</a>
-        </div>
+  <!-- VOLUME 02 — INTERIOR 🔒 EM BREVE -->
+  <div class="volume-card bloqueado">
+    <span style="font-size:40px; margin:10px 0;">🌾</span>
+    <h3 style="color:#888; font-size:16px; font-weight:bold;">VOL. 02</h3>
+    <p style="font-size:13px; color:#888;">INTERIOR</p>
+    <p style="font-size:10px; color:#666; margin-top:5px;">60 CENÁRIOS</p>
+    <p style="font-size:10px; color:#666;">300 DECISÕES</p>
+    <button class="btn-bloqueado" disabled>🔒 EM BREVE</button>
+  </div>
 
-        <!-- Aviso Importante -->
-        <div class="aviso">
-            ⚠️ <strong>AVISO IMPORTANTE:</strong> Este conteúdo é apenas para fins educacionais. <strong>Não substitui atendimento médico, SAMU ou Bombeiros.</strong> Em caso de emergência, ligue imediatamente.
-        </div>
+  <!-- VOLUME 03 — SELVA 🔒 EM BREVE -->
+  <div class="volume-card bloqueado">
+    <span style="font-size:40px; margin:10px 0;">🌴</span>
+    <h3 style="color:#888; font-size:16px; font-weight:bold;">VOL. 03</h3>
+    <p style="font-size:13px; color:#888;">SELVA</p>
+    <p style="font-size:10px; color:#666; margin-top:5px;">60 CENÁRIOS</p>
+    <p style="font-size:10px; color:#666;">300 DECISÕES</p>
+    <button class="btn-bloqueado" disabled>🔒 EM BREVE</button>
+  </div>
 
-        <!-- Números de Emergência -->
-        <div class="emergencia">
-            <h3>📞 NÚMEROS DE EMERGÊNCIA</h3>
-            <div class="emergencia-numeros">
-                <div class="emergencia-item">🚑 SAMU → <strong>192</strong></div>
-                <div class="emergencia-item">🚒 Bombeiros → <strong>193</strong></div>
-                <div class="emergencia-item">👮 Polícia → <strong>190</strong></div>
-                <div class="emergencia-item">🛡️ Defesa Civil → <strong>199</strong></div>
-            </div>
-        </div>
+  <!-- VOLUME 04 — ESTRADA 🔒 EM BREVE -->
+  <div class="volume-card bloqueado">
+    <span style="font-size:40px; margin:10px 0;">🚗</span>
+    <h3 style="color:#888; font-size:16px; font-weight:bold;">VOL. 04</h3>
+    <p style="font-size:13px; color:#888;">ESTRADA</p>
+    <p style="font-size:10px; color:#666; margin-top:5px;">60 CENÁRIOS</p>
+    <p style="font-size:10px; color:#666;">300 DECISÕES</p>
+    <button class="btn-bloqueado" disabled>🔒 EM BREVE</button>
+  </div>
 
-        <!-- Rodapé -->
-        <div class="rodape">
-            <p>© 2026 Francival Alves Farias — Todos os direitos reservados.</p>
-            <p>Preparação e confiança. Os primeiros minutos podem depender de você.</p>
-        </div>
+  <!-- VOLUME 05 — TERREMOTO 🔒 EM BREVE -->
+  <div class="volume-card bloqueado">
+    <span style="font-size:40px; margin:10px 0;">🏚️</span>
+    <h3 style="color:#888; font-size:16px; font-weight:bold;">VOL. 05</h3>
+    <p style="font-size:13px; color:#888;">TERREMOTO</p>
+    <p style="font-size:10px; color:#666; margin-top:5px;">60 CENÁRIOS</p>
+    <p style="font-size:10px; color:#666;">300 DECISÕES</p>
+    <button class="btn-bloqueado" disabled>🔒 EM BREVE</button>
+  </div>
 
-    </div>
+  <!-- VOLUME 06 — EXPLOSÃO 🔒 EM BREVE -->
+  <div class="volume-card bloqueado">
+    <span style="font-size:40px; margin:10px 0;">💥</span>
+    <h3 style="color:#888; font-size:16px; font-weight:bold;">VOL. 06</h3>
+    <p style="font-size:13px; color:#888;">EXPLOSÃO</p>
+    <p style="font-size:10px; color:#666; margin-top:5px;">60 CENÁRIOS</p>
+    <p style="font-size:10px; color:#666;">300 DECISÕES</p>
+    <button class="btn-bloqueado" disabled>🔒 EM BREVE</button>
+  </div>
+
+  <!-- VOLUME 07 — INCÊNDIO 🔒 EM BREVE -->
+  <div class="volume-card bloqueado">
+    <span style="font-size:40px; margin:10px 0;">🔥</span>
+    <h3 style="color:#888; font-size:16px; font-weight:bold;">VOL. 07</h3>
+    <p style="font-size:13px; color:#888;">INCÊNDIO</p>
+    <p style="font-size:10px; color:#666; margin-top:5px;">60 CENÁRIOS</p>
+    <p style="font-size:10px; color:#666;">300 DECISÕES</p>
+    <button class="btn-bloqueado" disabled>🔒 EM BREVE</button>
+  </div>
+
+  <!-- VOLUME 08 — ENCHENTE 🔒 EM BREVE -->
+  <div class="volume-card bloqueado">
+    <span style="font-size:40px; margin:10px 0;">🌊</span>
+    <h3 style="color:#888; font-size:16px; font-weight:bold;">VOL. 08</h3>
+    <p style="font-size:13px; color:#888;">ENCHENTE</p>
+    <p style="font-size:10px; color:#666; margin-top:5px;">60 CENÁRIOS</p>
+    <p style="font-size:10px; color:#666;">300 DECISÕES</p>
+    <button class="btn-bloqueado" disabled>🔒 EM BREVE</button>
+  </div>
+
+  <!-- VOLUME 09 — DESABAMENTO 🔒 EM BREVE -->
+  <div class="volume-card bloqueado">
+    <span style="font-size:40px; margin:10px 0;">🪨</span>
+    <h3 style="color:#888; font-size:16px; font-weight:bold;">VOL. 09</h3>
+    <p style="font-size:13px; color:#888;">DESABAMENTO</p>
+    <p style="font-size:10px; color:#666; margin-top:5px;">60 CENÁRIOS</p>
+    <p style="font-size:10px; color:#666;">300 DECISÕES</p>
+    <button class="btn-bloqueado" disabled>🔒 EM BREVE</button>
+  </div>
+
+  <!-- VOLUME 10 — APAGÃO 🔒 EM BREVE -->
+  <div class="volume-card bloqueado">
+    <span style="font-size:40px; margin:10px 0;">⚡</span>
+    <h3 style="color:#888; font-size:16px; font-weight:bold;">VOL. 10</h3>
+    <p style="font-size:13px; color:#888;">APAGÃO</p>
+    <p style="font-size:10px; color:#666; margin-top:5px;">60 CENÁRIOS</p>
+    <p style="font-size:10px; color:#666;">300 DECISÕES</p>
+    <button class="btn-bloqueado" disabled>🔒 EM BREVE</button>
+  </div>
+
+  <!-- VOLUME 11 — INDUSTRIAL 🔒 EM BREVE -->
+  <div class="volume-card bloqueado">
+    <span style="font-size:40px; margin:10px 0;">🏭</span>
+    <h3 style="color:#888; font-size:16px; font-weight:bold;">VOL. 11</h3>
+    <p style="font-size:13px; color:#888;">INDUSTRIAL</p>
+    <p style="font-size:10px; color:#666; margin-top:5px;">60 CENÁRIOS</p>
+    <p style="font-size:10px; color:#666;">300 DECISÕES</p>
+    <button class="btn-bloqueado" disabled>🔒 EM BREVE</button>
+  </div>
+
+  <!-- VOLUME 12 — RESILIÊNCIA 🔒 EM BREVE -->
+  <div class="volume-card bloqueado">
+    <span style="font-size:40px; margin:10px 0;">🌍</span>
+    <h3 style="color:#888; font-size:16px; font-weight:bold;">VOL. 12</h3>
+    <p style="font-size:13px; color:#888;">RESILIÊNCIA</p>
+    <p style="font-size:10px; color:#666; margin-top:5px;">60 CENÁRIOS</p>
+    <p style="font-size:10px; color:#666;">300 DECISÕES</p>
+    <button class="btn-bloqueado" disabled>🔒 EM BREVE</button>
+  </div>
+
+</div>
+
+<!-- RODAPÉ -->
+<div style="text-align:center; padding:20px; border-top:1px solid #222; margin-top:10px;">
+  <p style="font-size:12px; color:#d4af37; font-weight:bold;">FRANCIVAL ALVES FARIAS — AUTOR E CRIADOR</p>
+  <p style="font-size:10px; color:#666; margin-top:5px;">PRIME — Primeiros Socorros © 2026</p>
+</div>
 
 </body>
 </html>
