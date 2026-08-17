@@ -1,5 +1,5 @@
 /* ==============================================
-   PRIMEIROS SOCORROS — ESTILO OFICIAL
+   PRIME — Primeiros Socorros · Estilo Definitivo
    Autor: FRANCIVAL ALVES FARIAS
    ============================================== */
 
@@ -7,298 +7,36 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', Roboto, sans-serif;
 }
 
+html, body {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden; /* ✅ TUDO CABE — NÃO ROLA! */
+  background: #0a0a12;
+  color: #ffffff;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+/* Paleta de cores OFICIAL — NÃO MUDAR! */
 :root {
-  --fundo-escuro: #0f172a;
-  --vermelho-urgente: #dc2626;
-  --vermelho-claro: #fca5a5;
-  --destaque-emer: #f97316;
-  --texto-branco: #f8fafc;
-  --texto-cinza: #94a3b8;
-  --botao-fundo: #1e293b;
-  --botao-borda: #475569;
-  --botao-hover: #334155;
-  --sucesso: #22c55e;
-  --aviso-fundo: #451a03;
-  --aviso-borda: #92400e;
+  --vermelho: #ff2020;
+  --verde: #00dd44;
+  --laranja: #ff9900;
+  --azul: #0099ff;
+  --dourado: #d4af37;
+  --preto: #0a0a12;
+  --cinza: #1a1a2e;
+  --borda: #ff3333;
 }
 
-body {
-  background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
-  color: var(--texto-branco);
-  min-height: 100vh;
-  padding-bottom: 80px;
-}
-
-/* ==============================================
-   BARRA SUPERIOR — HP + PROGRESSO
-   ============================================== */
-.barra-superior {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: rgba(15, 23, 42, 0.95);
-  backdrop-filter: blur(8px);
-  padding: 12px 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 2px solid var(--vermelho-urgente);
-  z-index: 100;
-}
-
-.hp-container {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-width: 140px;
-}
-
-.hp-icone {
-  font-size: 20px;
-}
-
-.hp-barra-fundo {
-  flex: 1;
-  height: 14px;
-  background: #334155;
-  border-radius: 7px;
-  overflow: hidden;
-}
-
-.hp-barra {
-  height: 100%;
-  background: linear-gradient(90deg, #ef4444, #f97316, #22c55e);
-  border-radius: 7px;
-  transition: width 0.4s ease;
-}
-
-.hp-texto {
-  font-size: 13px;
-  font-weight: bold;
-  min-width: 45px;
-  text-align: right;
-}
-
-.progresso-container {
-  flex: 1;
-  margin-left: 16px;
-}
-
-.cena-texto {
-  font-size: 13px;
-  color: var(--texto-cinza);
-  margin-bottom: 4px;
-  display: block;
-  text-align: right;
-}
-
-.barra-progresso-fundo {
-  height: 8px;
-  background: #334155;
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.barra-progresso {
-  height: 100%;
-  background: var(--destaque-emer);
-  border-radius: 4px;
-  transition: width 0.4s ease;
-}
-
-/* ==============================================
-   CONTEÚDO PRINCIPAL
-   ============================================== */
-.conteudo-jogo {
-  margin-top: 80px;
-  padding: 16px;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.categoria {
-  background: rgba(249, 115, 22, 0.15);
-  border: 1px solid var(--destaque-emer);
-  border-radius: 8px;
-  padding: 8px 12px;
-  margin-bottom: 16px;
-  text-align: center;
-  font-weight: 600;
-  color: #fdba74;
-  font-size: 14px;
-}
-
-.container-imagem {
-  width: 100%;
-  height: 200px;
-  background: #1e293b;
-  border-radius: 12px;
-  margin-bottom: 20px;
-  overflow: hidden;
-  border: 2px solid var(--botao-borda);
-}
-
-.imagem-cena {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.titulo-cena {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 12px;
-  color: var(--vermelho-claro);
-  line-height: 1.4;
-}
-
-.texto-cenario {
-  font-size: 16px;
-  line-height: 1.7;
-  color: #e2e8f0;
-  margin-bottom: 16px;
-}
-
-.aviso-risco {
-  background: var(--aviso-fundo);
-  border: 1px solid var(--aviso-borda);
-  border-radius: 8px;
-  padding: 12px;
-  margin-bottom: 20px;
-  color: #fbbf24;
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.consequencia {
-  background: rgba(34, 197, 94, 0.15);
-  border: 1px solid var(--sucesso);
-  border-radius: 8px;
-  padding: 12px;
-  margin-bottom: 20px;
-  color: #bbf7d0;
-  font-size: 14px;
-  line-height: 1.5;
-  animation: aparecer 0.3s ease;
-}
-
-.consequencia.erro {
-  background: rgba(220, 38, 38, 0.15);
-  border-color: var(--vermelho-urgente);
-  color: #fecaca;
-}
-
-@keyframes aparecer {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ==============================================
-   ALTERNATIVAS — A-B-C-D-E FIXAS
-   ============================================== */
-.container-alternativas {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 24px;
-}
-
-.alternativa {
-  background: var(--botao-fundo);
-  border: 2px solid var(--botao-borda);
-  border-radius: 10px;
-  padding: 14px 16px;
-  color: var(--texto-branco);
-  font-size: 15px;
-  text-align: left;
+button {
   cursor: pointer;
-  transition: all 0.25s ease;
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  line-height: 1.5;
-}
-
-.alternativa:hover {
-  background: var(--botao-hover);
-  border-color: var(--vermelho-urgente);
-  transform: translateY(-2px);
-}
-
-.alternativa:active {
-  transform: translateY(0);
-}
-
-.letra {
-  font-weight: bold;
-  color: var(--destaque-emer);
-  font-size: 17px;
-  min-width: 24px;
-  display: inline-block;
-}
-
-/* ==============================================
-   BARRA INFERIOR
-   ============================================== */
-.barra-inferior {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(15, 23, 42, 0.95);
-  backdrop-filter: blur(8px);
-  padding: 12px 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 2px solid var(--botao-borda);
-  z-index: 100;
-}
-
-.pontos {
-  font-weight: bold;
-  color: var(--destaque-emer);
-  font-size: 15px;
-}
-
-.botoes-inferiores {
-  display: flex;
-  gap: 10px;
-}
-
-.btn-inferior {
-  background: var(--botao-fundo);
-  border: 1px solid var(--botao-borda);
+  border: none;
   border-radius: 6px;
-  padding: 8px 12px;
-  color: var(--texto-branco);
-  font-size: 13px;
-  cursor: pointer;
-  transition: all 0.2s;
+  font-family: inherit;
 }
 
-.btn-inferior:hover {
-  background: var(--botao-hover);
-  border-color: var(--destaque-emer);
-}
-
-/* ==============================================
-   RESPONSIVO — CELULAR
-   ============================================== */
-@media (max-width: 480px) {
-  .conteudo-jogo {
-    padding: 12px;
-  }
-  .alternativa {
-    padding: 12px 14px;
-    font-size: 14px;
-  }
-  .container-imagem {
-    height: 160px;
-  }
+button:active {
+  transform: scale(0.98);
 }
