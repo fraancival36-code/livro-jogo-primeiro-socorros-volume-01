@@ -2,160 +2,125 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="author" content="FRANCIVAL ALVES FARIAS">
-  <title>PRIME — Estante de Volumes</title>
+  <title>PRIME — Primeiros Socorros</title>
   <link rel="stylesheet" href="estilo.css">
-  <style>
-    .estante { padding: 15px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
-    .volume-card { background: #1a1a2e; border-radius: 10px; padding: 10px; aspect-ratio: 3/4; display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: transform 0.2s; }
-    .volume-card:active { transform: scale(0.97); }
-    .liberado { border: 2px solid #ff2020; }
-    .bloqueado { border: 2px solid #333; opacity: 0.7; }
-    .btn-jogar { margin-top: auto; background: #ff2020; color: white; border: none; padding: 6px 16px; border-radius: 5px; font-weight: bold; cursor: pointer; }
-    .btn-bloqueado { margin-top: auto; background: #333; color: #888; border: none; padding: 6px 16px; border-radius: 5px; cursor: not-allowed; }
-    .cabecalho { text-align: center; padding: 15px; border-bottom: 1px solid #222; }
-  </style>
 </head>
 <body>
+<div class="tela">
 
-<!-- CABEÇALHO DA ESTANTE -->
+<!-- 🔒 FIXO — NÃO ALTERAR -->
+<div class="topo-sistema">
+  <span>SISTEMA PRIME · SEKAI.A · QG ANDRÔMEDA</span>
+  <span class="online">● ONLINE</span>
+</div>
+
+<!-- 🔒 FIXO — NÃO ALTERAR -->
 <div class="cabecalho">
-  <h1 style="font-size:28px; font-weight:900;">📚 ESTANTE PRIME</h1>
-  <p style="font-size:12px; color:#888; margin-top:5px;">APRENDA · DECIDA · SALVE VIDAS</p>
-  <p style="font-size:11px; color:#d4af37; margin-top:8px; font-weight:bold;">FRANCIVAL ALVES FARIAS — AUTOR E CRIADOR</p>
+  <h1>PRIME</h1>
+  <h2>PRIMEIROS SOCORROS</h2>
+  <div class="ecg">❤️〰️❤️</div>
+  <p class="slogan">APRENDA • DECIDA • SALVE VIDAS</p>
 </div>
 
-<!-- A PRATELEIRA — 3 por linha -->
-<div class="estante">
-
-  <!-- VOLUME 01 — CIDADE ✅ LIBERADO -->
-  <div class="volume-card liberado" onclick="window.location.href='jogo.html'">
-    <span style="font-size:40px; margin:10px 0;">🏙️</span>
-    <h3 style="color:#ff2020; font-size:16px; font-weight:bold;">VOL. 01</h3>
-    <p style="font-size:13px;">CIDADE</p>
-    <p style="font-size:10px; color:#888; margin-top:5px;">60 CENÁRIOS</p>
-    <p style="font-size:10px; color:#888;">300 DECISÕES</p>
-    <button class="btn-jogar">▶️ JOGAR</button>
+<!-- 🔒 FIXO — NÃO ALTERAR -->
+<div class="status">
+  <div class="status-card hp-card">
+    <div class="hp-top"><span>❤️</span> HP</div>
+    <div class="hp-val">8/10</div>
+    <div class="hp-bar"><div class="hp-fill"></div></div>
   </div>
-
-  <!-- VOLUME 02 — INTERIOR 🔒 EM BREVE -->
-  <div class="volume-card bloqueado">
-    <span style="font-size:40px; margin:10px 0;">🌾</span>
-    <h3 style="color:#888; font-size:16px; font-weight:bold;">VOL. 02</h3>
-    <p style="font-size:13px; color:#888;">INTERIOR</p>
-    <p style="font-size:10px; color:#666; margin-top:5px;">60 CENÁRIOS</p>
-    <p style="font-size:10px; color:#666;">300 DECISÕES</p>
-    <button class="btn-bloqueado" disabled>🔒 EM BREVE</button>
+  <div class="status-card">
+    <span class="status-label">CENA</span>
+    <span class="status-val">1 DE 60</span>
   </div>
-
-  <!-- VOLUME 03 — SELVA 🔒 EM BREVE -->
-  <div class="volume-card bloqueado">
-    <span style="font-size:40px; margin:10px 0;">🌴</span>
-    <h3 style="color:#888; font-size:16px; font-weight:bold;">VOL. 03</h3>
-    <p style="font-size:13px; color:#888;">SELVA</p>
-    <p style="font-size:10px; color:#666; margin-top:5px;">60 CENÁRIOS</p>
-    <p style="font-size:10px; color:#666;">300 DECISÕES</p>
-    <button class="btn-bloqueado" disabled>🔒 EM BREVE</button>
+  <div class="status-card">
+    <span class="status-label">🧠 PERFIL</span>
+    <span class="status-val" style="font-size:13px;">ESTRATEGISTA</span>
   </div>
-
-  <!-- VOLUME 04 — ESTRADA 🔒 EM BREVE -->
-  <div class="volume-card bloqueado">
-    <span style="font-size:40px; margin:10px 0;">🚗</span>
-    <h3 style="color:#888; font-size:16px; font-weight:bold;">VOL. 04</h3>
-    <p style="font-size:13px; color:#888;">ESTRADA</p>
-    <p style="font-size:10px; color:#666; margin-top:5px;">60 CENÁRIOS</p>
-    <p style="font-size:10px; color:#666;">300 DECISÕES</p>
-    <button class="btn-bloqueado" disabled>🔒 EM BREVE</button>
-  </div>
-
-  <!-- VOLUME 05 — TERREMOTO 🔒 EM BREVE -->
-  <div class="volume-card bloqueado">
-    <span style="font-size:40px; margin:10px 0;">🏚️</span>
-    <h3 style="color:#888; font-size:16px; font-weight:bold;">VOL. 05</h3>
-    <p style="font-size:13px; color:#888;">TERREMOTO</p>
-    <p style="font-size:10px; color:#666; margin-top:5px;">60 CENÁRIOS</p>
-    <p style="font-size:10px; color:#666;">300 DECISÕES</p>
-    <button class="btn-bloqueado" disabled>🔒 EM BREVE</button>
-  </div>
-
-  <!-- VOLUME 06 — EXPLOSÃO 🔒 EM BREVE -->
-  <div class="volume-card bloqueado">
-    <span style="font-size:40px; margin:10px 0;">💥</span>
-    <h3 style="color:#888; font-size:16px; font-weight:bold;">VOL. 06</h3>
-    <p style="font-size:13px; color:#888;">EXPLOSÃO</p>
-    <p style="font-size:10px; color:#666; margin-top:5px;">60 CENÁRIOS</p>
-    <p style="font-size:10px; color:#666;">300 DECISÕES</p>
-    <button class="btn-bloqueado" disabled>🔒 EM BREVE</button>
-  </div>
-
-  <!-- VOLUME 07 — INCÊNDIO 🔒 EM BREVE -->
-  <div class="volume-card bloqueado">
-    <span style="font-size:40px; margin:10px 0;">🔥</span>
-    <h3 style="color:#888; font-size:16px; font-weight:bold;">VOL. 07</h3>
-    <p style="font-size:13px; color:#888;">INCÊNDIO</p>
-    <p style="font-size:10px; color:#666; margin-top:5px;">60 CENÁRIOS</p>
-    <p style="font-size:10px; color:#666;">300 DECISÕES</p>
-    <button class="btn-bloqueado" disabled>🔒 EM BREVE</button>
-  </div>
-
-  <!-- VOLUME 08 — ENCHENTE 🔒 EM BREVE -->
-  <div class="volume-card bloqueado">
-    <span style="font-size:40px; margin:10px 0;">🌊</span>
-    <h3 style="color:#888; font-size:16px; font-weight:bold;">VOL. 08</h3>
-    <p style="font-size:13px; color:#888;">ENCHENTE</p>
-    <p style="font-size:10px; color:#666; margin-top:5px;">60 CENÁRIOS</p>
-    <p style="font-size:10px; color:#666;">300 DECISÕES</p>
-    <button class="btn-bloqueado" disabled>🔒 EM BREVE</button>
-  </div>
-
-  <!-- VOLUME 09 — DESABAMENTO 🔒 EM BREVE -->
-  <div class="volume-card bloqueado">
-    <span style="font-size:40px; margin:10px 0;">🪨</span>
-    <h3 style="color:#888; font-size:16px; font-weight:bold;">VOL. 09</h3>
-    <p style="font-size:13px; color:#888;">DESABAMENTO</p>
-    <p style="font-size:10px; color:#666; margin-top:5px;">60 CENÁRIOS</p>
-    <p style="font-size:10px; color:#666;">300 DECISÕES</p>
-    <button class="btn-bloqueado" disabled>🔒 EM BREVE</button>
-  </div>
-
-  <!-- VOLUME 10 — APAGÃO 🔒 EM BREVE -->
-  <div class="volume-card bloqueado">
-    <span style="font-size:40px; margin:10px 0;">⚡</span>
-    <h3 style="color:#888; font-size:16px; font-weight:bold;">VOL. 10</h3>
-    <p style="font-size:13px; color:#888;">APAGÃO</p>
-    <p style="font-size:10px; color:#666; margin-top:5px;">60 CENÁRIOS</p>
-    <p style="font-size:10px; color:#666;">300 DECISÕES</p>
-    <button class="btn-bloqueado" disabled>🔒 EM BREVE</button>
-  </div>
-
-  <!-- VOLUME 11 — INDUSTRIAL 🔒 EM BREVE -->
-  <div class="volume-card bloqueado">
-    <span style="font-size:40px; margin:10px 0;">🏭</span>
-    <h3 style="color:#888; font-size:16px; font-weight:bold;">VOL. 11</h3>
-    <p style="font-size:13px; color:#888;">INDUSTRIAL</p>
-    <p style="font-size:10px; color:#666; margin-top:5px;">60 CENÁRIOS</p>
-    <p style="font-size:10px; color:#666;">300 DECISÕES</p>
-    <button class="btn-bloqueado" disabled>🔒 EM BREVE</button>
-  </div>
-
-  <!-- VOLUME 12 — RESILIÊNCIA 🔒 EM BREVE -->
-  <div class="volume-card bloqueado">
-    <span style="font-size:40px; margin:10px 0;">🌍</span>
-    <h3 style="color:#888; font-size:16px; font-weight:bold;">VOL. 12</h3>
-    <p style="font-size:13px; color:#888;">RESILIÊNCIA</p>
-    <p style="font-size:10px; color:#666; margin-top:5px;">60 CENÁRIOS</p>
-    <p style="font-size:10px; color:#666;">300 DECISÕES</p>
-    <button class="btn-bloqueado" disabled>🔒 EM BREVE</button>
-  </div>
-
 </div>
 
-<!-- RODAPÉ -->
-<div style="text-align:center; padding:20px; border-top:1px solid #222; margin-top:10px;">
-  <p style="font-size:12px; color:#d4af37; font-weight:bold;">FRANCIVAL ALVES FARIAS — AUTOR E CRIADOR</p>
-  <p style="font-size:10px; color:#666; margin-top:5px;">PRIME — Primeiros Socorros © 2026</p>
+<!-- 🔄 DINÂMICO — AQUI MUDA A IMAGEM DA CENA -->
+<div class="cena-imagem">
+  <span class="tag">ACIDENTE DE TRÂNSITO</span>
+  <span class="icone">➕</span>
 </div>
 
+<!-- 🔄 DINÂMICO — AQUI MUDA O TEXTO E AS ALTERNATIVAS -->
+<div class="decisao">
+  <div class="decisao-cab">
+    <span class="cena-titulo">CENA 1 — ACIDENTE DE TRÂNSITO</span>
+    <span class="pergunta-fixa">O QUE VOCÊ FAZ?</span>
+  </div>
+  <p class="situacao">Você chega ao local de um acidente. Um carro bateu em um poste. Há uma pessoa caída no chão, consciente, queixando-se de dor forte na perna direita. O trânsito continua passando próximo.</p>
+
+  <div class="alt alt-a" onclick="escolher(0)">
+    <div class="alt-esq"><span class="bola">A</span><span class="alt-texto">Correr imediatamente até a vítima no meio da pista.</span></div>
+    <span class="alt-hp">HP -1</span>
+  </div>
+  <div class="alt alt-b" onclick="escolher(1)">
+    <div class="alt-esq"><span class="bola">B</span><span class="alt-texto">Sinalizar o local e ligar para o SAMU (192).</span></div>
+    <span class="alt-hp">HP +1</span>
+  </div>
+  <div class="alt alt-c" onclick="escolher(2)">
+    <div class="alt-esq"><span class="bola">C</span><span class="alt-texto">Puxar a vítima pela perna para tirá-la da pista.</span></div>
+    <span class="alt-hp">HP -1</span>
+  </div>
+  <div class="alt alt-d" onclick="escolher(3)">
+    <div class="alt-esq"><span class="bola">D</span><span class="alt-texto">Dar água e tentar fazer a vítima andar.</span></div>
+    <span class="alt-hp">HP 0</span>
+  </div>
+  <div class="alt alt-e" onclick="escolher(4)">
+    <div class="alt-esq"><span class="bola">E</span><span class="alt-texto">Deixar a vítima e ir buscar ajuda longe dali.</span></div>
+    <span class="alt-hp">HP -1</span>
+  </div>
+</div>
+
+<!-- 📢 SLOT — ANÚNCIO EXTERNO (AdSense) -->
+<div class="banner-externo">
+  <span style="color:#4285F4; font-size:14px;">📢 ANÚNCIO — AdSense</span>
+</div>
+
+<!-- 📢 SLOT — DIVULGAÇÃO PRÓPRIA PRIME / QG ANDRÔMEDA -->
+<div class="divulgacao">
+  <div class="div-item">
+    <p class="div-tit">📚 EM BREVE</p>
+    <p class="div-desc">VOLUME 2</p>
+  </div>
+  <div class="div-item">
+    <p class="div-tit">🌐 SISTEMA</p>
+    <p class="div-desc">QG ANDRÔMEDA</p>
+  </div>
+  <div class="div-item">
+    <p class="div-tit">📖 LIVRO</p>
+    <p class="div-desc">VER NA LOJA</p>
+  </div>
+</div>
+
+<!-- 🔒 FIXO — NÃO ALTERAR -->
+<div class="rodape">
+  <div class="rod-card">
+    <p class="rod-tit">SEU PERFIL · PROGRESSO</p>
+    <div class="perfil-linha">
+      <div class="avatar"><span class="coroa">👑</span>👤</div>
+      <div>
+        <p class="perfil-nome">ESTRATEGISTA · NÍVEL 1</p>
+        <div class="barra-prog"><div class="barra-fill"></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="rod-card">
+    <p class="rod-tit">🏆 RANKING GLOBAL</p>
+    <ul class="rank-lista">
+      <li>1. Toella Master <span>9.850 pts</span></li>
+      <li>2. Alex_88 <span>9.420 pts</span></li>
+      <li>3. MariaMed <span>9.100 pts</span></li>
+    </ul>
+  </div>
+</div>
+
+</div>
+<script src="app.js"></script>
 </body>
 </html>
