@@ -1,5 +1,5 @@
 /* ==============================================
-   PRIME — Primeiros Socorros · MODELO OFICIAL
+   PRIME — Primeiros Socorros · FORMATO COMPACTO
    Autor: FRANCIVAL ALVES FARIAS
    ============================================== */
 
@@ -10,8 +10,8 @@
 }
 
 html, body {
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   overflow: hidden; /* ✅ TUDO CABE — NÃO ROLA! */
   background: #000;
   color: #fff;
@@ -22,227 +22,228 @@ html, body {
 }
 
 :root {
-  --vermelho: #ff2020;
-  --verde: #00dd44;
+  --vermelho: #ff0000;
+  --verde: #00ff00;
   --laranja: #ff9900;
   --azul: #0099ff;
-  --dourado: #d4af37;
-  --cinza-fundo: #1a1a2e;
+  --dourado: #ffd700;
+  --fundo-card: #12121f;
+  --borda: #ff3333;
 }
 
-.tela-jogo {
+.tela {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
 }
 
-/* 📢 1. BANNER SUPERIOR — 5% */
+/* 📢 1. BANNER TOPO — 40px */
 .banner-topo {
-  height: 5vh;
+  height: 40px;
   background: #fff;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 0 15px;
   flex-shrink: 0;
 }
 
-.banner-topo .logo { display: flex; align-items: center; gap: 8px; }
-.banner-topo .logo span { color: #4285f4; font-size: 18px; font-weight: 500; }
+.banner-topo span { color: #4285f4; font-size: 16px; font-weight: 500; }
 .banner-topo button {
   background: #4285f4;
   color: white;
   border: none;
-  padding: 6px 20px;
+  padding: 5px 16px;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: bold;
-  cursor: pointer;
 }
 
-/* 🏷️ 2. CABEÇALHO — 14% */
+/* 🏷️ 2. CABEÇALHO — 70px */
 .cabecalho {
-  height: 14vh;
+  height: 70px;
   background: linear-gradient(180deg, #000 0%, #111 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
+  border-bottom: 1px solid #222;
   flex-shrink: 0;
 }
 
-.cabecalho .menu { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); font-size: 26px; background: none; border: none; color: white; cursor: pointer; }
-.cabecalho .config { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); font-size: 24px; background: none; border: none; color: white; cursor: pointer; }
-.cabecalho h1 { font-size: 42px; font-weight: 900; letter-spacing: 4px; color: #fff; }
-.cabecalho h2 { font-size: 18px; color: #ddd; margin-top: 2px; letter-spacing: 1px; }
-.cabecalho .linha-pulso { display: flex; align-items: center; gap: 8px; margin-top: 4px; color: var(--vermelho); font-size: 20px; }
-.cabecalho .slogan { font-size: 12px; color: #888; margin-top: 2px; letter-spacing: 1px; }
+.cabecalho .menu { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 22px; }
+.cabecalho .config { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 20px; }
+.cabecalho h1 { font-size: 38px; font-weight: 900; letter-spacing: 3px; }
+.cabecalho h2 { font-size: 14px; color: #ddd; margin-top: 2px; }
+.cabecalho .ecg { display: flex; align-items: center; gap: 10px; margin-top: 2px; color: var(--vermelho); font-size: 16px; }
+.cabecalho p { font-size: 10px; color: #888; margin-top: 2px; }
 
-/* 📊 3. BARRA DE STATUS — 8% */
-.barra-status {
-  height: 8vh;
-  display: flex;
-  gap: 10px;
-  padding: 0 15px;
+/* 📊 3. STATUS — 55px */
+.status {
+  height: 55px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  padding: 0 12px;
   background: #000;
   flex-shrink: 0;
 }
 
 .status-card {
-  flex: 1;
-  background: #1a1a2e;
-  border-radius: 10px;
+  background: var(--fundo-card);
+  border: 1px solid #333;
+  border-radius: 8px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 8px;
 }
 
-.hp-col { flex-direction: column; align-items: flex-start; padding-left: 12px; }
-.hp-top { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; }
-.hp-top span { color: var(--vermelho); font-size: 18px; }
-.hp-valor { font-size: 18px; font-weight: bold; margin-top: 2px; }
-.hp-bar { width: 100%; height: 5px; background: #333; border-radius: 3px; margin-top: 4px; }
-.hp-fill { width: 80%; height: 100%; background: linear-gradient(90deg, var(--vermelho), #ff6060); border-radius: 3px; }
+.hp-card { align-items: flex-start; padding-left: 10px; }
+.hp-top { display: flex; align-items: center; gap: 5px; font-size: 12px; }
+.hp-top span { color: var(--vermelho); font-size: 16px; }
+.hp-val { font-size: 16px; font-weight: bold; margin-top: 2px; }
+.hp-bar { width: 100%; height: 5px; background: #333; border-radius: 3px; margin-top: 3px; }
+.hp-fill { width: 80%; height: 100%; background: var(--vermelho); border-radius: 3px; }
 
-.cena-col, .perfil-col { flex-direction: column; }
-.cena-col .label, .perfil-col .label { font-size: 12px; color: #888; }
-.cena-col .valor { font-size: 20px; font-weight: bold; margin-top: 2px; }
-.perfil-col .valor { font-size: 14px; font-weight: bold; margin-top: 2px; }
+.status-label { font-size: 11px; color: #888; }
+.status-val { font-size: 16px; font-weight: bold; margin-top: 2px; }
 
-/* 📸 4. IMAGEM PRINCIPAL — 26% */
-.imagem-cena {
-  height: 26vh;
-  background: linear-gradient(180deg, #0a0a1a 0%, #000 100%);
+/* 📸 4. IMAGEM — FLEXÍVEL */
+.imagem {
+  flex: 1;
+  min-height: 120px;
+  background: linear-gradient(180deg, #1a1a2e 0%, #000 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  flex-shrink: 0;
   overflow: hidden;
+  border-bottom: 1px solid #222;
 }
 
-.imagem-cena .cruz-neon { font-size: 90px; color: var(--vermelho); text-shadow: 0 0 30px var(--vermelho); z-index: 2; }
-/* Colocar imagem real depois: background: url('volumes/volume-01/cena-02.jpg') center/cover no-repeat; */
+.cruz { font-size: 70px; color: var(--vermelho); text-shadow: 0 0 20px var(--vermelho); }
 
-/* ❓ 5. ÁREA DE PERGUNTA — 27% */
-.area-pergunta {
-  height: 27vh;
+/* ❓ 5. PERGUNTA — 150px */
+.pergunta {
+  height: 150px;
   background: #000;
-  padding: 10px 12px;
+  padding: 8px 12px;
   flex-shrink: 0;
 }
 
-.pergunta-cabecalho {
+.perg-top {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
 }
 
-.pergunta-cabecalho .cena-num { font-size: 18px; font-weight: bold; color: var(--vermelho); }
-.pergunta-cabecalho .oq-faz { font-size: 18px; font-weight: bold; color: var(--vermelho); }
+.cena-num { font-size: 15px; font-weight: bold; color: var(--vermelho); }
+.oq-faz { font-size: 15px; font-weight: bold; color: var(--vermelho); }
 
-.situacao-texto {
-  font-size: 12px;
-  color: #ccc;
-  margin-bottom: 8px;
-  line-height: 1.4;
-}
+.texto-cena { font-size: 11px; color: #ccc; margin-bottom: 8px; line-height: 1.4; }
 
-.alternativas {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.alternativa-btn {
-  background: #1a1a2e;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 12px;
+.alt {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background: var(--fundo-card);
+  border-radius: 8px;
+  padding: 7px 10px;
+  margin-bottom: 4px;
   cursor: pointer;
-  transition: all 0.15s;
+  border: 1px solid;
 }
 
-.alternativa-btn:active { transform: scale(0.98); }
+.alt-a { border-color: var(--vermelho); }
+.alt-b { border-color: var(--verde); }
+.alt-c { border-color: var(--laranja); }
+.alt-d { border-color: var(--azul); }
+.alt-e { border-color: var(--vermelho); }
 
 .alt-esq { display: flex; align-items: center; gap: 10px; }
-.alt-bola { width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; color: white; }
-.alt-a .alt-bola { background: var(--vermelho); }
-.alt-b .alt-bola { background: var(--verde); }
-.alt-c .alt-bola { background: var(--laranja); }
-.alt-d .alt-bola { background: var(--azul); }
-.alt-e .alt-bola { background: var(--vermelho); }
+.bola {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: bold;
+  color: white;
+}
+.alt-a .bola { background: var(--vermelho); }
+.alt-b .bola { background: var(--verde); }
+.alt-c .bola { background: var(--laranja); }
+.alt-d .bola { background: var(--azul); }
+.alt-e .bola { background: var(--vermelho); }
 
-.alt-texto { font-size: 14px; text-align: left; }
-.alt-hp { font-size: 14px; font-weight: bold; }
-.alt-a .alt-hp { color: var(--vermelho); }
+.alt-texto { font-size: 13px; }
+.alt-hp { font-size: 13px; font-weight: bold; }
+.alt-a .alt-hp, .alt-e .alt-hp { color: var(--vermelho); }
 .alt-b .alt-hp { color: var(--verde); }
 .alt-c .alt-hp { color: var(--laranja); }
 .alt-d .alt-hp { color: var(--azul); }
-.alt-e .alt-hp { color: var(--vermelho); }
 
-/* 📢 6. BANNER MEIO — 5% */
+/* 📢 6. BANNER MEIO — 40px */
 .banner-meio {
-  height: 5vh;
+  height: 40px;
   background: #fff;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 0 15px;
   flex-shrink: 0;
 }
 
-.banner-meio .logo { display: flex; align-items: center; gap: 8px; }
-.banner-meio .logo span { color: #4285f4; font-size: 18px; font-weight: 500; }
+.banner-meio span { color: #4285f4; font-size: 16px; font-weight: 500; }
 .banner-meio button {
   background: #4285f4;
   color: white;
   border: none;
-  padding: 6px 20px;
+  padding: 5px 16px;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: bold;
-  cursor: pointer;
 }
 
-/* 📊 7. RODAPÉ — PERFIL + RANKING — 10% */
+/* 📊 7. RODAPÉ — 65px */
 .rodape {
-  height: 10vh;
-  display: flex;
-  gap: 10px;
-  padding: 8px 12px;
+  height: 65px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 6px 12px;
   background: #000;
   flex-shrink: 0;
 }
 
-.rodape-col {
-  flex: 1;
-  background: #1a1a2e;
+.rod-card {
+  background: var(--fundo-card);
+  border: 1px solid #333;
   border-radius: 8px;
-  padding: 8px;
+  padding: 6px 8px;
 }
 
-.rodape-titulo { font-size: 11px; color: #888; margin-bottom: 4px; }
-.perfil-corpo { display: flex; align-items: center; gap: 8px; }
-.perfil-icone { font-size: 24px; }
-.perfil-info p { font-size: 12px; font-weight: bold; }
-.perfil-barra { width: 100%; height: 5px; background: #333; border-radius: 3px; margin-top: 4px; }
-.perfil-barra-fill { width: 78%; height: 100%; background: linear-gradient(90deg, var(--azul), var(--verde)); border-radius: 3px; }
+.rod-tit { font-size: 10px; color: #888; margin-bottom: 3px; }
+.perfil-linha { display: flex; align-items: center; gap: 6px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; background: #333; display: flex; align-items: center; justify-content: center; font-size: 16px; position: relative; }
+.coroa { position: absolute; top: -5px; font-size: 10px; color: var(--dourado); }
+.perfil-nome { font-size: 11px; font-weight: bold; }
+.barra-prog { width: 100%; height: 4px; background: #333; border-radius: 2px; margin-top: 3px; }
+.barra-fill { width: 78%; height: 100%; background: linear-gradient(90deg, var(--azul), var(--verde)); border-radius: 2px; }
 
-.ranking-lista { list-style: none; }
-.ranking-lista li { font-size: 11px; display: flex; justify-content: space-between; margin-bottom: 2px; }
-.ranking-lista li span { color: #888; }
+.rank-lista { list-style: none; }
+.rank-lista li { font-size: 10px; display: flex; justify-content: space-between; margin-bottom: 1px; }
+.rank-lista li span { color: #888; }
 
-/* 📢 8. BANNER INFERIOR — 5% */
+/* 📢 8. BANNER INFERIOR — 40px */
 .banner-baixo {
-  height: 5vh;
+  height: 40px;
   background: #fff;
   display: flex;
   align-items: center;
@@ -250,4 +251,4 @@ html, body {
   flex-shrink: 0;
 }
 
-.banner-baixo span { color: #4285f4; font-size: 18px; font-weight: 500; }
+.banner-baixo span { color: #4285f4; font-size: 16px; font-weight: 500; }
