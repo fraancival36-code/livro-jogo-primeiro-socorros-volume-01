@@ -10,98 +10,108 @@
 <body>
 <div class="tela">
 
-<!-- 🔒 FIXO — NÃO ALTERAR -->
-<div class="topo-sistema">
+<!-- [01] 🔒 BARRA DE SISTEMA — SEMPRE 1 LINHA, NUNCA QUEBRAR -->
+<div class="barra-sistema">
   <span>SISTEMA PRIME · SEKAI.A · QG ANDRÔMEDA</span>
   <span class="online">● ONLINE</span>
 </div>
 
-<!-- 🔒 FIXO — NÃO ALTERAR -->
-<div class="cabecalho">
+<!-- [02] 🔒 IDENTIDADE — ESPAÇO PRÓPRIO, NÃO SOBREPÕE NADA -->
+<div class="identidade">
   <h1>PRIME</h1>
   <h2>PRIMEIROS SOCORROS</h2>
   <div class="ecg">❤️〰️❤️</div>
   <p class="slogan">APRENDA • DECIDA • SALVE VIDAS</p>
 </div>
 
-<!-- 🔒 FIXO — NÃO ALTERAR -->
-<div class="status">
-  <div class="status-card hp-card">
-    <div class="hp-top"><span>❤️</span> HP</div>
-    <div class="hp-val">8/10</div>
-    <div class="hp-bar"><div class="hp-fill"></div></div>
+<!-- [03] 🔒 HUD — 3 PAINÉIS FIXOS -->
+<div class="hud-status">
+  <div class="hud-card hp-bloco">
+    <div class="hp-titulo"><span>❤️</span> HP</div>
+    <div class="hp-valor">8/10</div>
+    <div class="hp-barra"><div class="hp-preenchimento"></div></div>
   </div>
-  <div class="status-card">
-    <span class="status-label">CENA</span>
-    <span class="status-val">1 DE 60</span>
+  <div class="hud-card">
+    <span class="hud-label">CENA</span>
+    <span class="hud-valor">1 DE 60</span>
   </div>
-  <div class="status-card">
-    <span class="status-label">🧠 PERFIL</span>
-    <span class="status-val" style="font-size:13px;">ESTRATEGISTA</span>
+  <div class="hud-card">
+    <span class="hud-label">🧠 PERFIL</span>
+    <span class="hud-valor" style="font-size:12px;">ESTRATEGISTA</span>
   </div>
 </div>
 
-<!-- 🔄 DINÂMICO — AQUI MUDA A IMAGEM DA CENA -->
+<!-- [04] 🔄 ÁREA DE IMAGEM — TEMA SOCORRO REAL -->
 <div class="cena-imagem">
-  <span class="tag">ACIDENTE DE TRÂNSITO</span>
-  <span class="icone">➕</span>
+  <div class="imagem-conteudo">
+    <span class="icone-emergencia">🚑</span>
+    <span class="tag-cena">ACIDENTE DE TRÂNSITO</span>
+  </div>
 </div>
 
-<!-- 🔄 DINÂMICO — AQUI MUDA O TEXTO E AS ALTERNATIVAS -->
-<div class="decisao">
-  <div class="decisao-cab">
-    <span class="cena-titulo">CENA 1 — ACIDENTE DE TRÂNSITO</span>
-    <span class="pergunta-fixa">O QUE VOCÊ FAZ?</span>
-  </div>
-  <p class="situacao">Você chega ao local de um acidente. Um carro bateu em um poste. Há uma pessoa caída no chão, consciente, queixando-se de dor forte na perna direita. O trânsito continua passando próximo.</p>
+<!-- [05] 🔄 CABEÇALHO DA CENA — SEM DUPLICAÇÃO, COM RESPIRO -->
+<div class="cena-cabecalho">
+  <span class="cena-titulo">CENA 1 · ACIDENTE DE TRÂNSITO</span>
+  <span class="pergunta-fixa">O QUE VOCÊ FAZ?</span>
+</div>
 
+<!-- [06] 🔄 NARRATIVA DA CENA -->
+<div class="cena-texto">
+  <p class="situacao">Você chega ao local de um acidente. Um carro bateu em um poste. Há uma pessoa caída no chão, consciente, queixando-se de dor forte na perna direita. O trânsito continua passando próximo.</p>
+</div>
+
+<!-- [07] 🔒 ALTERNATIVAS A–E — COMPACTAS, SEM REPETIÇÃO -->
+<div class="area-alternativas">
   <div class="alt alt-a" onclick="escolher(0)">
-    <div class="alt-esq"><span class="bola">A</span><span class="alt-texto">Correr imediatamente até a vítima no meio da pista.</span></div>
-    <span class="alt-hp">HP -1</span>
+    <div class="alt-esq"><span class="letra">A</span><span class="alt-texto">Correr imediatamente até a vítima no meio da pista.</span></div>
+    <span class="alt-hp">-1</span>
   </div>
   <div class="alt alt-b" onclick="escolher(1)">
-    <div class="alt-esq"><span class="bola">B</span><span class="alt-texto">Sinalizar o local e ligar para o SAMU (192).</span></div>
-    <span class="alt-hp">HP +1</span>
+    <div class="alt-esq"><span class="letra">B</span><span class="alt-texto">Sinalizar o local e ligar para o SAMU (192).</span></div>
+    <span class="alt-hp">+1</span>
   </div>
   <div class="alt alt-c" onclick="escolher(2)">
-    <div class="alt-esq"><span class="bola">C</span><span class="alt-texto">Puxar a vítima pela perna para tirá-la da pista.</span></div>
-    <span class="alt-hp">HP -1</span>
+    <div class="alt-esq"><span class="letra">C</span><span class="alt-texto">Puxar a vítima pela perna para tirá-la da pista.</span></div>
+    <span class="alt-hp">-1</span>
   </div>
   <div class="alt alt-d" onclick="escolher(3)">
-    <div class="alt-esq"><span class="bola">D</span><span class="alt-texto">Dar água e tentar fazer a vítima andar.</span></div>
-    <span class="alt-hp">HP 0</span>
+    <div class="alt-esq"><span class="letra">D</span><span class="alt-texto">Dar água e tentar fazer a vítima andar.</span></div>
+    <span class="alt-hp">0</span>
   </div>
   <div class="alt alt-e" onclick="escolher(4)">
-    <div class="alt-esq"><span class="bola">E</span><span class="alt-texto">Deixar a vítima e ir buscar ajuda longe dali.</span></div>
-    <span class="alt-hp">HP -1</span>
+    <div class="alt-esq"><span class="letra">E</span><span class="alt-texto">Deixar a vítima e ir buscar ajuda longe dali.</span></div>
+    <span class="alt-hp">-1</span>
   </div>
 </div>
 
-<!-- 📢 SLOT — ANÚNCIO EXTERNO (AdSense) -->
-<div class="banner-externo">
-  <span style="color:#4285F4; font-size:14px;">📢 ANÚNCIO — AdSense</span>
+<!-- [08] 📢 ANÚNCIO — BLOCO SEPARADO, NÃO PARECE PARTE DO JOGO -->
+<div class="area-anuncio">
+  <div class="anuncio-conteudo">
+    <p class="anuncio-titulo">📢 ANÚNCIO — AdSense</p>
+    <p class="anuncio-destaque">Seu anúncio aqui</p>
+  </div>
 </div>
 
-<!-- 📢 SLOT — DIVULGAÇÃO PRÓPRIA PRIME / QG ANDRÔMEDA -->
-<div class="divulgacao">
+<!-- [09] 📢 DIVULGAÇÃO PRÓPRIA — ORGANIZADA -->
+<div class="area-divulgacao">
   <div class="div-item">
     <p class="div-tit">📚 EM BREVE</p>
     <p class="div-desc">VOLUME 2</p>
   </div>
   <div class="div-item">
-    <p class="div-tit">🌐 SISTEMA</p>
+    <p class="div-tit">🌐 REDE</p>
     <p class="div-desc">QG ANDRÔMEDA</p>
   </div>
   <div class="div-item">
-    <p class="div-tit">📖 LIVRO</p>
-    <p class="div-desc">VER NA LOJA</p>
+    <p class="div-tit">🛒 LOJA</p>
+    <p class="div-desc">VER LIVRO</p>
   </div>
 </div>
 
-<!-- 🔒 FIXO — NÃO ALTERAR -->
+<!-- [10] 🔒 RODAPÉ — PERFIL + RANKING, SEMPRE VISÍVEL -->
 <div class="rodape">
   <div class="rod-card">
-    <p class="rod-tit">SEU PERFIL · PROGRESSO</p>
+    <p class="rod-tit">SEU PERFIL</p>
     <div class="perfil-linha">
       <div class="avatar"><span class="coroa">👑</span>👤</div>
       <div>
@@ -113,9 +123,9 @@
   <div class="rod-card">
     <p class="rod-tit">🏆 RANKING GLOBAL</p>
     <ul class="rank-lista">
-      <li>1. Toella Master <span>9.850 pts</span></li>
-      <li>2. Alex_88 <span>9.420 pts</span></li>
-      <li>3. MariaMed <span>9.100 pts</span></li>
+      <li>1. Toella Master <span>9.850</span></li>
+      <li>2. Alex_88 <span>9.420</span></li>
+      <li>3. MariaMed <span>9.100</span></li>
     </ul>
   </div>
 </div>
