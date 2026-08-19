@@ -7,187 +7,285 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, sans-serif; }
         body { background: #000; color: #fff; min-height: 100vh; padding: 15px; }
-        .status { display: flex; gap: 15px; margin: 10px 0; font-size: 16px; }
+        
+        /* CABEÇALHO */
+        .cabecalho { margin-bottom: 20px; }
+        .titulo-principal { font-size: 42px; font-weight: 900; }
+        .subtitulo { font-size: 24px; color: #ff4444; margin: 5px 0; }
+        .status { display: flex; gap: 20px; margin: 15px 0; font-size: 18px; flex-wrap: wrap; }
         .hp { color: #ff4444; font-weight: bold; }
-        .cena-num { color: #4fc3f7; }
-        .bloco-cena { background: #0a0a20; border-radius: 12px; padding: 20px; margin: 20px 0; }
-        .titulo { font-size: 22px; color: #ffcc00; text-align: center; margin-bottom: 15px; }
-        .imagem { width: 100%; height: 180px; background: #223; border-radius: 8px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; font-size: 40px; }
-        .texto { font-size: 17px; line-height: 1.6; margin-bottom: 20px; }
-        .opcao { padding: 14px; margin: 10px 0; border: 2px solid #444; border-radius: 10px; cursor: pointer; font-size: 16px; }
+        .cena-numero { color: #4fc3f7; }
+        .perfil { color: #ffd700; }
+        
+        /* CENA */
+        .bloco-cena { background: linear-gradient(180deg, #0f172a, #000); border-radius: 12px; padding: 20px; margin: 20px 0; border: 1px solid #1e3a5f; }
+        .cena-titulo { font-size: 24px; text-align: center; margin-bottom: 20px; color: #ffcc00; }
+        .cena-texto { font-size: 17px; line-height: 1.7; margin-bottom: 25px; }
+        
+        /* ALTERNATIVAS */
+        .opcao { display: flex; align-items: center; padding: 15px; margin: 10px 0; border-radius: 10px; border: 2px solid #333; cursor: pointer; font-size: 16px; transition: all 0.2s; }
         .opcao:hover { border-color: #666; }
-        .letra { font-weight: bold; font-size: 18px; margin-right: 10px; }
+        .letra { font-weight: bold; font-size: 20px; width: 35px; display: inline-block; }
+        .pontos { margin-left: auto; font-weight: bold; font-size: 15px; }
+        .positivo { color: #00ff00; }
+        .negativo { color: #ff4444; }
+        .neutro { color: #888; }
+        
+        /* TELAS */
         .escondido { display: none !important; }
-        .inicio { text-align: center; padding-top: 100px; }
-        .btn-iniciar { padding: 20px 50px; font-size: 22px; background: #ff4444; color: #fff; border: none; border-radius: 12px; cursor: pointer; font-weight: bold; }
+        .tela-inicio { text-align: center; padding-top: 100px; }
+        .btn-iniciar { padding: 20px 50px; font-size: 22px; background: linear-gradient(90deg, #ff4444, #ff6666); color: #fff; border: none; border-radius: 12px; cursor: pointer; font-weight: bold; margin-top: 30px; }
+        .tela-final { text-align: center; padding-top: 80px; }
+        .barra-vida { width: 100%; height: 12px; background: #333; border-radius: 6px; margin: 10px 0; }
+        .barra-vida-preencher { height: 100%; background: linear-gradient(90deg, #ff0000, #ff4444); border-radius: 6px; transition: width 0.3s; }
     </style>
 </head>
 <body>
 
+<!-- ============================================== -->
 <!-- TELA DE INÍCIO -->
-<div id="tela-inicio" class="inicio">
-    <h1 style="font-size: 48px; margin-bottom: 20px;">PRIME</h1>
-    <h2 style="color: #ff4444; margin-bottom: 40px;">PRIMEIROS SOCORROS</h2>
+<!-- ============================================== -->
+<div id="tela-inicio" class="tela-inicio">
+    <h1 class="titulo-principal">PRIME</h1>
+    <h2 class="subtitulo">PRIMEIROS SOCORROS</h2>
+    <p style="color:#888; margin:15px 0; font-size:18px;">❤️ APRENDA • DECIDA • SALVE VIDAS ❤️</p>
     <button class="btn-iniciar" onclick="iniciarJogo()">🚑 INICIAR JOGO</button>
 </div>
 
+<!-- ============================================== -->
 <!-- TELA DO JOGO -->
+<!-- ============================================== -->
 <div id="tela-jogo" class="escondido">
-    <div class="status">
-        <span class="hp">❤️ HP: <span id="valor-hp">10</span>/10</span>
-        <span class="cena-num">📍 Cena <span id="valor-cena">1</span> de 5</span>
+    <div class="cabecalho">
+        <h1 class="titulo-principal">PRIME</h1>
+        <h2 class="subtitulo">PRIMEIROS SOCORROS</h2>
+        <p style="color:#888; margin:8px 0; font-size:15px;">APRENDA • DECIDA • SALVE VIDAS</p>
+        
+        <div class="barra-vida">
+            <div id="barra-hp" class="barra-vida-preencher" style="width: 80%;"></div>
+        </div>
+        
+        <div class="status">
+            <span class="hp">❤️ HP: <span id="valor-hp">8</span>/10</span>
+            <span class="cena-numero">📍 CENA <span id="numero-cena">1</span> DE 60</span>
+            <span class="perfil">🧠 ESTRATEGISTA</span>
+        </div>
     </div>
 
-    <div class="bloco-cena">
-        <h3 id="cena-titulo" class="titulo">Título da Cena 1</h3>
-        <div id="cena-imagem" class="imagem">🚗</div>
-        <p id="cena-texto" class="texto">Texto da situação 1...</p>
+    <div id="bloco-cena" class="bloco-cena">
+        <h3 id="cena-titulo" class="cena-titulo">🚑 ACIDENTE DE TRÂNSITO</h3>
+        <p id="cena-texto" class="cena-texto">Você chega ao local de um acidente. Um carro bateu em um poste. Há uma pessoa caída no chão, consciente, queixando-se de dor forte na perna direita. O trânsito continua passando próximo.</p>
         
-        <div id="opcoes">
-            <div class="opcao" onclick="responder(0)"><span class="letra">A</span>Opção A1</div>
-            <div class="opcao" onclick="responder(1)"><span class="letra">B</span>Opção B1</div>
-            <div class="opcao" onclick="responder(2)"><span class="letra">C</span>Opção C1</div>
-            <div class="opcao" onclick="responder(3)"><span class="letra">D</span>Opção D1</div>
-            <div class="opcao" onclick="responder(4)"><span class="letra">E</span>Opção E1</div>
+        <div id="container-opcoes">
+            <!-- As alternativas A-E vão ser GERADAS AQUI pelo JavaScript -->
         </div>
     </div>
 </div>
 
+<!-- ============================================== -->
+<!-- TELA FINAL -->
+<!-- ============================================== -->
+<div id="tela-final" class="escondido tela-final">
+    <h1>🎉 PARABÉNS!</h1>
+    <h2>Você concluiu todas as 60 cenas!</h2>
+    <p style="font-size:20px; margin:30px 0;">Pontuação Final: <span id="pontuacao-final">0</span> pontos</p>
+    <button class="btn-iniciar" onclick="reiniciarJogo()">🔄 JOGAR NOVAMENTE</button>
+</div>
+
 <script>
 // ==============================================
-// BANCO DE CENAS — AQUI FICA TODO O CONTEÚDO
+// 📋 BANCO DE DADOS — AQUI ESTÃO TODAS AS CENAS
 // ==============================================
 const CENAS = [
     {
-        titulo: "🚗 ACIDENTE DE TRÂNSITO",
-        icone: "🚗",
-        texto: "Você chega ao local de um acidente. Um carro bateu em um poste. Há uma pessoa caída no chão, queixando-se de dor na perna direita.",
-        opcoes: [
-            { texto: "Correr imediatamente até a vítima no meio da pista.", hp: -1 },
-            { texto: "Sinalizar o local e ligar para o SAMU (192).", hp: +1 },
-            { texto: "Puxar a vítima pela perna para tirá-la da pista.", hp: -2 },
-            { texto: "Dar água e tentar fazer a vítima andar.", hp: -1 },
-            { texto: "Deixar a vítima e ir buscar ajuda longe dali.", hp: -1 }
+        titulo: "🚑 ACIDENTE DE TRÂNSITO",
+        texto: "Você chega ao local de um acidente. Um carro bateu em um poste. Há uma pessoa caída no chão, consciente, queixando-se de dor forte na perna direita. O trânsito continua passando próximo.",
+        alternativas: [
+            { letra: "A", texto: "Correr imediatamente até a vítima no meio da pista.", hp: -1, correta: false },
+            { letra: "B", texto: "Sinalizar o local e ligar para o SAMU (192).", hp: +1, correta: true },
+            { letra: "C", texto: "Puxar a vítima pela perna para tirá-la da pista.", hp: -1, correta: false },
+            { letra: "D", texto: "Dar água e tentar fazer a vítima andar.", hp: 0, correta: false },
+            { letra: "E", texto: "Deixar a vítima e ir buscar ajuda longe dali.", hp: -1, correta: false }
         ]
     },
     {
         titulo: "⚡ FIOS ELÉTRICOS CAÍDOS",
-        icone: "⚡",
-        texto: "Uma tempestade derrubou fios de alta tensão. Um fio está no chão soltando faíscas. Uma pessoa se aproxima sem perceber o perigo.",
-        opcoes: [
-            { texto: "Pegar o fio com a mão para afastar.", hp: -3 },
-            { texto: "Gritar para a pessoa parar e manter distância mínima de 10 metros.", hp: +1 },
-            { texto: "Puxar a pessoa pela roupa para tirar dali.", hp: -2 },
-            { texto: "Chutar o fio com o pé.", hp: -2 },
-            { texto: "Ignorar e seguir caminho.", hp: -1 }
+        texto: "Uma tempestade derrubou fios de alta tensão. Um fio está no chão, soltando faíscas. Uma pessoa se aproxima sem perceber o perigo.",
+        alternativas: [
+            { letra: "A", texto: "Pegar o fio com a mão para afastar.", hp: -3, correta: false },
+            { letra: "B", texto: "Gritar para a pessoa parar e manter distância mínima de 10 metros.", hp: +1, correta: true },
+            { letra: "C", texto: "Puxar a pessoa pela roupa para tirá-la dali.", hp: -2, correta: false },
+            { letra: "D", texto: "Chutar o fio com o pé.", hp: -2, correta: false },
+            { letra: "E", texto: "Ignorar e seguir caminho.", hp: -1, correta: false }
         ]
     },
     {
         titulo: "🩸 HEMORRAGIA FORTE",
-        icone: "🩸",
         texto: "Uma pessoa sofreu um corte profundo no braço e o sangue jorra sem parar.",
-        opcoes: [
-            { texto: "Lavar com água e esperar parar sozinho.", hp: -1 },
-            { texto: "Fazer pressão direta no local com pano limpo.", hp: +1 },
-            { texto: "Amarrar fio fino acima do corte.", hp: -2 },
-            { texto: "Colocar algodão em cima do corte.", hp: 0 },
-            { texto: "Deixar sangrar para limpar.", hp: -3 }
+        alternativas: [
+            { letra: "A", texto: "Lavar com água e esperar parar sozinho.", hp: -1, correta: false },
+            { letra: "B", texto: "Fazer pressão direta no local com pano limpo.", hp: +1, correta: true },
+            { letra: "C", texto: "Amarrar fio fino acima do corte.", hp: -2, correta: false },
+            { letra: "D", texto: "Colocar algodão em cima do corte.", hp: 0, correta: false },
+            { letra: "E", texto: "Deixar sangrar para limpar.", hp: -3, correta: false }
         ]
     },
     {
         titulo: "🔥 QUEIMADURA QUENTE",
-        icone: "🔥",
         texto: "Uma pessoa tocou em panela quente e a pele está vermelha e dolorida.",
-        opcoes: [
-            { texto: "Colocar manteiga ou pasta de dente.", hp: -2 },
-            { texto: "Colocar sob água corrente fria por 10 minutos.", hp: +1 },
-            { texto: "Estourar as bolhas se aparecerem.", hp: -2 },
-            { texto: "Cobrir com curativo fechado.", hp: 0 },
-            { texto: "Passar gelo direto na pele.", hp: -1 }
+        alternativas: [
+            { letra: "A", texto: "Colocar manteiga ou pasta de dente.", hp: -2, correta: false },
+            { letra: "B", texto: "Colocar sob água corrente fria por 10 minutos.", hp: +1, correta: true },
+            { letra: "C", texto: "Estourar as bolhas se aparecerem.", hp: -2, correta: false },
+            { letra: "D", texto: "Cobrir com curativo fechado.", hp: 0, correta: false },
+            { letra: "E", texto: "Passar gelo direto na pele.", hp: -1, correta: false }
         ]
     },
     {
         titulo: "💓 PARADA CARDÍACA",
-        icone: "💓",
         texto: "Uma pessoa caiu no chão, não responde, não respira. O peito não se move.",
-        opcoes: [
-            { texto: "Dar água e esperar acordar.", hp: -2 },
-            { texto: "Ligar 192 e iniciar massagem cardíaca imediatamente.", hp: +1 },
-            { texto: "Sacudir a pessoa para acordar.", hp: -1 },
-            { texto: "Colocar deitada de lado e esperar.", hp: 0 },
-            { texto: "Correr buscar ajuda e deixar a pessoa sozinha.", hp: -1 }
+        alternativas: [
+            { letra: "A", texto: "Dar água e esperar acordar.", hp: -2, correta: false },
+            { letra: "B", texto: "Ligar 192 e iniciar massagem cardíaca imediatamente.", hp: +1, correta: true },
+            { letra: "C", texto: "Sacudir a pessoa para acordar.", hp: -1, correta: false },
+            { letra: "D", texto: "Colocar deitada de lado e esperar.", hp: 0, correta: false },
+            { letra: "E", texto: "Correr buscar ajuda e deixar a pessoa sozinha.", hp: -1, correta: false }
         ]
     }
+    // 👉 AQUI VOCÊ CONTINUA ADICIONANDO AS OUTRAS 55 CENAS SEGUINDO O MESMO FORMATO
 ];
 
 // ==============================================
-// ESTADO DO JOGO
+// 🧠 ESTADO DO JOGO
 // ==============================================
 let estado = {
     hp: 10,
+    hpMax: 10,
     cenaAtual: 0,
-    totalCenas: CENAS.length
+    totalCenas: 60,
+    pontos: 0,
+    cenasEmbaralhadas: []
 };
+
+// ==============================================
+// 🎲 EMBARALHAR CENAS — NINGUÉM DECORA!
+// ==============================================
+function embaralharCenas() {
+    estado.cenasEmbaralhadas = [];
+    for (let i = 0; i < CENAS.length; i++) {
+        estado.cenasEmbaralhadas.push(i);
+    }
+    // Embaralha
+    for (let i = estado.cenasEmbaralhadas.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [estado.cenasEmbaralhadas[i], estado.cenasEmbaralhadas[j]] = 
+        [estado.cenasEmbaralhadas[j], estado.cenasEmbaralhadas[i]];
+    }
+}
 
 // ==============================================
 // 🎯 FUNÇÃO PRINCIPAL — CARREGA A CENA NA TELA
 // ==============================================
 function carregarCena() {
-    // PEGA A CENA ATUAL — USA O ÍNDICE QUE ESTÁ AVANÇANDO
-    const cena = CENAS[estado.cenaAtual];
-    
+    // Pega o índice embaralhado
+    const indiceReal = estado.cenasEmbaralhadas[estado.cenaAtual];
+    const cena = CENAS[indiceReal];
+
     if (!cena) {
-        alert("🎉 JOGO FINALIZADO! Você passou por todas as cenas!");
+        mostrarTelaFinal();
         return;
     }
 
-    // ✅ TROCA TUDO — TÍTULO, IMAGEM, TEXTO, OPÇÕES, NÚMERO, HP
+    // ✅ TROCA TÍTULO
     document.getElementById("cena-titulo").textContent = cena.titulo;
-    document.getElementById("cena-imagem").textContent = cena.icone;
+    
+    // ✅ TROCA TEXTO
     document.getElementById("cena-texto").textContent = cena.texto;
-    document.getElementById("valor-cena").textContent = estado.cenaAtual + 1;
+    
+    // ✅ TROCA NÚMERO DA CENA
+    document.getElementById("numero-cena").textContent = estado.cenaAtual + 1;
+    
+    // ✅ TROCA HP
     document.getElementById("valor-hp").textContent = estado.hp;
+    document.getElementById("barra-hp").style.width = `${(estado.hp / estado.hpMax) * 100}%`;
 
-    // ✅ TROCA AS 5 OPÇÕES A–E
-    const divOpcoes = document.getElementById("opcoes");
-    divOpcoes.innerHTML = ""; // APAGA AS VELHAS PRIMEIRO!
+    // ✅ TROCA AS 5 ALTERNATIVAS — APAGA AS VELHAS E COLOCA NOVAS!
+    const container = document.getElementById("container-opcoes");
+    container.innerHTML = ""; // 🔑 APAGA TUDO ANTES DE COLOCAR NOVO!
 
-    const letras = ["A", "B", "C", "D", "E"];
-    cena.opcoes.forEach((op, i) => {
-        divOpcoes.innerHTML += `
-            <div class="opcao" onclick="responder(${i})">
-                <span class="letra">${letras[i]}</span>${op.texto}
+    cena.alternativas.forEach((alt, indice) => {
+        const classePontos = alt.hp > 0 ? 'positivo' : alt.hp < 0 ? 'negativo' : 'neutro';
+        const sinal = alt.hp > 0 ? `+${alt.hp}` : alt.hp;
+        
+        container.innerHTML += `
+            <div class="opcao" onclick="responder(${indice})">
+                <span class="letra">${alt.letra}</span>
+                <span>${alt.texto}</span>
+                <span class="pontos ${classePontos}">${sinal}</span>
             </div>
         `;
     });
 }
 
 // ==============================================
-// ✅ RESPONDER E AVANÇAR — CHAMA CARREGAR CENA DE NOVO!
+// ✅ RESPONDER E AVANÇAR — CHAMA CARREGAR DE NOVO!
 // ==============================================
-function responder(indiceOpcao) {
-    const cena = CENAS[estado.cenaAtual];
-    const hpMudanca = cena.opcoes[indiceOpcao].hp;
-    
-    estado.hp = Math.max(0, Math.min(10, estado.hp + hpMudanca));
-    
-    // AVANÇA PARA PRÓXIMA CENA
+function responder(indiceEscolhido) {
+    const indiceReal = estado.cenasEmbaralhadas[estado.cenaAtual];
+    const cena = CENAS[indiceReal];
+    const escolha = cena.alternativas[indiceEscolhido];
+
+    // Atualiza HP
+    estado.hp = Math.max(0, Math.min(estado.hpMax, estado.hp + escolha.hp));
+    estado.pontos += escolha.hp;
+
+    // Avança cena
     estado.cenaAtual++;
-    
+
     // ✅ CHAMA A FUNÇÃO QUE TROCA TUDO — SEM FALTA ISSO!
+    setTimeout(() => {
+        carregarCena();
+    }, 300);
+}
+
+// ==============================================
+// ▶️ INICIAR JOGO
+// ==============================================
+function iniciarJogo() {
+    estado = {
+        hp: 10,
+        hpMax: 10,
+        cenaAtual: 0,
+        totalCenas: CENAS.length,
+        pontos: 0,
+        cenasEmbaralhadas: []
+    };
+
+    embaralharCenas();
+
+    // Troca de tela
+    document.getElementById("tela-inicio").classList.add("escondido");
+    document.getElementById("tela-jogo").classList.remove("escondido");
+    document.getElementById("tela-final").classList.add("escondido");
+
+    // ✅ CARREGA A PRIMEIRA CENA
     carregarCena();
 }
 
 // ==============================================
-// ▶️ INICIAR O JOGO
+// 🏆 TELA FINAL
 // ==============================================
-function iniciarJogo() {
-    estado = { hp: 10, cenaAtual: 0, totalCenas: CENAS.length };
-    document.getElementById("tela-inicio").classList.add("escondido");
-    document.getElementById("tela-jogo").classList.remove("escondido");
-    
-    // ✅ CARREGA A PRIMEIRA CENA
-    carregarCena();
+function mostrarTelaFinal() {
+    document.getElementById("tela-jogo").classList.add("escondido");
+    document.getElementById("tela-final").classList.remove("escondido");
+    document.getElementById("pontuacao-final").textContent = estado.pontos;
+}
+
+// ==============================================
+// 🔄 REINICIAR
+// ==============================================
+function reiniciarJogo() {
+    iniciarJogo();
 }
 </script>
 
