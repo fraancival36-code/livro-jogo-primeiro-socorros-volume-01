@@ -1,136 +1,195 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="author" content="FRANCIVAL ALVES FARIAS">
-  <title>PRIME — Primeiros Socorros</title>
-  <link rel="stylesheet" href="estilo.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRIME — Primeiros Socorros</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, sans-serif; }
+        body { background: #000; color: #fff; min-height: 100vh; padding: 15px; }
+        .status { display: flex; gap: 15px; margin: 10px 0; font-size: 16px; }
+        .hp { color: #ff4444; font-weight: bold; }
+        .cena-num { color: #4fc3f7; }
+        .bloco-cena { background: #0a0a20; border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .titulo { font-size: 22px; color: #ffcc00; text-align: center; margin-bottom: 15px; }
+        .imagem { width: 100%; height: 180px; background: #223; border-radius: 8px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; font-size: 40px; }
+        .texto { font-size: 17px; line-height: 1.6; margin-bottom: 20px; }
+        .opcao { padding: 14px; margin: 10px 0; border: 2px solid #444; border-radius: 10px; cursor: pointer; font-size: 16px; }
+        .opcao:hover { border-color: #666; }
+        .letra { font-weight: bold; font-size: 18px; margin-right: 10px; }
+        .escondido { display: none !important; }
+        .inicio { text-align: center; padding-top: 100px; }
+        .btn-iniciar { padding: 20px 50px; font-size: 22px; background: #ff4444; color: #fff; border: none; border-radius: 12px; cursor: pointer; font-weight: bold; }
+    </style>
 </head>
 <body>
-<div class="tela">
 
-<!-- [01] 🔒 BARRA DE SISTEMA — SEMPRE 1 LINHA, NUNCA QUEBRAR -->
-<div class="barra-sistema">
-  <span>SISTEMA PRIME · SEKAI.A · QG ANDRÔMEDA</span>
-  <span class="online">● ONLINE</span>
+<!-- TELA DE INÍCIO -->
+<div id="tela-inicio" class="inicio">
+    <h1 style="font-size: 48px; margin-bottom: 20px;">PRIME</h1>
+    <h2 style="color: #ff4444; margin-bottom: 40px;">PRIMEIROS SOCORROS</h2>
+    <button class="btn-iniciar" onclick="iniciarJogo()">🚑 INICIAR JOGO</button>
 </div>
 
-<!-- [02] 🔒 IDENTIDADE — ESPAÇO PRÓPRIO, NÃO SOBREPÕE NADA -->
-<div class="identidade">
-  <h1>PRIME</h1>
-  <h2>PRIMEIROS SOCORROS</h2>
-  <div class="ecg">❤️〰️❤️</div>
-  <p class="slogan">APRENDA • DECIDA • SALVE VIDAS</p>
-</div>
-
-<!-- [03] 🔒 HUD — 3 PAINÉIS FIXOS -->
-<div class="hud-status">
-  <div class="hud-card hp-bloco">
-    <div class="hp-titulo"><span>❤️</span> HP</div>
-    <div class="hp-valor">8/10</div>
-    <div class="hp-barra"><div class="hp-preenchimento"></div></div>
-  </div>
-  <div class="hud-card">
-    <span class="hud-label">CENA</span>
-    <span class="hud-valor">1 DE 60</span>
-  </div>
-  <div class="hud-card">
-    <span class="hud-label">🧠 PERFIL</span>
-    <span class="hud-valor" style="font-size:12px;">ESTRATEGISTA</span>
-  </div>
-</div>
-
-<!-- [04] 🔄 ÁREA DE IMAGEM — TEMA SOCORRO REAL -->
-<div class="cena-imagem">
-  <div class="imagem-conteudo">
-    <span class="icone-emergencia">🚑</span>
-    <span class="tag-cena">ACIDENTE DE TRÂNSITO</span>
-  </div>
-</div>
-
-<!-- [05] 🔄 CABEÇALHO DA CENA — SEM DUPLICAÇÃO, COM RESPIRO -->
-<div class="cena-cabecalho">
-  <span class="cena-titulo">CENA 1 · ACIDENTE DE TRÂNSITO</span>
-  <span class="pergunta-fixa">O QUE VOCÊ FAZ?</span>
-</div>
-
-<!-- [06] 🔄 NARRATIVA DA CENA -->
-<div class="cena-texto">
-  <p class="situacao">Você chega ao local de um acidente. Um carro bateu em um poste. Há uma pessoa caída no chão, consciente, queixando-se de dor forte na perna direita. O trânsito continua passando próximo.</p>
-</div>
-
-<!-- [07] 🔒 ALTERNATIVAS A–E — COMPACTAS, SEM REPETIÇÃO -->
-<div class="area-alternativas">
-  <div class="alt alt-a" onclick="escolher(0)">
-    <div class="alt-esq"><span class="letra">A</span><span class="alt-texto">Correr imediatamente até a vítima no meio da pista.</span></div>
-    <span class="alt-hp">-1</span>
-  </div>
-  <div class="alt alt-b" onclick="escolher(1)">
-    <div class="alt-esq"><span class="letra">B</span><span class="alt-texto">Sinalizar o local e ligar para o SAMU (192).</span></div>
-    <span class="alt-hp">+1</span>
-  </div>
-  <div class="alt alt-c" onclick="escolher(2)">
-    <div class="alt-esq"><span class="letra">C</span><span class="alt-texto">Puxar a vítima pela perna para tirá-la da pista.</span></div>
-    <span class="alt-hp">-1</span>
-  </div>
-  <div class="alt alt-d" onclick="escolher(3)">
-    <div class="alt-esq"><span class="letra">D</span><span class="alt-texto">Dar água e tentar fazer a vítima andar.</span></div>
-    <span class="alt-hp">0</span>
-  </div>
-  <div class="alt alt-e" onclick="escolher(4)">
-    <div class="alt-esq"><span class="letra">E</span><span class="alt-texto">Deixar a vítima e ir buscar ajuda longe dali.</span></div>
-    <span class="alt-hp">-1</span>
-  </div>
-</div>
-
-<!-- [08] 📢 ANÚNCIO — BLOCO SEPARADO, NÃO PARECE PARTE DO JOGO -->
-<div class="area-anuncio">
-  <div class="anuncio-conteudo">
-    <p class="anuncio-titulo">📢 ANÚNCIO — AdSense</p>
-    <p class="anuncio-destaque">Seu anúncio aqui</p>
-  </div>
-</div>
-
-<!-- [09] 📢 DIVULGAÇÃO PRÓPRIA — ORGANIZADA -->
-<div class="area-divulgacao">
-  <div class="div-item">
-    <p class="div-tit">📚 EM BREVE</p>
-    <p class="div-desc">VOLUME 2</p>
-  </div>
-  <div class="div-item">
-    <p class="div-tit">🌐 REDE</p>
-    <p class="div-desc">QG ANDRÔMEDA</p>
-  </div>
-  <div class="div-item">
-    <p class="div-tit">🛒 LOJA</p>
-    <p class="div-desc">VER LIVRO</p>
-  </div>
-</div>
-
-<!-- [10] 🔒 RODAPÉ — PERFIL + RANKING, SEMPRE VISÍVEL -->
-<div class="rodape">
-  <div class="rod-card">
-    <p class="rod-tit">SEU PERFIL</p>
-    <div class="perfil-linha">
-      <div class="avatar"><span class="coroa">👑</span>👤</div>
-      <div>
-        <p class="perfil-nome">ESTRATEGISTA · NÍVEL 1</p>
-        <div class="barra-prog"><div class="barra-fill"></div></div>
-      </div>
+<!-- TELA DO JOGO -->
+<div id="tela-jogo" class="escondido">
+    <div class="status">
+        <span class="hp">❤️ HP: <span id="valor-hp">10</span>/10</span>
+        <span class="cena-num">📍 Cena <span id="valor-cena">1</span> de 5</span>
     </div>
-  </div>
-  <div class="rod-card">
-    <p class="rod-tit">🏆 RANKING GLOBAL</p>
-    <ul class="rank-lista">
-      <li>1. Toella Master <span>9.850</span></li>
-      <li>2. Alex_88 <span>9.420</span></li>
-      <li>3. MariaMed <span>9.100</span></li>
-    </ul>
-  </div>
+
+    <div class="bloco-cena">
+        <h3 id="cena-titulo" class="titulo">Título da Cena 1</h3>
+        <div id="cena-imagem" class="imagem">🚗</div>
+        <p id="cena-texto" class="texto">Texto da situação 1...</p>
+        
+        <div id="opcoes">
+            <div class="opcao" onclick="responder(0)"><span class="letra">A</span>Opção A1</div>
+            <div class="opcao" onclick="responder(1)"><span class="letra">B</span>Opção B1</div>
+            <div class="opcao" onclick="responder(2)"><span class="letra">C</span>Opção C1</div>
+            <div class="opcao" onclick="responder(3)"><span class="letra">D</span>Opção D1</div>
+            <div class="opcao" onclick="responder(4)"><span class="letra">E</span>Opção E1</div>
+        </div>
+    </div>
 </div>
 
-</div>
-<script src="app.js"></script>
+<script>
+// ==============================================
+// BANCO DE CENAS — AQUI FICA TODO O CONTEÚDO
+// ==============================================
+const CENAS = [
+    {
+        titulo: "🚗 ACIDENTE DE TRÂNSITO",
+        icone: "🚗",
+        texto: "Você chega ao local de um acidente. Um carro bateu em um poste. Há uma pessoa caída no chão, queixando-se de dor na perna direita.",
+        opcoes: [
+            { texto: "Correr imediatamente até a vítima no meio da pista.", hp: -1 },
+            { texto: "Sinalizar o local e ligar para o SAMU (192).", hp: +1 },
+            { texto: "Puxar a vítima pela perna para tirá-la da pista.", hp: -2 },
+            { texto: "Dar água e tentar fazer a vítima andar.", hp: -1 },
+            { texto: "Deixar a vítima e ir buscar ajuda longe dali.", hp: -1 }
+        ]
+    },
+    {
+        titulo: "⚡ FIOS ELÉTRICOS CAÍDOS",
+        icone: "⚡",
+        texto: "Uma tempestade derrubou fios de alta tensão. Um fio está no chão soltando faíscas. Uma pessoa se aproxima sem perceber o perigo.",
+        opcoes: [
+            { texto: "Pegar o fio com a mão para afastar.", hp: -3 },
+            { texto: "Gritar para a pessoa parar e manter distância mínima de 10 metros.", hp: +1 },
+            { texto: "Puxar a pessoa pela roupa para tirar dali.", hp: -2 },
+            { texto: "Chutar o fio com o pé.", hp: -2 },
+            { texto: "Ignorar e seguir caminho.", hp: -1 }
+        ]
+    },
+    {
+        titulo: "🩸 HEMORRAGIA FORTE",
+        icone: "🩸",
+        texto: "Uma pessoa sofreu um corte profundo no braço e o sangue jorra sem parar.",
+        opcoes: [
+            { texto: "Lavar com água e esperar parar sozinho.", hp: -1 },
+            { texto: "Fazer pressão direta no local com pano limpo.", hp: +1 },
+            { texto: "Amarrar fio fino acima do corte.", hp: -2 },
+            { texto: "Colocar algodão em cima do corte.", hp: 0 },
+            { texto: "Deixar sangrar para limpar.", hp: -3 }
+        ]
+    },
+    {
+        titulo: "🔥 QUEIMADURA QUENTE",
+        icone: "🔥",
+        texto: "Uma pessoa tocou em panela quente e a pele está vermelha e dolorida.",
+        opcoes: [
+            { texto: "Colocar manteiga ou pasta de dente.", hp: -2 },
+            { texto: "Colocar sob água corrente fria por 10 minutos.", hp: +1 },
+            { texto: "Estourar as bolhas se aparecerem.", hp: -2 },
+            { texto: "Cobrir com curativo fechado.", hp: 0 },
+            { texto: "Passar gelo direto na pele.", hp: -1 }
+        ]
+    },
+    {
+        titulo: "💓 PARADA CARDÍACA",
+        icone: "💓",
+        texto: "Uma pessoa caiu no chão, não responde, não respira. O peito não se move.",
+        opcoes: [
+            { texto: "Dar água e esperar acordar.", hp: -2 },
+            { texto: "Ligar 192 e iniciar massagem cardíaca imediatamente.", hp: +1 },
+            { texto: "Sacudir a pessoa para acordar.", hp: -1 },
+            { texto: "Colocar deitada de lado e esperar.", hp: 0 },
+            { texto: "Correr buscar ajuda e deixar a pessoa sozinha.", hp: -1 }
+        ]
+    }
+];
+
+// ==============================================
+// ESTADO DO JOGO
+// ==============================================
+let estado = {
+    hp: 10,
+    cenaAtual: 0,
+    totalCenas: CENAS.length
+};
+
+// ==============================================
+// 🎯 FUNÇÃO PRINCIPAL — CARREGA A CENA NA TELA
+// ==============================================
+function carregarCena() {
+    // PEGA A CENA ATUAL — USA O ÍNDICE QUE ESTÁ AVANÇANDO
+    const cena = CENAS[estado.cenaAtual];
+    
+    if (!cena) {
+        alert("🎉 JOGO FINALIZADO! Você passou por todas as cenas!");
+        return;
+    }
+
+    // ✅ TROCA TUDO — TÍTULO, IMAGEM, TEXTO, OPÇÕES, NÚMERO, HP
+    document.getElementById("cena-titulo").textContent = cena.titulo;
+    document.getElementById("cena-imagem").textContent = cena.icone;
+    document.getElementById("cena-texto").textContent = cena.texto;
+    document.getElementById("valor-cena").textContent = estado.cenaAtual + 1;
+    document.getElementById("valor-hp").textContent = estado.hp;
+
+    // ✅ TROCA AS 5 OPÇÕES A–E
+    const divOpcoes = document.getElementById("opcoes");
+    divOpcoes.innerHTML = ""; // APAGA AS VELHAS PRIMEIRO!
+
+    const letras = ["A", "B", "C", "D", "E"];
+    cena.opcoes.forEach((op, i) => {
+        divOpcoes.innerHTML += `
+            <div class="opcao" onclick="responder(${i})">
+                <span class="letra">${letras[i]}</span>${op.texto}
+            </div>
+        `;
+    });
+}
+
+// ==============================================
+// ✅ RESPONDER E AVANÇAR — CHAMA CARREGAR CENA DE NOVO!
+// ==============================================
+function responder(indiceOpcao) {
+    const cena = CENAS[estado.cenaAtual];
+    const hpMudanca = cena.opcoes[indiceOpcao].hp;
+    
+    estado.hp = Math.max(0, Math.min(10, estado.hp + hpMudanca));
+    
+    // AVANÇA PARA PRÓXIMA CENA
+    estado.cenaAtual++;
+    
+    // ✅ CHAMA A FUNÇÃO QUE TROCA TUDO — SEM FALTA ISSO!
+    carregarCena();
+}
+
+// ==============================================
+// ▶️ INICIAR O JOGO
+// ==============================================
+function iniciarJogo() {
+    estado = { hp: 10, cenaAtual: 0, totalCenas: CENAS.length };
+    document.getElementById("tela-inicio").classList.add("escondido");
+    document.getElementById("tela-jogo").classList.remove("escondido");
+    
+    // ✅ CARREGA A PRIMEIRA CENA
+    carregarCena();
+}
+</script>
+
 </body>
 </html>
