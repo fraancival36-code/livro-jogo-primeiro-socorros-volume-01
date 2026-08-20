@@ -36,21 +36,18 @@
             color: #fff;
         }
         
-        /* 🟡 PASSANDO O DEDO → AMARELO */
         .opcao:hover {
             border-color: #ffcc00;
             background: #2a2a3e;
             box-shadow: 0 0 8px rgba(255, 204, 0, 0.25);
         }
         
-        /* 🟢 CERTO → VERDE */
         .opcao.certa {
             border-color: #00ff00 !important;
             background: #003300 !important;
             box-shadow: 0 0 12px rgba(0, 255, 0, 0.25);
         }
         
-        /* 🔴 ERRADO → VERMELHO */
         .opcao.errada {
             border-color: #ff0000 !important;
             background: #330000 !important;
@@ -64,7 +61,26 @@
         
         .tela-inicio { text-align: center; padding-top: 100px; }
         .btn-iniciar { padding: 20px 50px; font-size: 22px; background: linear-gradient(90deg, #ff4444, #ff6666); color: #fff; border: none; border-radius: 12px; cursor: pointer; font-weight: bold; margin-top: 30px; }
-        .tela-final { text-align: center; padding-top: 80px; }
+        
+        /* 📊 TELA FINAL COM RELATÓRIO */
+        .tela-final { text-align: center; padding-top: 60px; }
+        .relatorio { 
+            background: linear-gradient(180deg, #0f172a, #000); 
+            border-radius: 12px; 
+            padding: 25px; 
+            margin: 30px 0; 
+            border: 1px solid #1e3a5f;
+        }
+        .relatorio h2 { font-size: 28px; margin-bottom: 25px; color: #ffcc00; }
+        .linha { display: flex; justify-content: space-between; padding: 12px 0; font-size: 18px; border-bottom: 1px solid #333; }
+        .linha.total { border-bottom: 2px solid #ffcc00; font-weight: bold; font-size: 20px; margin-top: 10px; }
+        .acertou { color: #00ff00; }
+        .errou { color: #ff4444; }
+        .avaliacao { margin-top: 25px; padding: 15px; border-radius: 10px; font-size: 20px; font-weight: bold; }
+        .excelente { background: #003300; border: 2px solid #00ff00; color: #00ff00; }
+        .bom { background: #1a3a00; border: 2px solid #88ff00; color: #88ff00; }
+        .regular { background: #332b00; border: 2px solid #ffcc00; color: #ffcc00; }
+        .precisa { background: #330000; border: 2px solid #ff4444; color: #ff4444; }
     </style>
 </head>
 <body>
@@ -84,13 +100,12 @@
         <h2 class="subtitulo">PRIMEIROS SOCORROS</h2>
         <p style="color:#888; margin:8px 0; font-size:15px;">APRENDA • DECIDA • SALVE VIDAS</p>
         
-        <!-- ❌ SEM NÚMERO DE HP — SÓ A BARRA! -->
         <div class="barra-vida">
             <div id="barra-hp" class="barra-vida-preencher" style="width: 100%;"></div>
         </div>
         
         <div class="status">
-            <span class="cena-numero">📍 CENA <span id="numero-cena">1</span> DE 60</span>
+            <span class="cena-numero">📍 CENA <span id="numero-cena">1</span> DE <span id="total-cenas">60</span></span>
             <span class="perfil">🧠 ESTRATEGISTA</span>
         </div>
     </div>
@@ -102,16 +117,45 @@
     </div>
 </div>
 
-<!-- TELA FINAL -->
+<!-- 📊 TELA FINAL COM RELATÓRIO COMPLETO -->
 <div id="tela-final" class="escondido tela-final">
-    <h1>🎉 PARABÉNS!</h1>
-    <h2>Você concluiu todas as cenas!</h2>
+    <h1>🎉 CONCLUÍDO!</h1>
+    <h2>Treinamento de Primeiros Socorros</h2>
+    
+    <div class="relatorio">
+        <h2>📊 RELATÓRIO DE DESEMPENHO</h2>
+        
+        <div class="linha">
+            <span>Total de cenas</span>
+            <span id="rel-total">0</span>
+        </div>
+        
+        <div class="linha">
+            <span class="acertou">✅ Acertos</span>
+            <span id="rel-acertos" class="acertou">0</span>
+        </div>
+        
+        <div class="linha">
+            <span class="errou">❌ Erros</span>
+            <span id="rel-erros" class="errou">0</span>
+        </div>
+        
+        <div class="linha total">
+            <span>Porcentagem de acerto</span>
+            <span id="rel-porcentagem">0%</span>
+        </div>
+        
+        <div id="avaliacao" class="avaliacao">
+            <!-- Avaliação dinâmica -->
+        </div>
+    </div>
+    
     <button class="btn-iniciar" onclick="reiniciarJogo()">🔄 JOGAR NOVAMENTE</button>
 </div>
 
 <script>
 // ==============================================
-// 📋 BANCO DE CENAS
+// 📋 BANCO DE CENAS — PREPARADO PARA 60+ CENAS!
 // ==============================================
 const CENAS = [
     {
@@ -137,6 +181,17 @@ const CENAS = [
         ]
     },
     {
+        titulo: "🩸 HEMORRAGIA FORTE",
+        texto: "Uma pessoa sofreu um corte profundo no braço e o sangue jorra sem parar.",
+        alternativas: [
+            { letra: "A", texto: "Lavar com água e esperar parar sozinho.", hp: -1, correta: false },
+            { letra: "B", texto: "Fazer pressão direta no local com pano limpo.", hp: +1, correta: true },
+            { letra: "C", texto: "Amarrar fio fino acima do corte.", hp: -2, correta: false },
+            { letra: "D", texto: "Colocar algodão em cima do corte.", hp: 0, correta: false },
+            { letra: "E", texto: "Deixar sangrar para limpar.", hp: -3, correta: false }
+        ]
+    },
+    {
         titulo: "🔥 QUEIMADURA QUENTE",
         texto: "Uma pessoa tocou em panela quente e a pele está vermelha e dolorida.",
         alternativas: [
@@ -146,18 +201,33 @@ const CENAS = [
             { letra: "D", texto: "Cobrir com curativo fechado.", hp: 0, correta: false },
             { letra: "E", texto: "Passar gelo direto na pele.", hp: -1, correta: false }
         ]
+    },
+    {
+        titulo: "💓 PARADA CARDÍACA",
+        texto: "Uma pessoa caiu no chão, não responde, não respira. O peito não se move.",
+        alternativas: [
+            { letra: "A", texto: "Dar água e esperar acordar.", hp: -2, correta: false },
+            { letra: "B", texto: "Ligar 192 e iniciar massagem cardíaca imediatamente.", hp: +1, correta: true },
+            { letra: "C", texto: "Sacudir a pessoa para acordar.", hp: -1, correta: false },
+            { letra: "D", texto: "Colocar deitada de lado e esperar.", hp: 0, correta: false },
+            { letra: "E", texto: "Correr buscar ajuda e deixar a pessoa sozinha.", hp: -1, correta: false }
+        ]
     }
-    // 👉 CONTINUE ADICIONANDO AS OUTRAS 57 CENAS AQUI
+    // 👉 ADICIONE AS OUTRAS CENAS AQUI — O SISTEMA CONTA SOZINHO!
 ];
 
 // ==============================================
-// 🧠 ESTADO
+// 🧠 ESTADO — COM CONTADOR DE ACERTOS E ERROS!
 // ==============================================
+const TOTAL_CENAS_DEFINIDAS = CENAS.length;
+
 let estado = {
     hp: 10,
     hpMax: 10,
     cenaAtual: 0,
-    pontos: 0,
+    totalCenas: TOTAL_CENAS_DEFINIDAS,
+    acertos: 0,  // ✅ CONTA QUANTAS ACERTOU
+    erros: 0,    // ✅ CONTA QUANTAS ERROU
     cenasEmbaralhadas: [],
     alternativasAtuais: []
 };
@@ -167,7 +237,7 @@ let estado = {
 // ==============================================
 function embaralharCenas() {
     estado.cenasEmbaralhadas = [];
-    for (let i = 0; i < CENAS.length; i++) {
+    for (let i = 0; i < estado.totalCenas; i++) {
         estado.cenasEmbaralhadas.push(i);
     }
     for (let i = estado.cenasEmbaralhadas.length - 1; i > 0; i--) {
@@ -178,14 +248,23 @@ function embaralharCenas() {
 }
 
 // ==============================================
-// 🎲 EMBARALHAR ALTERNATIVAS A–E
+// 🎲 EMBARALHAR ALTERNATIVAS — SEMPRE 5!
 // ==============================================
 function embaralharAlternativas(alternativas) {
+    while (alternativas.length < 5) {
+        alternativas.push({
+            texto: "Opção indisponível",
+            hp: 0,
+            correta: false
+        });
+    }
+    
     const embaralhadas = [...alternativas];
     for (let i = embaralhadas.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [embaralhadas[i], embaralhadas[j]] = [embaralhadas[j], embaralhadas[i]];
     }
+    
     return embaralhadas.map((alt, indice) => ({
         ...alt,
         letra: ['A', 'B', 'C', 'D', 'E'][indice]
@@ -196,24 +275,23 @@ function embaralharAlternativas(alternativas) {
 // 🎯 CARREGAR CENA
 // ==============================================
 function carregarCena() {
-    const indiceReal = estado.cenasEmbaralhadas[estado.cenaAtual];
-    const cena = CENAS[indiceReal];
-
-    if (!cena) {
-        mostrarTelaFinal();
+    if (estado.cenaAtual >= estado.totalCenas) {
+        mostrarRelatorioFinal(); // ✅ MOSTRA O RELATÓRIO COMPLETO!
         return;
     }
 
-    // ✅ EMBARALHA AS ALTERNATIVAS
-    const alternativasEmbaralhadas = embaralharAlternativas(cena.alternativas);
+    const indiceReal = estado.cenasEmbaralhadas[estado.cenaAtual];
+    const cena = CENAS[indiceReal];
 
-    // ✅ ATUALIZA TUDO — SEM NÚMEROS NAS OPÇÕES!
+    document.getElementById("total-cenas").textContent = estado.totalCenas;
+    document.getElementById("numero-cena").textContent = estado.cenaAtual + 1;
     document.getElementById("cena-titulo").textContent = cena.titulo;
     document.getElementById("cena-texto").textContent = cena.texto;
-    document.getElementById("numero-cena").textContent = estado.cenaAtual + 1;
     document.getElementById("barra-hp").style.width = `${(estado.hp / estado.hpMax) * 100}%`;
 
-    // ✅ GERA OPÇÕES — SÓ LETRA + TEXTO, SEM NÚMEROS!
+    const alternativasEmbaralhadas = embaralharAlternativas(cena.alternativas);
+    estado.alternativasAtuais = alternativasEmbaralhadas;
+
     const container = document.getElementById("container-opcoes");
     container.innerHTML = "";
 
@@ -225,12 +303,10 @@ function carregarCena() {
             </div>
         `;
     });
-
-    estado.alternativasAtuais = alternativasEmbaralhadas;
 }
 
 // ==============================================
-// ✅ RESPONDER — COR DEVAGARZINHO!
+// ✅ RESPONDER — CONTA ACERTOS E ERROS!
 // ==============================================
 function responder(indiceEscolhido) {
     const alternativas = estado.alternativasAtuais;
@@ -243,25 +319,61 @@ function responder(indiceEscolhido) {
         btn.style.pointerEvents = 'none';
     });
 
-    // 🎯 MUDA COR DEVAGARZINHO
+    // 🎯 MUDA COR E CONTA!
     const botaoClicado = todosBotoes[indiceEscolhido];
     setTimeout(() => {
         if (escolha.correta) {
             botaoClicado.classList.add('certa'); // 🟢 VERDE
+            estado.acertos++; // ✅ CONTA ACERTO!
         } else {
             botaoClicado.classList.add('errada'); // 🔴 VERMELHO
+            estado.erros++; // ❌ CONTA ERRO!
         }
     }, 150);
 
-    // Atualiza HP (interno, sem mostrar número)
+    // Atualiza HP (interno)
     estado.hp = Math.max(0, Math.min(estado.hpMax, estado.hp + escolha.hp));
-    estado.pontos += escolha.hp;
 
     // ⏳ ESPERA → AVANÇA
     setTimeout(() => {
         estado.cenaAtual++;
         carregarCena();
     }, 1200);
+}
+
+// ==============================================
+// 📊 RELATÓRIO FINAL COMPLETO!
+// ==============================================
+function mostrarRelatorioFinal() {
+    document.getElementById("tela-jogo").classList.add("escondido");
+    document.getElementById("tela-final").classList.remove("escondido");
+
+    const total = estado.totalCenas;
+    const acertos = estado.acertos;
+    const erros = estado.erros;
+    const porcentagem = Math.round((acertos / total) * 100);
+
+    // ✅ PREENCHE OS DADOS
+    document.getElementById("rel-total").textContent = total;
+    document.getElementById("rel-acertos").textContent = acertos;
+    document.getElementById("rel-erros").textContent = erros;
+    document.getElementById("rel-porcentagem").textContent = porcentagem + "%";
+
+    // ✅ AVALIAÇÃO DESEMPENHO
+    const avaliacaoEl = document.getElementById("avaliacao");
+    if (porcentagem >= 90) {
+        avaliacaoEl.textContent = "🏆 EXCELENTE — Instrutor de Primeiros Socorros!";
+        avaliacaoEl.className = "avaliacao excelente";
+    } else if (porcentagem >= 75) {
+        avaliacaoEl.textContent = "🥇 BOM — Bom desempenho! Continue praticando!";
+        avaliacaoEl.className = "avaliacao bom";
+    } else if (porcentagem >= 50) {
+        avaliacaoEl.textContent = "⚠️ REGULAR — Precisa praticar mais!";
+        avaliacaoEl.className = "avaliacao regular";
+    } else {
+        avaliacaoEl.textContent = "🔴 PRECISA DE TREINAMENTO — Revise os conceitos!";
+        avaliacaoEl.className = "avaliacao precisa";
+    }
 }
 
 // ==============================================
@@ -272,7 +384,9 @@ function iniciarJogo() {
         hp: 10,
         hpMax: 10,
         cenaAtual: 0,
-        pontos: 0,
+        totalCenas: TOTAL_CENAS_DEFINIDAS,
+        acertos: 0, // ✅ ZERA NO INÍCIO
+        erros: 0,   // ✅ ZERA NO INÍCIO
         cenasEmbaralhadas: [],
         alternativasAtuais: []
     };
@@ -283,14 +397,6 @@ function iniciarJogo() {
     document.getElementById("tela-final").classList.add("escondido");
     
     carregarCena();
-}
-
-// ==============================================
-// 🏆 TELA FINAL
-// ==============================================
-function mostrarTelaFinal() {
-    document.getElementById("tela-jogo").classList.add("escondido");
-    document.getElementById("tela-final").classList.remove("escondido");
 }
 
 // ==============================================
