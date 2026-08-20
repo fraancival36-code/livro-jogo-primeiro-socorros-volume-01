@@ -1,198 +1,42 @@
-/* =====================================================
-   🔒 CONTRATO DE INTERFACE — PRIME · PRIMEIROS SOCORROS
-   =====================================================
-   📌 CATEGORIAS DE ELEMENTOS:
-   🔒 FIXO      → NUNCA MODIFICAR. Estrutura, identidade, ordem.
-   🔄 DINÂMICO  → Pode mudar POR CENA: imagem, texto, alternativas.
-   📢 SLOT      → Pode receber conteúdo publicitário sem quebrar layout.
-   ===================================================== */
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html, body {
-  height: 100%; width: 100%; overflow: hidden;
-  background: #000; color: #fff;
-  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-  position: fixed; top: 0; left: 0;
+/* OPÇÃO — ANTES DE TOCAR: TODAS IGUAIS, SEM COR */
+.opcao { 
+  display: flex; 
+  align-items: center; 
+  padding: 15px; 
+  margin: 10px 0; 
+  border-radius: 10px; 
+  border: 2px solid #555; /* CINZA NEUTRO */
+  cursor: pointer; 
+  font-size: 16px; 
+  transition: all 0.4s ease; /* DEVAGARZINHO — suave! */
+  background: #1a1a2e;
+  color: #fff;
 }
 
-:root {
-  --vermelho-neon: #FF0000;
-  --verde-neon: #00FF41;
-  --azul-neon: #0099FF;
-  --laranja-neon: #FF9900;
-  --dourado: #FFD700;
-  --fundo-card: #0F0F1A;
-  --borda: #2A2A4A;
+/* 🟡 PASSANDO O DEDO POR CIMA → AMARELO (ALERTA) */
+.opcao:hover {
+  border-color: #ffcc00; /* ARO AMARELO */
+  background: #2a2a3e;
+  box-shadow: 0 0 8px #ffcc0040;
 }
 
-.tela {
-  display: flex;
-  flex-direction: column;
-  height: 100%; width: 100%;
-  /* 🔒 FIXO — Ordem e disposição NÃO mudam */
+/* ✅ APERTOU CERTO → VERDE */
+.opcao.certa {
+  border-color: #00ff00 !important;
+  background: #003300 !important;
+  box-shadow: 0 0 12px #00ff0040;
 }
 
-/* ==============================================
-   🔒 BLOQUEADO — TOPO DO SISTEMA
-   ============================================== */
-.topo-sistema {
-  height: 36px; flex-shrink: 0;
-  background: linear-gradient(90deg, #1A0000, #000, #001A00);
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 15px; font-size: 11px; color: #888;
-  border-bottom: 1px solid var(--borda);
+/* ❌ APERTOU ERRADO → VERMELHO */
+.opcao.errada {
+  border-color: #ff0000 !important;
+  background: #330000 !important;
+  box-shadow: 0 0 12px #ff000040;
+  opacity: 0.85;
 }
-.topo-sistema .online { color: var(--verde-neon); }
-/* 🔒 FIXO — Conteúdo: "SISTEMA PRIME · SEKAI.A · QG ANDRÔMEDA · ONLINE" */
 
-/* ==============================================
-   🔒 BLOQUEADO — CABEÇALHO / IDENTIDADE PRIME
-   ============================================== */
-.cabecalho {
-  height: 72px; flex-shrink: 0;
-  background: linear-gradient(180deg, #0A0A15 0%, #000 100%);
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  position: relative; border-bottom: 1px solid var(--borda);
+/* ❌ DESATIVA CLIQUES DEPOIS DE RESPONDER */
+.opcao.desativada {
+  pointer-events: none;
+  cursor: default;
 }
-.cabecalho h1 { font-size: 42px; font-weight: 900; letter-spacing: 4px; }
-.cabecalho h2 { font-size: 14px; color: #CCC; margin-top: 2px; text-transform: uppercase; }
-.cabecalho .ecg { display: flex; gap: 12px; margin-top: 4px; color: var(--vermelho-neon); font-size: 18px; text-shadow: 0 0 8px var(--vermelho-neon); }
-.cabecalho .slogan { font-size: 11px; color: #888; margin-top: 2px; text-transform: uppercase; }
-/* 🔒 FIXO — Conteúdo: PRIME / PRIMEIROS SOCORROS / APRENDA • DECIDA • SALVE VIDAS */
-
-/* ==============================================
-   🔒 BLOQUEADO — BARRA DE STATUS
-   ============================================== */
-.status {
-  height: 58px; flex-shrink: 0;
-  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;
-  padding: 8px 12px; background: #000;
-  border-bottom: 1px solid var(--borda);
-}
-.status-card {
-  background: var(--fundo-card); border: 1px solid var(--borda);
-  border-radius: 10px; padding: 6px 8px;
-  display: flex; flex-direction: column; justify-content: center;
-}
-.hp-card { align-items: flex-start; }
-.hp-top { display: flex; align-items: center; gap: 5px; font-size: 12px; text-transform: uppercase; }
-.hp-top span { color: var(--vermelho-neon); font-size: 16px; }
-.hp-val { font-size: 18px; font-weight: bold; margin-top: 2px; }
-.hp-bar { width: 100%; height: 5px; background: #222; border-radius: 3px; margin-top: 4px; }
-.hp-fill { width: 80%; height: 100%; background: linear-gradient(90deg, var(--vermelho-neon), #FF4444); border-radius: 3px; }
-.status-label { font-size: 11px; color: #777; text-transform: uppercase; }
-.status-val { font-size: 18px; font-weight: bold; margin-top: 2px; }
-/* 🔒 FIXO — Colunas: HP | CENA X/60 | PERFIL */
-
-/* ==============================================
-   🔄 DINÂMICO — ÁREA DA IMAGEM DA CENA
-   ============================================== */
-.cena-imagem {
-  flex: 1; min-height: 140px;
-  background: linear-gradient(180deg, #0F0F2A 0%, #000 100%);
-  display: flex; align-items: center; justify-content: center;
-  position: relative; overflow: hidden;
-  border-bottom: 1px solid var(--borda);
-}
-.cena-imagem .tag { position: absolute; top: 10px; left: 15px; font-size: 14px; font-weight: bold; color: var(--vermelho-neon); text-transform: uppercase; }
-.cena-imagem .icone { font-size: 80px; color: var(--vermelho-neon); text-shadow: 0 0 30px var(--vermelho-neon); }
-/* 🔄 DINÂMICO — A imagem/cena muda a cada vez, mas o container NÃO */
-
-/* ==============================================
-   🔄 DINÂMICO — ÁREA DE NARRATIVA E PERGUNTA
-   ============================================== */
-.decisao {
-  height: 170px; flex-shrink: 0;
-  background: #000; padding: 10px 12px;
-  border-bottom: 1px solid var(--borda);
-}
-.decisao-cab { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
-.cena-titulo { font-size: 15px; font-weight: bold; color: var(--vermelho-neon); text-transform: uppercase; }
-.pergunta-fixa { font-size: 15px; font-weight: bold; color: var(--vermelho-neon); text-transform: uppercase; }
-.situacao { font-size: 12px; color: #CCC; margin-bottom: 10px; line-height: 1.5; }
-/* 🔒 FIXO — "O QUE VOCÊ FAZ?" SEMPRE O MESMO */
-/* 🔄 DINÂMICO — Título da cena e situação mudam */
-
-/* ==============================================
-   🔒 BLOQUEADO — PADRÃO DAS ALTERNATIVAS A/B/C/D/E
-   ============================================== */
-.alt {
-  display: flex; align-items: center; justify-content: space-between;
-  background: var(--fundo-card); border: 1px solid;
-  border-radius: 8px; padding: 8px 12px; margin-bottom: 5px;
-  cursor: pointer; transition: all 0.15s;
-}
-.alt:active { transform: scale(0.98); }
-.alt-a { border-color: var(--vermelho-neon); }
-.alt-b { border-color: var(--verde-neon); }
-.alt-c { border-color: var(--laranja-neon); }
-.alt-d { border-color: var(--azul-neon); }
-.alt-e { border-color: var(--vermelho-neon); }
-.alt-esq { display: flex; align-items: center; gap: 12px; }
-.bola {
-  width: 20px; height: 20px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 12px; font-weight: bold; color: white;
-}
-.alt-a .bola { background: var(--vermelho-neon); }
-.alt-b .bola { background: var(--verde-neon); }
-.alt-c .bola { background: var(--laranja-neon); }
-.alt-d .bola { background: var(--azul-neon); }
-.alt-e .bola { background: var(--vermelho-neon); }
-.alt-texto { font-size: 13px; line-height: 1.4; }
-.alt-hp { font-size: 13px; font-weight: bold; }
-.alt-a .alt-hp, .alt-e .alt-hp { color: var(--vermelho-neon); }
-.alt-b .alt-hp { color: var(--verde-neon); }
-.alt-c .alt-hp { color: var(--laranja-neon); }
-.alt-d .alt-hp { color: var(--azul-neon); }
-/* 🔒 FIXO — Sempre 5 alternativas: A, B, C, D, E. Ordem e cores NÃO mudam. */
-/* 🔄 DINÂMICO — O texto de cada alternativa muda por cena. */
-
-/* ==============================================
-   📢 SLOT — ESPAÇO PUBLICITÁRIO EXTERNO
-   ============================================== */
-.banner-externo {
-  height: 44px; flex-shrink: 0;
-  background: #fff; display: flex; align-items: center; justify-content: center;
-  border-bottom: 1px solid var(--borda);
-}
-/* 📢 SLOT — Pode receber AdSense. NÃO alterar altura nem posição. */
-
-/* ==============================================
-   📢 SLOT — DIVULGAÇÃO PRÓPRIA PRIME / QG ANDRÔMEDA
-   ============================================== */
-.divulgacao {
-  height: 50px; flex-shrink: 0;
-  background: linear-gradient(90deg, #1A0A2E, #0F0F2A, #1A0A2E);
-  display: flex; align-items: center; justify-content: space-around;
-  border-bottom: 1px solid var(--borda);
-}
-.div-item { text-align: center; cursor: pointer; }
-.div-tit { font-size: 11px; color: #AAA; }
-.div-desc { font-size: 12px; font-weight: bold; color: var(--dourado); }
-/* 📢 SLOT — Divulgar Volume 2, QG Andrômeda, Loja do Livro, etc. */
-
-/* ==============================================
-   🔒 BLOQUEADO — RODAPÉ: PERFIL + RANKING
-   ============================================== */
-.rodape {
-  height: 60px; flex-shrink: 0;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
-  padding: 8px 12px; background: #000;
-}
-.rod-card {
-  background: var(--fundo-card); border: 1px solid var(--borda);
-  border-radius: 8px; padding: 6px 10px;
-}
-.rod-tit { font-size: 10px; color: #777; text-transform: uppercase; margin-bottom: 4px; }
-.perfil-linha { display: flex; align-items: center; gap: 8px; }
-.avatar { width: 28px; height: 28px; border-radius: 50%; background: #222; display: flex; align-items: center; justify-content: center; font-size: 16px; position: relative; }
-.coroa { position: absolute; top: -6px; font-size: 10px; color: var(--dourado); }
-.perfil-nome { font-size: 11px; font-weight: bold; }
-.barra-prog { width: 100%; height: 4px; background: #222; border-radius: 2px; margin-top: 4px; }
-.barra-fill { width: 78%; height: 100%; background: linear-gradient(90deg, var(--azul-neon), var(--verde-neon)); }
-.rank-lista { list-style: none; }
-.rank-lista li { font-size: 10px; display: flex; justify-content: space-between; margin-bottom: 1px; }
-.rank-lista li span { color: #777; }
-/* 🔒 FIXO — Sempre duas colunas: PERFIL | RANKING */
