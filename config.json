@@ -1,0 +1,15 @@
+{
+  "id": "prime-v1",
+  "titulo": "Primeiros Socorros",
+  "titulo_en": "First Aid",
+  "titulo_es": "Primeros Auxilios",
+  "descricao": "Aprenda a agir em emergências.",
+  "descricao_en": "Learn to act in emergencies.",
+  "idioma": "pt-BR",
+  "regiao": "BR",
+  "categoria": "Saúde",
+  "dificuldade": "misto",
+  "totalCenas": 60,
+  "capa": "capa-prime.png",
+  "versaoConteudo": "1.0"
+}
