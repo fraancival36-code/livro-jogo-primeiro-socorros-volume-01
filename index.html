@@ -1,40 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRIME — Primeiros Socorros</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, sans-serif; }
+        body { background: #000; color: #fff; min-height: 100vh; padding: 15px; }
+        
+        .cabecalho { margin-bottom: 20px; }
+        .titulo-principal { font-size: 42px; font-weight: 900; }
+        .subtitulo { font-size: 24px; color: #ff4444; margin: 5px 0; }
+        .status { display: flex; gap: 15px; margin: 10px 0; font-size: 16px; flex-wrap: wrap; }
+        .cena-numero { color: #4fc3f7; }
+        .perfil { color: #ffd700; }
+        
+        .barra-vida { width: 100%; height: 12px; background: #333; border-radius: 6px; margin: 10px 0; }
+        .barra-vida-preencher { height: 100%; background: linear-gradient(90deg, #ff0000, #ff4444); border-radius: 6px; transition: width 0.3s; }
+        
+        .bloco-cena { background: linear-gradient(180deg, #0f172a, #000); border-radius: 12px; padding: 20px; margin: 20px 0; border: 1px solid #1e3a5f; }
+        .cena-titulo { font-size: 24px; text-align: center; margin-bottom: 20px; color: #ffcc00; }
+        .cena-texto { font-size: 17px; line-height: 1.7; margin-bottom: 25px; }
+        
+        .opcao { 
+            display: flex; 
+            align-items: center; 
+            padding: 15px; 
+            margin: 10px 0; 
+            border-radius: 10px; 
+            border: 2px solid #555; 
+            cursor: pointer; 
+            font-size: 16px; 
+            transition: all 0.4s ease;
+            background: #1a1a2e;
+            color: #fff;
+        }
+        
+        /* 🟡 PASSANDO O DEDO → AMARELO */
+        .opcao:hover {
+            border-color: #ffcc00;
+            background: #2a2a3e;
+            box-shadow: 0 0 8px rgba(255, 204, 0, 0.25);
+        }
+        
+        /* 🟢 CERTO → VERDE */
+        .opcao.certa {
+            border-color: #00ff00 !important;
+            background: #003300 !important;
+            box-shadow: 0 0 12px rgba(0, 255, 0, 0.25);
+        }
+        
+        /* 🔴 ERRADO → VERMELHO */
+        .opcao.errada {
+            border-color: #ff0000 !important;
+            background: #330000 !important;
+            box-shadow: 0 0 12px rgba(255, 0, 0, 0.25);
+            opacity: 0.85;
+        }
+        
+        .opcao.desativada { pointer-events: none; cursor: default; }
+        .letra { font-weight: bold; font-size: 20px; width: 35px; display: inline-block; }
+        .escondido { display: none !important; }
+        
+        .tela-inicio { text-align: center; padding-top: 100px; }
+        .btn-iniciar { padding: 20px 50px; font-size: 22px; background: linear-gradient(90deg, #ff4444, #ff6666); color: #fff; border: none; border-radius: 12px; cursor: pointer; font-weight: bold; margin-top: 30px; }
+        .tela-final { text-align: center; padding-top: 80px; }
+    </style>
+</head>
+<body>
+
+<!-- TELA DE INÍCIO -->
+<div id="tela-inicio" class="tela-inicio">
+    <h1 class="titulo-principal">PRIME</h1>
+    <h2 class="subtitulo">PRIMEIROS SOCORROS</h2>
+    <p style="color:#888; margin:15px 0; font-size:18px;">❤️ APRENDA • DECIDA • SALVE VIDAS ❤️</p>
+    <button class="btn-iniciar" onclick="iniciarJogo()">🚑 INICIAR JOGO</button>
+</div>
+
+<!-- TELA DO JOGO -->
+<div id="tela-jogo" class="escondido">
+    <div class="cabecalho">
+        <h1 class="titulo-principal">PRIME</h1>
+        <h2 class="subtitulo">PRIMEIROS SOCORROS</h2>
+        <p style="color:#888; margin:8px 0; font-size:15px;">APRENDA • DECIDA • SALVE VIDAS</p>
+        
+        <!-- ❌ SEM NÚMERO DE HP — SÓ A BARRA! -->
+        <div class="barra-vida">
+            <div id="barra-hp" class="barra-vida-preencher" style="width: 100%;"></div>
+        </div>
+        
+        <div class="status">
+            <span class="cena-numero">📍 CENA <span id="numero-cena">1</span> DE 60</span>
+            <span class="perfil">🧠 ESTRATEGISTA</span>
+        </div>
+    </div>
+
+    <div id="bloco-cena" class="bloco-cena">
+        <h3 id="cena-titulo" class="cena-titulo">TÍTULO DA CENA</h3>
+        <p id="cena-texto" class="cena-texto">Texto da situação...</p>
+        <div id="container-opcoes"></div>
+    </div>
+</div>
+
+<!-- TELA FINAL -->
+<div id="tela-final" class="escondido tela-final">
+    <h1>🎉 PARABÉNS!</h1>
+    <h2>Você concluiu todas as cenas!</h2>
+    <button class="btn-iniciar" onclick="reiniciarJogo()">🔄 JOGAR NOVAMENTE</button>
+</div>
+
+<script>
 // ==============================================
-// ✅ GERA AS ALTERNATIVAS — ZERO NÚMEROS! ZERO SINAIS!
+// 📋 BANCO DE CENAS
+// ==============================================
+const CENAS = [
+    {
+        titulo: "🚑 ACIDENTE DE TRÂNSITO",
+        texto: "Você chega ao local de um acidente. Um carro bateu em um poste. Há uma pessoa caída no chão, consciente, queixando-se de dor forte na perna direita. O trânsito continua passando próximo.",
+        alternativas: [
+            { letra: "A", texto: "Correr imediatamente até a vítima no meio da pista.", hp: -1, correta: false },
+            { letra: "B", texto: "Sinalizar o local e ligar para o SAMU (192).", hp: +1, correta: true },
+            { letra: "C", texto: "Puxar a vítima pela perna para tirá-la da pista.", hp: -1, correta: false },
+            { letra: "D", texto: "Dar água e tentar fazer a vítima andar.", hp: 0, correta: false },
+            { letra: "E", texto: "Deixar a vítima e ir buscar ajuda longe dali.", hp: -1, correta: false }
+        ]
+    },
+    {
+        titulo: "⚡ FIOS ELÉTRICOS CAÍDOS",
+        texto: "Uma tempestade derrubou fios de alta tensão. Um fio está no chão, soltando faíscas. Uma pessoa se aproxima sem perceber o perigo.",
+        alternativas: [
+            { letra: "A", texto: "Pegar o fio com a mão para afastar.", hp: -3, correta: false },
+            { letra: "B", texto: "Gritar para a pessoa parar e manter distância mínima de 10 metros.", hp: +1, correta: true },
+            { letra: "C", texto: "Puxar a pessoa pela roupa para tirá-la dali.", hp: -2, correta: false },
+            { letra: "D", texto: "Chutar o fio com o pé.", hp: -2, correta: false },
+            { letra: "E", texto: "Ignorar e seguir caminho.", hp: -1, correta: false }
+        ]
+    },
+    {
+        titulo: "🔥 QUEIMADURA QUENTE",
+        texto: "Uma pessoa tocou em panela quente e a pele está vermelha e dolorida.",
+        alternativas: [
+            { letra: "A", texto: "Colocar manteiga ou pasta de dente.", hp: -2, correta: false },
+            { letra: "B", texto: "Colocar sob água corrente fria por 10 minutos.", hp: +1, correta: true },
+            { letra: "C", texto: "Estourar as bolhas se aparecerem.", hp: -2, correta: false },
+            { letra: "D", texto: "Cobrir com curativo fechado.", hp: 0, correta: false },
+            { letra: "E", texto: "Passar gelo direto na pele.", hp: -1, correta: false }
+        ]
+    }
+    // 👉 CONTINUE ADICIONANDO AS OUTRAS 57 CENAS AQUI
+];
+
+// ==============================================
+// 🧠 ESTADO
+// ==============================================
+let estado = {
+    hp: 10,
+    hpMax: 10,
+    cenaAtual: 0,
+    pontos: 0,
+    cenasEmbaralhadas: [],
+    alternativasAtuais: []
+};
+
+// ==============================================
+// 🎲 EMBARALHAR CENAS
+// ==============================================
+function embaralharCenas() {
+    estado.cenasEmbaralhadas = [];
+    for (let i = 0; i < CENAS.length; i++) {
+        estado.cenasEmbaralhadas.push(i);
+    }
+    for (let i = estado.cenasEmbaralhadas.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [estado.cenasEmbaralhadas[i], estado.cenasEmbaralhadas[j]] = 
+        [estado.cenasEmbaralhadas[j], estado.cenasEmbaralhadas[i]];
+    }
+}
+
+// ==============================================
+// 🎲 EMBARALHAR ALTERNATIVAS A–E
+// ==============================================
+function embaralharAlternativas(alternativas) {
+    const embaralhadas = [...alternativas];
+    for (let i = embaralhadas.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [embaralhadas[i], embaralhadas[j]] = [embaralhadas[j], embaralhadas[i]];
+    }
+    return embaralhadas.map((alt, indice) => ({
+        ...alt,
+        letra: ['A', 'B', 'C', 'D', 'E'][indice]
+    }));
+}
+
+// ==============================================
+// 🎯 CARREGAR CENA
 // ==============================================
 function carregarCena() {
-  const indiceReal = estado.cenasEmbaralhadas[estado.cenaAtual];
-  const cena = CENAS[indiceReal];
+    const indiceReal = estado.cenasEmbaralhadas[estado.cenaAtual];
+    const cena = CENAS[indiceReal];
 
-  if (!cena) {
-    mostrarTelaFinal();
-    return;
-  }
+    if (!cena) {
+        mostrarTelaFinal();
+        return;
+    }
 
-  // ✅ EMBARALHA AS ALTERNATIVAS — NINGUÉM DECORA A LETRA!
-  const alternativasEmbaralhadas = embaralharAlternativas(cena.alternativas);
+    // ✅ EMBARALHA AS ALTERNATIVAS
+    const alternativasEmbaralhadas = embaralharAlternativas(cena.alternativas);
 
-  // Atualiza título e texto
-  document.getElementById("cena-titulo").textContent = cena.titulo;
-  document.getElementById("cena-texto").textContent = cena.texto;
-  document.getElementById("numero-cena").textContent = estado.cenaAtual + 1;
-  
-  // ✅ HP — MOSTRA APENAS A BARRA, SEM NÚMERO!
-  document.getElementById("barra-hp").style.width = `${(estado.hp / estado.hpMax) * 100}%`;
-  // ❌ REMOVEMOS: document.getElementById("valor-hp").textContent = ...
+    // ✅ ATUALIZA TUDO — SEM NÚMEROS NAS OPÇÕES!
+    document.getElementById("cena-titulo").textContent = cena.titulo;
+    document.getElementById("cena-texto").textContent = cena.texto;
+    document.getElementById("numero-cena").textContent = estado.cenaAtual + 1;
+    document.getElementById("barra-hp").style.width = `${(estado.hp / estado.hpMax) * 100}%`;
 
-  // ✅ GERA AS OPÇÕES — SÓ LETRA + TEXTO, NADA MAIS!
-  const container = document.getElementById("container-opcoes");
-  container.innerHTML = "";
+    // ✅ GERA OPÇÕES — SÓ LETRA + TEXTO, SEM NÚMEROS!
+    const container = document.getElementById("container-opcoes");
+    container.innerHTML = "";
 
-  alternativasEmbaralhadas.forEach((alt, indice) => {
-    container.innerHTML += `
-      <div class="opcao" onclick="responder(${indice})">
-        <span class="letra">${alt.letra}</span>
-        <span>${alt.texto}</span>
-        <!-- 🚫 SEM -3, SEM +1, SEM 0, SEM NADA DE NÚMERO! -->
-      </div>
-    `;
-  });
+    alternativasEmbaralhadas.forEach((alt, indice) => {
+        container.innerHTML += `
+            <div class="opcao" onclick="responder(${indice})">
+                <span class="letra">${alt.letra}</span>
+                <span>${alt.texto}</span>
+            </div>
+        `;
+    });
 
-  estado.alternativasAtuais = alternativasEmbaralhadas;
+    estado.alternativasAtuais = alternativasEmbaralhadas;
 }
+
+// ==============================================
+// ✅ RESPONDER — COR DEVAGARZINHO!
+// ==============================================
+function responder(indiceEscolhido) {
+    const alternativas = estado.alternativasAtuais;
+    const escolha = alternativas[indiceEscolhido];
+
+    // 🔒 TRAVA TODOS OS BOTÕES
+    const todosBotoes = document.querySelectorAll('.opcao');
+    todosBotoes.forEach(btn => {
+        btn.classList.add('desativada');
+        btn.style.pointerEvents = 'none';
+    });
+
+    // 🎯 MUDA COR DEVAGARZINHO
+    const botaoClicado = todosBotoes[indiceEscolhido];
+    setTimeout(() => {
+        if (escolha.correta) {
+            botaoClicado.classList.add('certa'); // 🟢 VERDE
+        } else {
+            botaoClicado.classList.add('errada'); // 🔴 VERMELHO
+        }
+    }, 150);
+
+    // Atualiza HP (interno, sem mostrar número)
+    estado.hp = Math.max(0, Math.min(estado.hpMax, estado.hp + escolha.hp));
+    estado.pontos += escolha.hp;
+
+    // ⏳ ESPERA → AVANÇA
+    setTimeout(() => {
+        estado.cenaAtual++;
+        carregarCena();
+    }, 1200);
+}
+
+// ==============================================
+// ▶️ INICIAR
+// ==============================================
+function iniciarJogo() {
+    estado = {
+        hp: 10,
+        hpMax: 10,
+        cenaAtual: 0,
+        pontos: 0,
+        cenasEmbaralhadas: [],
+        alternativasAtuais: []
+    };
+    embaralharCenas();
+    
+    document.getElementById("tela-inicio").classList.add("escondido");
+    document.getElementById("tela-jogo").classList.remove("escondido");
+    document.getElementById("tela-final").classList.add("escondido");
+    
+    carregarCena();
+}
+
+// ==============================================
+// 🏆 TELA FINAL
+// ==============================================
+function mostrarTelaFinal() {
+    document.getElementById("tela-jogo").classList.add("escondido");
+    document.getElementById("tela-final").classList.remove("escondido");
+}
+
+// ==============================================
+// 🔄 REINICIAR
+// ==============================================
+function reiniciarJogo() {
+    iniciarJogo();
+}
+</script>
+
+</body>
+</html>
