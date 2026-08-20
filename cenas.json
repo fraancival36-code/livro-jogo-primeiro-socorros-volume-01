@@ -1,0 +1,16 @@
+[
+  {
+    "id": "PS-001",
+    "tipo": "situacao",
+    "categoria": "Segurança da Cena",
+    "dificuldade": "facil",
+    "imagem": "cenas/ps-001.jpg",
+    "situacao": "Você chega ao local de um acidente...",
+    "pergunta": "Qual é a primeira coisa a fazer?",
+    "alternativas": [
+      { "letra": "A", "texto": "Correr direto para a vítima", "valor": -1, "tipo": "errado" },
+      { "letra": "B", "texto": "Sinalizar e garantir segurança", "valor": 2, "tipo": "correto" }
+    ],
+    "explicacao": "Sua segurança vem primeiro..."
+  }
+]
