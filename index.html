@@ -1,411 +1,135 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRIME — Primeiros Socorros</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, sans-serif; }
-        body { background: #000; color: #fff; min-height: 100vh; padding: 15px; }
-        
-        .cabecalho { margin-bottom: 20px; }
-        .titulo-principal { font-size: 42px; font-weight: 900; }
-        .subtitulo { font-size: 24px; color: #ff4444; margin: 5px 0; }
-        .status { display: flex; gap: 15px; margin: 10px 0; font-size: 16px; flex-wrap: wrap; }
-        .cena-numero { color: #4fc3f7; }
-        .perfil { color: #ffd700; }
-        
-        .barra-vida { width: 100%; height: 12px; background: #333; border-radius: 6px; margin: 10px 0; }
-        .barra-vida-preencher { height: 100%; background: linear-gradient(90deg, #ff0000, #ff4444); border-radius: 6px; transition: width 0.3s; }
-        
-        .bloco-cena { background: linear-gradient(180deg, #0f172a, #000); border-radius: 12px; padding: 20px; margin: 20px 0; border: 1px solid #1e3a5f; }
-        .cena-titulo { font-size: 24px; text-align: center; margin-bottom: 20px; color: #ffcc00; }
-        .cena-texto { font-size: 17px; line-height: 1.7; margin-bottom: 25px; }
-        
-        .opcao { 
-            display: flex; 
-            align-items: center; 
-            padding: 15px; 
-            margin: 10px 0; 
-            border-radius: 10px; 
-            border: 2px solid #555; 
-            cursor: pointer; 
-            font-size: 16px; 
-            transition: all 0.4s ease;
-            background: #1a1a2e;
-            color: #fff;
-        }
-        
-        .opcao:hover {
-            border-color: #ffcc00;
-            background: #2a2a3e;
-            box-shadow: 0 0 8px rgba(255, 204, 0, 0.25);
-        }
-        
-        .opcao.certa {
-            border-color: #00ff00 !important;
-            background: #003300 !important;
-            box-shadow: 0 0 12px rgba(0, 255, 0, 0.25);
-        }
-        
-        .opcao.errada {
-            border-color: #ff0000 !important;
-            background: #330000 !important;
-            box-shadow: 0 0 12px rgba(255, 0, 0, 0.25);
-            opacity: 0.85;
-        }
-        
-        .opcao.desativada { pointer-events: none; cursor: default; }
-        .letra { font-weight: bold; font-size: 20px; width: 35px; display: inline-block; }
-        .escondido { display: none !important; }
-        
-        .tela-inicio { text-align: center; padding-top: 100px; }
-        .btn-iniciar { padding: 20px 50px; font-size: 22px; background: linear-gradient(90deg, #ff4444, #ff6666); color: #fff; border: none; border-radius: 12px; cursor: pointer; font-weight: bold; margin-top: 30px; }
-        
-        /* 📊 TELA FINAL COM RELATÓRIO */
-        .tela-final { text-align: center; padding-top: 60px; }
-        .relatorio { 
-            background: linear-gradient(180deg, #0f172a, #000); 
-            border-radius: 12px; 
-            padding: 25px; 
-            margin: 30px 0; 
-            border: 1px solid #1e3a5f;
-        }
-        .relatorio h2 { font-size: 28px; margin-bottom: 25px; color: #ffcc00; }
-        .linha { display: flex; justify-content: space-between; padding: 12px 0; font-size: 18px; border-bottom: 1px solid #333; }
-        .linha.total { border-bottom: 2px solid #ffcc00; font-weight: bold; font-size: 20px; margin-top: 10px; }
-        .acertou { color: #00ff00; }
-        .errou { color: #ff4444; }
-        .avaliacao { margin-top: 25px; padding: 15px; border-radius: 10px; font-size: 20px; font-weight: bold; }
-        .excelente { background: #003300; border: 2px solid #00ff00; color: #00ff00; }
-        .bom { background: #1a3a00; border: 2px solid #88ff00; color: #88ff00; }
-        .regular { background: #332b00; border: 2px solid #ffcc00; color: #ffcc00; }
-        .precisa { background: #330000; border: 2px solid #ff4444; color: #ff4444; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="author" content="Francival Alves Farias">
+  <title>PRIME · Primeiros Socorros</title>
+  <link rel="stylesheet" href="css/estante.css">
 </head>
 <body>
 
-<!-- TELA DE INÍCIO -->
-<div id="tela-inicio" class="tela-inicio">
-    <h1 class="titulo-principal">PRIME</h1>
-    <h2 class="subtitulo">PRIMEIROS SOCORROS</h2>
-    <p style="color:#888; margin:15px 0; font-size:18px;">❤️ APRENDA • DECIDA • SALVE VIDAS ❤️</p>
-    <button class="btn-iniciar" onclick="iniciarJogo()">🚑 INICIAR JOGO</button>
-</div>
+  <!-- ======================================================
+       02_AD_TOP — ANÚNCIO SUPERIOR · CAMADA INDEPENDENTE
+       → Pode ligar/desligar/redimensionar SEM TOCAR NO JOGO
+       ====================================================== -->
+  <div class="camada ad-superior" id="camada-02">
+    <div class="espaco-anuncio">
+      <!-- ⚠️ Colocar código do AdMob Google aqui -->
+      <span class="texto-anuncio">📢 Área de Publicidade — Google AdMob</span>
+    </div>
+  </div>
 
-<!-- TELA DO JOGO -->
-<div id="tela-jogo" class="escondido">
-    <div class="cabecalho">
-        <h1 class="titulo-principal">PRIME</h1>
-        <h2 class="subtitulo">PRIMEIROS SOCORROS</h2>
-        <p style="color:#888; margin:8px 0; font-size:15px;">APRENDA • DECIDA • SALVE VIDAS</p>
-        
-        <div class="barra-vida">
-            <div id="barra-hp" class="barra-vida-preencher" style="width: 100%;"></div>
-        </div>
-        
-        <div class="status">
-            <span class="cena-numero">📍 CENA <span id="numero-cena">1</span> DE <span id="total-cenas">60</span></span>
-            <span class="perfil">🧠 ESTRATEGISTA</span>
-        </div>
+  <!-- ======================================================
+       CONTAINER PRINCIPAL — Toda a área interna do celular
+       ====================================================== -->
+  <div class="container-principal">
+
+    <!-- 03_CABECALHO · CAMADA INDEPENDENTE -->
+    <header class="camada cabecalho" id="camada-03">
+      <button class="btn-voltar">←</button>
+      <h1 class="titulo">PRIME • PRIMEIROS SOCORROS</h1>
+      <span class="status-online">🟢 ONLINE</span>
+    </header>
+
+    <!-- 04_STATUS · CAMADA INDEPENDENTE (cada indicador separado) -->
+    <div class="camada status-bar" id="camada-04">
+      <span class="item-status" id="status-cena">Cena 12 de 60</span>
+      <span class="item-status hp" id="status-hp">❤️ HP 9/10</span>
+      <span class="item-status tempo" id="status-tempo">⏱️ 32s</span>
     </div>
 
-    <div id="bloco-cena" class="bloco-cena">
-        <h3 id="cena-titulo" class="cena-titulo">TÍTULO DA CENA</h3>
-        <p id="cena-texto" class="cena-texto">Texto da situação...</p>
-        <div id="container-opcoes"></div>
+    <!-- ======================================================
+         BLOCO DO JOGO — INTACTO, PRESERVADO, NÃO SEPARA
+         ====================================================== -->
+
+    <!-- 05_IMAGEM_CENA · CAMADA INDEPENDENTE -->
+    <div class="camada bloco-imagem" id="camada-05">
+      <img id="imagem-cena" src="imagens/cena-acidente.jpg" alt="Acidente de trânsito — vítima no asfalto">
     </div>
-</div>
 
-<!-- 📊 TELA FINAL COM RELATÓRIO COMPLETO -->
-<div id="tela-final" class="escondido tela-final">
-    <h1>🎉 CONCLUÍDO!</h1>
-    <h2>Treinamento de Primeiros Socorros</h2>
-    
-    <div class="relatorio">
-        <h2>📊 RELATÓRIO DE DESEMPENHO</h2>
-        
-        <div class="linha">
-            <span>Total de cenas</span>
-            <span id="rel-total">0</span>
-        </div>
-        
-        <div class="linha">
-            <span class="acertou">✅ Acertos</span>
-            <span id="rel-acertos" class="acertou">0</span>
-        </div>
-        
-        <div class="linha">
-            <span class="errou">❌ Erros</span>
-            <span id="rel-erros" class="errou">0</span>
-        </div>
-        
-        <div class="linha total">
-            <span>Porcentagem de acerto</span>
-            <span id="rel-porcentagem">0%</span>
-        </div>
-        
-        <div id="avaliacao" class="avaliacao">
-            <!-- Avaliação dinâmica -->
-        </div>
+    <!-- 06_PERGUNTA · CAMADA INDEPENDENTE -->
+    <div class="camada bloco-pergunta" id="camada-06">
+      <p class="texto-pergunta">Você chega ao local de um acidente de trânsito. O que faz <strong class="destaque-vermelho">PRIMEIRO</strong>?</p>
     </div>
-    
-    <button class="btn-iniciar" onclick="reiniciarJogo()">🔄 JOGAR NOVAMENTE</button>
-</div>
 
-<script>
-// ==============================================
-// 📋 BANCO DE CENAS — PREPARADO PARA 60+ CENAS!
-// ==============================================
-const CENAS = [
-    {
-        titulo: "🚑 ACIDENTE DE TRÂNSITO",
-        texto: "Você chega ao local de um acidente. Um carro bateu em um poste. Há uma pessoa caída no chão, consciente, queixando-se de dor forte na perna direita. O trânsito continua passando próximo.",
-        alternativas: [
-            { letra: "A", texto: "Correr imediatamente até a vítima no meio da pista.", hp: -1, correta: false },
-            { letra: "B", texto: "Sinalizar o local e ligar para o SAMU (192).", hp: +1, correta: true },
-            { letra: "C", texto: "Puxar a vítima pela perna para tirá-la da pista.", hp: -1, correta: false },
-            { letra: "D", texto: "Dar água e tentar fazer a vítima andar.", hp: 0, correta: false },
-            { letra: "E", texto: "Deixar a vítima e ir buscar ajuda longe dali.", hp: -1, correta: false }
-        ]
-    },
-    {
-        titulo: "⚡ FIOS ELÉTRICOS CAÍDOS",
-        texto: "Uma tempestade derrubou fios de alta tensão. Um fio está no chão, soltando faíscas. Uma pessoa se aproxima sem perceber o perigo.",
-        alternativas: [
-            { letra: "A", texto: "Pegar o fio com a mão para afastar.", hp: -3, correta: false },
-            { letra: "B", texto: "Gritar para a pessoa parar e manter distância mínima de 10 metros.", hp: +1, correta: true },
-            { letra: "C", texto: "Puxar a pessoa pela roupa para tirá-la dali.", hp: -2, correta: false },
-            { letra: "D", texto: "Chutar o fio com o pé.", hp: -2, correta: false },
-            { letra: "E", texto: "Ignorar e seguir caminho.", hp: -1, correta: false }
-        ]
-    },
-    {
-        titulo: "🩸 HEMORRAGIA FORTE",
-        texto: "Uma pessoa sofreu um corte profundo no braço e o sangue jorra sem parar.",
-        alternativas: [
-            { letra: "A", texto: "Lavar com água e esperar parar sozinho.", hp: -1, correta: false },
-            { letra: "B", texto: "Fazer pressão direta no local com pano limpo.", hp: +1, correta: true },
-            { letra: "C", texto: "Amarrar fio fino acima do corte.", hp: -2, correta: false },
-            { letra: "D", texto: "Colocar algodão em cima do corte.", hp: 0, correta: false },
-            { letra: "E", texto: "Deixar sangrar para limpar.", hp: -3, correta: false }
-        ]
-    },
-    {
-        titulo: "🔥 QUEIMADURA QUENTE",
-        texto: "Uma pessoa tocou em panela quente e a pele está vermelha e dolorida.",
-        alternativas: [
-            { letra: "A", texto: "Colocar manteiga ou pasta de dente.", hp: -2, correta: false },
-            { letra: "B", texto: "Colocar sob água corrente fria por 10 minutos.", hp: +1, correta: true },
-            { letra: "C", texto: "Estourar as bolhas se aparecerem.", hp: -2, correta: false },
-            { letra: "D", texto: "Cobrir com curativo fechado.", hp: 0, correta: false },
-            { letra: "E", texto: "Passar gelo direto na pele.", hp: -1, correta: false }
-        ]
-    },
-    {
-        titulo: "💓 PARADA CARDÍACA",
-        texto: "Uma pessoa caiu no chão, não responde, não respira. O peito não se move.",
-        alternativas: [
-            { letra: "A", texto: "Dar água e esperar acordar.", hp: -2, correta: false },
-            { letra: "B", texto: "Ligar 192 e iniciar massagem cardíaca imediatamente.", hp: +1, correta: true },
-            { letra: "C", texto: "Sacudir a pessoa para acordar.", hp: -1, correta: false },
-            { letra: "D", texto: "Colocar deitada de lado e esperar.", hp: 0, correta: false },
-            { letra: "E", texto: "Correr buscar ajuda e deixar a pessoa sozinha.", hp: -1, correta: false }
-        ]
-    }
-    // 👉 ADICIONE AS OUTRAS CENAS AQUI — O SISTEMA CONTA SOZINHO!
-];
+    <!-- 07 a 11 — CADA BOTÃO = CAMADA PRÓPRIA, TOTALMENTE INDEPENDENTE -->
+    <div class="bloco-alternativas">
+      <button class="camada botao-opcao" id="camada-07" data-letra="A" data-indice="0">
+        <span class="letra-botao">A</span>
+        <span class="texto-botao">Garanta que o local é seguro</span>
+      </button>
 
-// ==============================================
-// 🧠 ESTADO — COM CONTADOR DE ACERTOS E ERROS!
-// ==============================================
-const TOTAL_CENAS_DEFINIDAS = CENAS.length;
+      <button class="camada botao-opcao" id="camada-08" data-letra="B" data-indice="1">
+        <span class="letra-botao">B</span>
+        <span class="texto-botao">Corre imediatamente para a vítima</span>
+      </button>
 
-let estado = {
-    hp: 10,
-    hpMax: 10,
-    cenaAtual: 0,
-    totalCenas: TOTAL_CENAS_DEFINIDAS,
-    acertos: 0,  // ✅ CONTA QUANTAS ACERTOU
-    erros: 0,    // ✅ CONTA QUANTAS ERROU
-    cenasEmbaralhadas: [],
-    alternativasAtuais: []
-};
+      <button class="camada botao-opcao" id="camada-09" data-letra="C" data-indice="2">
+        <span class="letra-botao">C</span>
+        <span class="texto-botao">Fica observando sem se aproximar</span>
+      </button>
 
-// ==============================================
-// 🎲 EMBARALHAR CENAS
-// ==============================================
-function embaralharCenas() {
-    estado.cenasEmbaralhadas = [];
-    for (let i = 0; i < estado.totalCenas; i++) {
-        estado.cenasEmbaralhadas.push(i);
-    }
-    for (let i = estado.cenasEmbaralhadas.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [estado.cenasEmbaralhadas[i], estado.cenasEmbaralhadas[j]] = 
-        [estado.cenasEmbaralhadas[j], estado.cenasEmbaralhadas[i]];
-    }
-}
+      <button class="camada botao-opcao" id="camada-10" data-letra="D" data-indice="3">
+        <span class="letra-botao">D</span>
+        <span class="texto-botao">Move a vítima para lugar seguro</span>
+      </button>
 
-// ==============================================
-// 🎲 EMBARALHAR ALTERNATIVAS — SEMPRE 5!
-// ==============================================
-function embaralharAlternativas(alternativas) {
-    while (alternativas.length < 5) {
-        alternativas.push({
-            texto: "Opção indisponível",
-            hp: 0,
-            correta: false
-        });
-    }
-    
-    const embaralhadas = [...alternativas];
-    for (let i = embaralhadas.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [embaralhadas[i], embaralhadas[j]] = [embaralhadas[j], embaralhadas[i]];
-    }
-    
-    return embaralhadas.map((alt, indice) => ({
-        ...alt,
-        letra: ['A', 'B', 'C', 'D', 'E'][indice]
-    }));
-}
+      <button class="camada botao-opcao" id="camada-11" data-letra="E" data-indice="4">
+        <span class="letra-botao">E</span>
+        <span class="texto-botao">Sai para buscar ajuda</span>
+      </button>
+    </div>
 
-// ==============================================
-// 🎯 CARREGAR CENA
-// ==============================================
-function carregarCena() {
-    if (estado.cenaAtual >= estado.totalCenas) {
-        mostrarRelatorioFinal(); // ✅ MOSTRA O RELATÓRIO COMPLETO!
-        return;
-    }
+    <!-- ======================================================
+         FIM DO BLOCO DO JOGO — O RESTANTE É ESTRUTURA SEPARADA
+         ====================================================== -->
 
-    const indiceReal = estado.cenasEmbaralhadas[estado.cenaAtual];
-    const cena = CENAS[indiceReal];
+    <!-- 12_PRODUTOS · CAMADA INDEPENDENTE — PODE REMOVER SEM TOCAR NO JOGO -->
+    <div class="camada card-produtos" id="camada-12">
+      <h3 class="titulo-produtos">📚 VÊ CONHEÇA NOSSOS PRODUTOS</h3>
+      <p class="autor-produtos">✍️ POR <strong>FRANCIVAL ALVES FARIAS</strong><br>Criador e Autor</p>
+      <div class="lista-produtos">
+        <span>• Livro Impresso</span>
+        <span>• Apostila PDF</span>
+        <span>• Curso PRIME</span>
+      </div>
+      <button class="btn-plataforma">Ver Plataforma ▶</button>
+    </div>
 
-    document.getElementById("total-cenas").textContent = estado.totalCenas;
-    document.getElementById("numero-cena").textContent = estado.cenaAtual + 1;
-    document.getElementById("cena-titulo").textContent = cena.titulo;
-    document.getElementById("cena-texto").textContent = cena.texto;
-    document.getElementById("barra-hp").style.width = `${(estado.hp / estado.hpMax) * 100}%`;
+    <!-- 13_CONTROLES · CAMADA INDEPENDENTE -->
+    <div class="camada barra-controles" id="camada-13">
+      <span class="controle-item">💾 Pontos: 120</span>
+      <button class="controle-btn">🏠 Sair</button>
+      <button class="controle-btn">⏸️ Pausa</button>
+    </div>
 
-    const alternativasEmbaralhadas = embaralharAlternativas(cena.alternativas);
-    estado.alternativasAtuais = alternativasEmbaralhadas;
+  </div>
+  <!-- FIM DO CONTAINER PRINCIPAL -->
 
-    const container = document.getElementById("container-opcoes");
-    container.innerHTML = "";
+  <!-- 14_AD_RODAPE · CAMADA INDEPENDENTE — DEPOIS DE TUDO -->
+  <div class="camada ad-inferior" id="camada-14">
+    <div class="espaco-anuncio">
+      <!-- ⚠️ Colocar código do AdMob Google aqui -->
+      <span class="texto-anuncio">📢 Área de Publicidade — Google AdMob</span>
+    </div>
+  </div>
 
-    alternativasEmbaralhadas.forEach((alt, indice) => {
-        container.innerHTML += `
-            <div class="opcao" onclick="responder(${indice})">
-                <span class="letra">${alt.letra}</span>
-                <span>${alt.texto}</span>
-            </div>
-        `;
-    });
-}
+  <!-- 15_NAVEGACAO · CAMADA INDEPENDENTE — FIXA EMBAIXO -->
+  <nav class="camada navegacao-inferior" id="camada-15">
+    <button class="nav-item">📖 Estante</button>
+    <button class="nav-item">📊 Desempenho</button>
+    <button class="nav-item btn-jogar">🔴 Jogar</button>
+    <button class="nav-item">📄 Ranking</button>
+    <button class="nav-item">⚙️ Ajustes</button>
+  </nav>
 
-// ==============================================
-// ✅ RESPONDER — CONTA ACERTOS E ERROS!
-// ==============================================
-function responder(indiceEscolhido) {
-    const alternativas = estado.alternativasAtuais;
-    const escolha = alternativas[indiceEscolhido];
-
-    // 🔒 TRAVA TODOS OS BOTÕES
-    const todosBotoes = document.querySelectorAll('.opcao');
-    todosBotoes.forEach(btn => {
-        btn.classList.add('desativada');
-        btn.style.pointerEvents = 'none';
-    });
-
-    // 🎯 MUDA COR E CONTA!
-    const botaoClicado = todosBotoes[indiceEscolhido];
-    setTimeout(() => {
-        if (escolha.correta) {
-            botaoClicado.classList.add('certa'); // 🟢 VERDE
-            estado.acertos++; // ✅ CONTA ACERTO!
-        } else {
-            botaoClicado.classList.add('errada'); // 🔴 VERMELHO
-            estado.erros++; // ❌ CONTA ERRO!
-        }
-    }, 150);
-
-    // Atualiza HP (interno)
-    estado.hp = Math.max(0, Math.min(estado.hpMax, estado.hp + escolha.hp));
-
-    // ⏳ ESPERA → AVANÇA
-    setTimeout(() => {
-        estado.cenaAtual++;
-        carregarCena();
-    }, 1200);
-}
-
-// ==============================================
-// 📊 RELATÓRIO FINAL COMPLETO!
-// ==============================================
-function mostrarRelatorioFinal() {
-    document.getElementById("tela-jogo").classList.add("escondido");
-    document.getElementById("tela-final").classList.remove("escondido");
-
-    const total = estado.totalCenas;
-    const acertos = estado.acertos;
-    const erros = estado.erros;
-    const porcentagem = Math.round((acertos / total) * 100);
-
-    // ✅ PREENCHE OS DADOS
-    document.getElementById("rel-total").textContent = total;
-    document.getElementById("rel-acertos").textContent = acertos;
-    document.getElementById("rel-erros").textContent = erros;
-    document.getElementById("rel-porcentagem").textContent = porcentagem + "%";
-
-    // ✅ AVALIAÇÃO DESEMPENHO
-    const avaliacaoEl = document.getElementById("avaliacao");
-    if (porcentagem >= 90) {
-        avaliacaoEl.textContent = "🏆 EXCELENTE — Instrutor de Primeiros Socorros!";
-        avaliacaoEl.className = "avaliacao excelente";
-    } else if (porcentagem >= 75) {
-        avaliacaoEl.textContent = "🥇 BOM — Bom desempenho! Continue praticando!";
-        avaliacaoEl.className = "avaliacao bom";
-    } else if (porcentagem >= 50) {
-        avaliacaoEl.textContent = "⚠️ REGULAR — Precisa praticar mais!";
-        avaliacaoEl.className = "avaliacao regular";
-    } else {
-        avaliacaoEl.textContent = "🔴 PRECISA DE TREINAMENTO — Revise os conceitos!";
-        avaliacaoEl.className = "avaliacao precisa";
-    }
-}
-
-// ==============================================
-// ▶️ INICIAR
-// ==============================================
-function iniciarJogo() {
-    estado = {
-        hp: 10,
-        hpMax: 10,
-        cenaAtual: 0,
-        totalCenas: TOTAL_CENAS_DEFINIDAS,
-        acertos: 0, // ✅ ZERA NO INÍCIO
-        erros: 0,   // ✅ ZERA NO INÍCIO
-        cenasEmbaralhadas: [],
-        alternativasAtuais: []
-    };
-    embaralharCenas();
-    
-    document.getElementById("tela-inicio").classList.add("escondido");
-    document.getElementById("tela-jogo").classList.remove("escondido");
-    document.getElementById("tela-final").classList.add("escondido");
-    
-    carregarCena();
-}
-
-// ==============================================
-// 🔄 REINICIAR
-// ==============================================
-function reiniciarJogo() {
-    iniciarJogo();
-}
-</script>
+  <!-- ======================================================
+       00_MOTOR · SEPARADO, PROTEGIDO, INTOCÁVEL
+       ====================================================== -->
+  <script src="motor/core.js"></script>
+  <script src="motor/adapter.js"></script>
+  <script src="js/app.js"></script>
 
 </body>
 </html>
