@@ -1,42 +1,292 @@
-/* OPÇÃO — ANTES DE TOCAR: TODAS IGUAIS, SEM COR */
-.opcao { 
-  display: flex; 
-  align-items: center; 
-  padding: 15px; 
-  margin: 10px 0; 
-  border-radius: 10px; 
-  border: 2px solid #555; /* CINZA NEUTRO */
-  cursor: pointer; 
-  font-size: 16px; 
-  transition: all 0.4s ease; /* DEVAGARZINHO — suave! */
-  background: #1a1a2e;
-  color: #fff;
+/* ======================================================
+   ESTANTE PRIME · TEMA ESCURO OFICIAL
+   Camadas independentes — NÃO MISTURAR ESTILOS
+   ====================================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, Roboto, 'Segoe UI', sans-serif;
 }
 
-/* 🟡 PASSANDO O DEDO POR CIMA → AMARELO (ALERTA) */
-.opcao:hover {
-  border-color: #ffcc00; /* ARO AMARELO */
-  background: #2a2a3e;
-  box-shadow: 0 0 8px #ffcc0040;
+:root {
+  --fundo: #000000;
+  --cartao: #121212;
+  --borda: #2A2A2A;
+  --texto: #FFFFFF;
+  --vermelho: #E53935;
+  --vermelho-escuro: #C62828;
+  --bege-produtos: #F5EEDC;
+  --texto-produtos: #1A1A1A;
+  --destaque-verde: #34C759;
 }
 
-/* ✅ APERTOU CERTO → VERDE */
-.opcao.certa {
-  border-color: #00ff00 !important;
-  background: #003300 !important;
-  box-shadow: 0 0 12px #00ff0040;
+body {
+  background: var(--fundo);
+  color: var(--texto);
+  min-height: 100vh;
+  padding-bottom: 60px; /* Espaço para navegação inferior */
 }
 
-/* ❌ APERTOU ERRADO → VERMELHO */
-.opcao.errada {
-  border-color: #ff0000 !important;
-  background: #330000 !important;
-  box-shadow: 0 0 12px #ff000040;
-  opacity: 0.85;
+/* ======================================================
+   01_FUNDO — CAMADA BASE
+   ====================================================== */
+.camada {
+  position: relative;
+  z-index: 1;
 }
 
-/* ❌ DESATIVA CLIQUES DEPOIS DE RESPONDER */
-.opcao.desativada {
-  pointer-events: none;
-  cursor: default;
+/* ======================================================
+   CONTAINER PRINCIPAL — ÁREA ÚTIL DO CELULAR (9:16)
+   ====================================================== */
+.container-principal {
+  max-width: 430px;
+  margin: 0 auto;
+  padding: 0 12px;
+}
+
+/* ======================================================
+   02_AD_TOP — ANÚNCIO SUPERIOR
+   ====================================================== */
+.ad-superior {
+  width: 100%;
+  background: #0F0F0F;
+  border-bottom: 1px solid var(--borda);
+  padding: 8px 0;
+  text-align: center;
+}
+.espaco-anuncio {
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+  font-size: 13px;
+}
+
+/* ======================================================
+   03_CABECALHO
+   ====================================================== */
+.cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0 8px;
+}
+.btn-voltar {
+  background: none;
+  border: none;
+  color: var(--texto);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+.titulo {
+  font-size: 17px;
+  font-weight: 600;
+}
+.status-online {
+  font-size: 12px;
+}
+
+/* ======================================================
+   04_STATUS
+   ====================================================== */
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0 12px;
+  font-size: 14px;
+  color: #CCC;
+}
+.item-status.hp { color: var(--vermelho); font-weight: 500; }
+.item-status.tempo { color: #FFD60A; }
+
+/* ======================================================
+   05_IMAGEM_CENA
+   ====================================================== */
+.bloco-imagem {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid var(--vermelho);
+  margin-bottom: 16px;
+}
+.bloco-imagem img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+/* ======================================================
+   06_PERGUNTA
+   ====================================================== */
+.bloco-pergunta {
+  padding: 0 4px 16px;
+}
+.texto-pergunta {
+  font-size: 16px;
+  line-height: 1.5;
+}
+.destaque-vermelho {
+  color: var(--vermelho);
+  font-weight: 700;
+}
+
+/* ======================================================
+   07 a 11 — BOTÕES A-E · CADA UM INDEPENDENTE
+   ====================================================== */
+.bloco-alternativas {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.botao-opcao {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(90deg, var(--vermelho), var(--vermelho-escuro));
+  border: none;
+  border-radius: 10px;
+  padding: 14px 16px;
+  color: white;
+  font-size: 15px;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.15s, opacity 0.15s;
+  width: 100%;
+}
+.botao-opcao:active {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+.letra-botao {
+  background: rgba(0,0,0,0.25);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.texto-botao {
+  flex: 1;
+}
+
+/* ======================================================
+   12_PRODUTOS · CARD BEGE
+   ====================================================== */
+.card-produtos {
+  background: var(--bege-produtos);
+  color: var(--texto-produtos);
+  border-radius: 12px;
+  padding: 16px;
+  margin: 8px 4px 20px;
+}
+.titulo-produtos {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.autor-produtos {
+  font-size: 13px;
+  margin-bottom: 10px;
+  opacity: 0.9;
+}
+.lista-produtos {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+.btn-plataforma {
+  background: var(--vermelho);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* ======================================================
+   13_CONTROLES
+   ====================================================== */
+.barra-controles {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4px 16px;
+}
+.controle-item {
+  font-size: 14px;
+  color: #AAA;
+}
+.controle-btn {
+  background: #1F1F1F;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+/* ======================================================
+   14_AD_RODAPE
+   ====================================================== */
+.ad-inferior {
+  position: fixed;
+  bottom: 60px;
+  left: 0;
+  right: 0;
+  background: #0F0F0F;
+  border-top: 1px solid var(--borda);
+  padding: 6px 0;
+  text-align: center;
+  z-index: 10;
+}
+
+/* ======================================================
+   15_NAVEGACAO INFERIOR · FIXA
+   ====================================================== */
+.navegacao-inferior {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #0A0A0A;
+  border-top: 1px solid var(--borda);
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 4px;
+  z-index: 20;
+}
+.nav-item {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 11px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  cursor: pointer;
+}
+.nav-item.btn-jogar {
+  background: var(--vermelho);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 13px;
 }
