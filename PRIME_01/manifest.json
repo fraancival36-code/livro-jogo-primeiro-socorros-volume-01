@@ -1,0 +1,26 @@
+{
+  "pacote_id": "PRIME_01",
+  "titulo": "PRIME — Primeiros Socorros",
+  "versao": "1.0.0",
+  "idioma_original": "pt-BR",
+  "total_cenas": 60,
+  "ordem_cenas": "sequencial",
+  "sistema_pontuacao": {
+    "acerto_base": 10,
+    "penalidade_erro": 0,
+    "bonus_tempo": "opcional",
+    "penalidade_tempo_esgotado": "50%"
+  },
+  "timer": {
+    "disponivel": true,
+    "padrao": "desativado",
+    "tempo_segundos": 30
+  },
+  "feedback_obrigatorio": true,
+  "feedback_antes_de_proxima": true,
+  "fichas_apoio": true,
+  "imagens_por_cena": true,
+  "monetizacao_eventos": true,
+  "referencia_tecnica": "AHA/ILCOR 2025",
+  "aviso_legal": "Recurso educacional. Não substitui treinamento oficial e atendimento médico."
+}
