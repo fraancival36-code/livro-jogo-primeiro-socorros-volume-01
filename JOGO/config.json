@@ -1,0 +1,8 @@
+{
+  "modo": "jogo",
+  "total_cenas": 60,
+  "tem_relogio": true,
+  "tem_pontos": true,
+  "tem_hp": true,
+  "tem_anuncio": true
+}
