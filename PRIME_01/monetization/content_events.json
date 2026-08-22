@@ -1,0 +1,27 @@
+{
+  "eventos": {
+    "inicio_sessao": "opcional",
+    "apos_cena_005": "anuncio_google",
+    "apos_cena_010": "anuncio_proprio",
+    "apos_cena_015": "anuncio_google",
+    "apos_cena_020": "anuncio_proprio",
+    "apos_cena_025": "anuncio_google",
+    "apos_cena_030": "anuncio_proprio",
+    "apos_cena_035": "anuncio_google",
+    "apos_cena_040": "anuncio_proprio",
+    "apos_cena_045": "anuncio_google",
+    "apos_cena_050": "anuncio_proprio",
+    "apos_cena_055": "anuncio_google",
+    "fim_sessao": "promocao_livro_e_curso",
+    "intervalo_entre_cenas": "nenhum",
+    "premium": {
+      "remove_todos_anuncios": true,
+      "mantem_promocoes_proprias": true
+    }
+  },
+  "regras": {
+    "nunca_interromper_feedback": true,
+    "nunca_antes_da_resposta": true,
+    "nunca_esconder_explicacao": true
+  }
+}
