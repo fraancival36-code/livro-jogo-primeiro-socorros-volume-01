@@ -1,0 +1,18 @@
+{
+  "id": "001",
+  "titulo": "Segurança da cena",
+  "categoria": "Avaliação Inicial",
+  "situacao": "Pessoa caída ao lado de um painel elétrico aberto, com fios expostos.",
+  "opcoes": {
+    "A": "Correr até a vítima.",
+    "B": "Verificar o risco elétrico e garantir que a fonte esteja controlada antes de se aproximar.",
+    "C": "Jogar água no painel.",
+    "D": "Puxar a vítima com as mãos.",
+    "E": "Entrar imediatamente na área."
+  },
+  "correta": "B",
+  "feedback": "O socorrista não pode se transformar em uma segunda vítima. A segurança da cena vem primeiro.",
+  "ficha_apoio": "ficha_001.md",
+  "referencia": "AHA/ILCOR 2025 — Segurança do socorrista",
+  "tags": ["segurança", "eletricidade", "avaliação_inicial"]
+}
