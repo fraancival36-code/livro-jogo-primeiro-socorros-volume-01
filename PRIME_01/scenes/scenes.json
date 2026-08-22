@@ -1,0 +1,125 @@
+{
+  "pacote": "PRIME_01",
+  "titulo": "PRIME — Primeiros Socorros",
+  "versao": "1.0",
+  "total_cenas": 60,
+  "regra_feedback": "obrigatorio_antes_de_proxima",
+  "fluxo": "situacao → escolha → resultado → explicacao → proxima",
+  "cenas": [
+    {
+      "id": "001",
+      "titulo": "Segurança da cena",
+      "categoria": "Avaliação Inicial",
+      "situacao": "Pessoa caída ao lado de um painel elétrico aberto, com fios expostos.",
+      "opcoes": {
+        "A": "Correr até a vítima.",
+        "B": "Verificar o risco elétrico e garantir que a fonte esteja controlada antes de se aproximar.",
+        "C": "Jogar água no painel.",
+        "D": "Puxar a vítima com as mãos.",
+        "E": "Entrar imediatamente na área."
+      },
+      "correta": "B",
+      "feedback_certo": "✅ CERTO! Você escolheu a alternativa correta porque, antes de ajudar, é necessário garantir que a cena esteja segura. No caso de eletricidade, aproximar-se sem controlar a fonte pode transformar o socorrista em outra vítima. A sua segurança vem sempre PRIMEIRO — sem você, não há socorro.",
+      "feedback_errado": {
+        "A": "❌ ERRADO! Correr até a vítima sem verificar o painel elétrico coloca VOCÊ em risco de choque. Primeiro controle o perigo e só depois aproxime-se para prestar auxílio. Você não pode virar a segunda vítima.",
+        "C": "❌ ERRADO! Jogar água no painel energizado é perigoso — a água conduz eletricidade e pode causar choque grave em você. Nunca use água em equipamentos elétricos ligados.",
+        "D": "❌ ERRADO! Puxar a vítima com as mãos energiza você também — o choque passa de uma pessoa para a outra. Desligue a energia antes de tocar em qualquer pessoa ou objeto.",
+        "E": "❌ ERRADO! Entrar na área sem avaliar o risco é pular direto para dentro do perigo. Você precisa verificar, controlar e só depois aproximar-se. Duas vítimas em vez de uma é sempre pior."
+      },
+      "referencia": "AHA/ILCOR 2025 — Segurança do socorrista",
+      "tags": ["segurança", "eletricidade", "avaliação"]
+    },
+    {
+      "id": "002",
+      "titulo": "Acionamento de ajuda",
+      "categoria": "Avaliação Inicial",
+      "situacao": "A cena está segura e a vítima não responde aos chamados nem ao toque.",
+      "opcoes": {
+        "A": "Esperar a vítima acordar sozinha.",
+        "B": "Levantar a vítima e sacudir para acordar.",
+        "C": "Pedir ajuda a alguém próximo e acionar imediatamente o serviço de emergência (192).",
+        "D": "Dar água para a vítima beber.",
+        "E": "Ir embora e avisar depois."
+      },
+      "correta": "C",
+      "feedback_certo": "✅ CERTO! Depois de garantir que a cena está segura, reconhecer a emergência e buscar ajuda profissional é o passo mais importante. Você não precisa — e não deve — fazer tudo sozinho. Chamar o socorro especializado logo no início aumenta drasticamente as chances de sobrevivência.",
+      "feedback_errado": {
+        "A": "❌ ERRADO! Esperar sem fazer nada deixa a vítima sem atendimento. A falta de oxigênio começa a danificar órgãos em poucos minutos. Não espere — aja.",
+        "B": "❌ ERRADO! Levantar e sacudir pode piorar lesões graves na coluna, pescoço ou fraturas que você ainda não consegue ver. Deite com cuidado e não mova desnecessariamente.",
+        "D": "❌ ERRADO! Dar água a quem não responde é perigoso — a pessoa não engole direito e a água vai para os pulmões, causando afogamento interno e complicações graves. Nunca dê líquidos a alguém inconsciente.",
+        "E": "❌ ERRADO! Abandonar a vítima é o pior cenário possível. Ela precisa de você agora. Fique, chame ajuda e inicie o socorro até chegar o suporte profissional."
+      },
+      "referencia": "AHA/ILCOR 2025 — Acionamento de emergência",
+      "tags": ["ajuda", "emergência", "avaliação"]
+    },
+    {
+      "id": "003",
+      "titulo": "Vítima inconsciente e sem respiração normal",
+      "categoria": "Avaliação Inicial",
+      "situacao": "Adulto não responde aos chamados e respira de forma muito lenta e com ruído estranho.",
+      "opcoes": {
+        "A": "Considerar que está dormindo e esperar.",
+        "B": "Dar água e colocar cobertor.",
+        "C": "Reconhecer sinal de parada cardíaca, acionar emergência e iniciar RCP se tiver treinamento.",
+        "D": "Colocar sentado para respirar melhor.",
+        "E": "Ficar observando sem fazer nada."
+      },
+      "correta": "C",
+      "feedback_certo": "✅ CERTO! Sem resposta + respiração anormal = sinal claro de parada cardiorrespiratória. Cada segundo sem circulação de sangue prejudica o cérebro e órgãos vitais. Acione a emergência IMEDIATAMENTE e inicie as compressões torácicas se tiver sido treinado para isso.",
+      "feedback_errado": {
+        "A": "❌ ERRADO! Respiração muito lenta, com ruído ou em solavancos NÃO é respiração normal — é o que chamamos de 'respiração agonizante', um sinal de parada iminente. Não é sono — é emergência.",
+        "B": "❌ ERRADO! Inconsciente não engole — a água entra nos pulmões e causa aspiração, que pode ser fatal. Cobertor não salva vidas em parada cardíaca. O que precisa agora é circulação de sangue.",
+        "D": "❌ ERRADO! Sentar a vítima dificulta a avaliação e impede a realização de compressões torácicas. Deitar em superfície rígida e plana é a posição correta para avaliar e socorrer.",
+        "E": "❌ ERRADO! Observar sem agir permite que a falta de oxigênio cause dano irreversível ao cérebro em poucos minutos. A parada cardíaca exige ação imediata — não espera."
+      },
+      "referencia": "AHA/ILCOR 2025 — Reconhecimento de PCR",
+      "tags": ["inconsciência", "respiração", "parada cardíaca"]
+    },
+    {
+      "id": "004",
+      "titulo": "Usando o DEA disponível",
+      "categoria": "Suporte Básico de Vida",
+      "situacao": "Vítima em parada cardíaca e um Desfibrilador Externo Automático (DEA) está disponível no local.",
+      "opcoes": {
+        "A": "Guardar o aparelho e continuar só com RCP.",
+        "B": "Ligar o DEA, seguir as instruções de voz e continuar o socorro conforme orientado.",
+        "C": "Dar água enquanto prepara o aparelho.",
+        "D": "Esperar a chegada do médico para usar o aparelho.",
+        "E": "Desligar o aparelho e não usar."
+      },
+      "correta": "B",
+      "feedback_certo": "✅ CERTO! O DEA foi feito para ser usado por QUALQUER pessoa — ele fala o que fazer. Não precisa ser médico nem técnico. Usar o mais rápido possível aumenta a chance de sobrevivência em até 50%. Ligue, cole as pás no peito desnudo e deixe o aparelho analisar o coração. Continue a RCP enquanto ele carrega e depois de cada choque.",
+      "feedback_errado": {
+        "A": "❌ ERRADO! Guardar o DEA é guardar a chance de voltar o coração. A desfibrilação é a ÚNICA forma de corrigir certas paradas cardíacas. O aparelho existe para ser usado — não para ficar guardado.",
+        "C": "❌ ERRADO! A vítima está em parada cardíaca — não engole e não respira direito. Qualquer líquido vai para os pulmões e piora tudo. Foco no que salva vidas: circulação e desfibrilação.",
+        "D": "❌ ERRADO! Esperar o médico chegar pode custar a vida da pessoa. Cada minuto sem desfibrilação reduz a sobrevivência em 7–10%. O DEA é automático e seguro — use AGORA.",
+        "E": "❌ ERRADO! Desligar o aparelho é desligar a esperança. O DEA não machuca e não erra — ele só dá choque se o coração realmente precisar. Confie no aparelho e siga suas instruções."
+      },
+      "referencia": "AHA/ILCOR 2025 — Uso do DEA",
+      "tags": ["DEA", "desfibrilador", "parada cardíaca"]
+    },
+    {
+      "id": "005",
+      "titulo": "Fazendo RCP corretamente",
+      "categoria": "Suporte Básico de Vida",
+      "situacao": "Você identificou parada cardíaca e vai iniciar as compressões torácicas.",
+      "opcoes": {
+        "A": "Fazer compressões bem devagar e levemente.",
+        "B": "Posicionar as mãos no centro do peito, comprimir 5–6 cm com ritmo de 100 a 120 por minuto.",
+        "C": "Colocar travesseiro embaixo das costas para facilitar.",
+        "D": "Parar a cada 10 segundos para ver se a pessoa acordou.",
+        "E": "Fazer deitado de lado."
+      },
+      "correta": "B",
+      "feedback_certo": "✅ CERTO! Compressões de ALTA QUALIDADE são o que realmente circula o sangue. No meio do peito, braços esticados, força para baixo (5–6 cm de profundidade), ritmo rápido — como a música 'Stayin' Alive' — e NÃO PARE por mais de 10 segundos. A consistência salva vidas.",
+      "feedback_errado": {
+        "A": "❌ ERRADO! Compressões lentas e fracas não empurram o sangue para o cérebro e órgãos. Tem que ter força e ritmo. Se doer nos seus braços, é sinal que está fazendo certo — a vida da pessoa depende disso.",
+        "C": "❌ ERRADO! Travesseiro ou almofada levanta o peito e IMPIDE que a compressão chegue no coração. A superfície precisa ser RÍGIDA e plana — tire tudo debaixo do peito da vítima.",
+        "D": "❌ ERRADO! Parar a cada poucos segundos corta o fluxo de sangue que você estava construindo. Cada parada maior que 10 segundos anula o esforço anterior. Só pare quando o DEA mandar ou a pessoa se mover claramente.",
+        "E": "❌ ERRADO! Deitado de lado é posição de recuperação — NÃO para RCP. Para comprimir o coração, a pessoa precisa estar COMPLETAMENTE de barriga para cima, em superfície dura."
+      },
+      "referencia": "AHA/ILCOR 2025 — RCP de alta qualidade",
+      "tags": ["RCP", "compressões", "circulação"]
+    }
+  ]
+}
