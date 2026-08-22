@@ -1,0 +1,35 @@
+{
+  "id": "brasil",
+  "nome": "Brasil",
+  "idioma": "pt-BR",
+  "bandeira": "🇧🇷",
+  
+  "contatos_emergencia": {
+    "ambulancia": "192 — SAMU",
+    "bombeiros": "193",
+    "policia": "190",
+    "emergencia_geral": "192"
+  },
+
+  "legislacao": {
+    "lei_bom_samaritano": true,
+    "numero_lei": "Lei nº 13.718/2018",
+    "resumo": "Protege quem presta socorro de boa-fé. Sem responsabilidade civil ou penal, desde que sem dolo ou negligência grave.",
+    "fonte": "Presidência da República — Brasil"
+  },
+
+  "contexto_cultural": {
+    "animais_peconhentos": ["Jararaca", "Cascavel", "Surucucu", "Escorpião-amarelo"],
+    "desastres_comuns": ["Enchentes", "Deslizamentos", "Secas"],
+    "veiculo_socorro": "Ambulância branca com faixa vermelha — SAMU",
+    "deas_disponiveis": "Aeroportos, shoppings, estádios, hospitais"
+  },
+
+  "termos_traduzidos": {
+    "emergency_call": "Ligue para o SAMU",
+    "ambulance": "Ambulância",
+    "hospital": "Pronto-Socorro",
+    "paramedic": "Socorrista",
+    "cpr": "RCP — Reanimação Cardiopulmonar"
+  }
+}
