@@ -1,15 +1,12 @@
 {
-  "id": "prime-v1",
-  "titulo": "Primeiros Socorros",
-  "titulo_en": "First Aid",
-  "titulo_es": "Primeros Auxilios",
-  "descricao": "Aprenda a agir em emergências.",
-  "descricao_en": "Learn to act in emergencies.",
-  "idioma": "pt-BR",
-  "regiao": "BR",
-  "categoria": "Saúde",
-  "dificuldade": "misto",
-  "totalCenas": 60,
-  "capa": "capa-prime.png",
-  "versaoConteudo": "1.0"
+  "id": "dor-peito",
+  "nome": "Dor no peito / aperto",
+  "perguntas": [
+    { "id": "consciente", "texto": "Está consciente?", "tipo": "simNao" },
+    { "id": "respira", "texto": "Respira normalmente?", "tipo": "simNao" },
+    { "id": "inicio", "texto": "Quando começou?", "tipo": "texto" }
+  ],
+  "alertas": [
+    { "condicao": "dor_peito && suor", "texto": "⚠️ Sinais de alerta — ligue 192" }
+  ]
 }
