@@ -4,132 +4,183 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="author" content="Francival Alves Farias">
-  <title>PRIME · Primeiros Socorros</title>
+  <title>Primeiros Socorros</title>
   <link rel="stylesheet" href="css/estante.css">
 </head>
 <body>
 
-  <!-- ======================================================
-       02_AD_TOP — ANÚNCIO SUPERIOR · CAMADA INDEPENDENTE
-       → Pode ligar/desligar/redimensionar SEM TOCAR NO JOGO
-       ====================================================== -->
-  <div class="camada ad-superior" id="camada-02">
-    <div class="espaco-anuncio">
-      <!-- ⚠️ Colocar código do AdMob Google aqui -->
-      <span class="texto-anuncio">📢 Área de Publicidade — Google AdMob</span>
-    </div>
-  </div>
-
-  <!-- ======================================================
-       CONTAINER PRINCIPAL — Toda a área interna do celular
-       ====================================================== -->
-  <div class="container-principal">
-
-    <!-- 03_CABECALHO · CAMADA INDEPENDENTE -->
-    <header class="camada cabecalho" id="camada-03">
-      <button class="btn-voltar">←</button>
-      <h1 class="titulo">PRIME • PRIMEIROS SOCORROS</h1>
-      <span class="status-online">🟢 ONLINE</span>
-    </header>
-
-    <!-- 04_STATUS · CAMADA INDEPENDENTE (cada indicador separado) -->
-    <div class="camada status-bar" id="camada-04">
-      <span class="item-status" id="status-cena">Cena 12 de 60</span>
-      <span class="item-status hp" id="status-hp">❤️ HP 9/10</span>
-      <span class="item-status tempo" id="status-tempo">⏱️ 32s</span>
-    </div>
-
-    <!-- ======================================================
-         BLOCO DO JOGO — INTACTO, PRESERVADO, NÃO SEPARA
-         ====================================================== -->
-
-    <!-- 05_IMAGEM_CENA · CAMADA INDEPENDENTE -->
-    <div class="camada bloco-imagem" id="camada-05">
-      <img id="imagem-cena" src="imagens/cena-acidente.jpg" alt="Acidente de trânsito — vítima no asfalto">
-    </div>
-
-    <!-- 06_PERGUNTA · CAMADA INDEPENDENTE -->
-    <div class="camada bloco-pergunta" id="camada-06">
-      <p class="texto-pergunta">Você chega ao local de um acidente de trânsito. O que faz <strong class="destaque-vermelho">PRIMEIRO</strong>?</p>
-    </div>
-
-    <!-- 07 a 11 — CADA BOTÃO = CAMADA PRÓPRIA, TOTALMENTE INDEPENDENTE -->
-    <div class="bloco-alternativas">
-      <button class="camada botao-opcao" id="camada-07" data-letra="A" data-indice="0">
-        <span class="letra-botao">A</span>
-        <span class="texto-botao">Garanta que o local é seguro</span>
-      </button>
-
-      <button class="camada botao-opcao" id="camada-08" data-letra="B" data-indice="1">
-        <span class="letra-botao">B</span>
-        <span class="texto-botao">Corre imediatamente para a vítima</span>
-      </button>
-
-      <button class="camada botao-opcao" id="camada-09" data-letra="C" data-indice="2">
-        <span class="letra-botao">C</span>
-        <span class="texto-botao">Fica observando sem se aproximar</span>
-      </button>
-
-      <button class="camada botao-opcao" id="camada-10" data-letra="D" data-indice="3">
-        <span class="letra-botao">D</span>
-        <span class="texto-botao">Move a vítima para lugar seguro</span>
-      </button>
-
-      <button class="camada botao-opcao" id="camada-11" data-letra="E" data-indice="4">
-        <span class="letra-botao">E</span>
-        <span class="texto-botao">Sai para buscar ajuda</span>
-      </button>
-    </div>
-
-    <!-- ======================================================
-         FIM DO BLOCO DO JOGO — O RESTANTE É ESTRUTURA SEPARADA
-         ====================================================== -->
-
-    <!-- 12_PRODUTOS · CAMADA INDEPENDENTE — PODE REMOVER SEM TOCAR NO JOGO -->
-    <div class="camada card-produtos" id="camada-12">
-      <h3 class="titulo-produtos">📚 VÊ CONHEÇA NOSSOS PRODUTOS</h3>
-      <p class="autor-produtos">✍️ POR <strong>FRANCIVAL ALVES FARIAS</strong><br>Criador e Autor</p>
-      <div class="lista-produtos">
-        <span>• Livro Impresso</span>
-        <span>• Apostila PDF</span>
-        <span>• Curso PRIME</span>
+  <!-- ==============================================
+       TELA INICIAL / CAPA — APARECE PRIMEIRO
+       ============================================== -->
+  <div class="tela-inicial" id="tela-inicial">
+    <div class="capa-conteudo">
+      <div class="icone-capa">🚑</div>
+      <h1 class="titulo-capa">PRIMEIROS SOCORROS</h1>
+      <p class="subtitulo-capa">Treine. Decida. Salve.</p>
+      
+      <div class="destaques-capa">
+        <div class="item-destaque">⚡ 60 cenas reais</div>
+        <div class="item-destaque">⏱️ Cronômetro opcional</div>
+        <div class="item-destaque">📚 Aprenda praticando</div>
       </div>
-      <button class="btn-plataforma">Ver Plataforma ▶</button>
-    </div>
-
-    <!-- 13_CONTROLES · CAMADA INDEPENDENTE -->
-    <div class="camada barra-controles" id="camada-13">
-      <span class="controle-item">💾 Pontos: 120</span>
-      <button class="controle-btn">🏠 Sair</button>
-      <button class="controle-btn">⏸️ Pausa</button>
-    </div>
-
-  </div>
-  <!-- FIM DO CONTAINER PRINCIPAL -->
-
-  <!-- 14_AD_RODAPE · CAMADA INDEPENDENTE — DEPOIS DE TUDO -->
-  <div class="camada ad-inferior" id="camada-14">
-    <div class="espaco-anuncio">
-      <!-- ⚠️ Colocar código do AdMob Google aqui -->
-      <span class="texto-anuncio">📢 Área de Publicidade — Google AdMob</span>
+      
+      <button class="btn-iniciar" id="btn-iniciar">▶️ INICIAR JOGO</button>
+      
+      <div class="caixa-sistema">
+        <p class="texto-sistema">Escolha o sistema:</p>
+        <label class="opcao-sistema">
+          <input type="radio" name="sistema" value="gratuito" checked>
+          <span>🆓 Gratuito — com anúncios</span>
+        </label>
+        <label class="opcao-sistema">
+          <input type="radio" name="sistema" value="prime">
+          <span>✨ Sistema PRIME — sem anúncios do Google</span>
+        </label>
+      </div>
+      
+      <p class="autor-capa">✍️ Por FRANCIVAL ALVES FARIAS</p>
     </div>
   </div>
 
-  <!-- 15_NAVEGACAO · CAMADA INDEPENDENTE — FIXA EMBAIXO -->
-  <nav class="camada navegacao-inferior" id="camada-15">
-    <button class="nav-item">📖 Estante</button>
-    <button class="nav-item">📊 Desempenho</button>
-    <button class="nav-item btn-jogar">🔴 Jogar</button>
-    <button class="nav-item">📄 Ranking</button>
-    <button class="nav-item">⚙️ Ajustes</button>
-  </nav>
+  <!-- ==============================================
+       TELA DO JOGO — ESCONDIDA ATÉ CLICAR EM INICIAR
+       ============================================== -->
+  <div class="tela-jogo" id="tela-jogo" style="display: none;">
 
-  <!-- ======================================================
-       00_MOTOR · SEPARADO, PROTEGIDO, INTOCÁVEL
-       ====================================================== -->
+    <!-- CAMADA 01 — PUBLICIDADE SUPERIOR (some no PRIME) -->
+    <div class="camada ad-superior" id="camada-01">
+      <div class="espaco-anuncio">
+        <span class="texto-anuncio">📢 Publicidade — Google AdMob</span>
+      </div>
+    </div>
+
+    <!-- CAMADA 02 — NAVEGAÇÃO -->
+    <div class="camada navegacao-topo" id="camada-02">
+      <button class="btn-voltar" id="btn-voltar">←</button>
+    </div>
+
+    <div class="container-principal">
+
+      <!-- CAMADA 03 — TÍTULO CORRIGIDO -->
+      <header class="camada titulo-jogo" id="camada-03">
+        <h1>PRIMEIROS SOCORROS</h1>
+        <span class="status-online">🟢 ONLINE</span>
+      </header>
+
+      <!-- CAMADA 04 — STATUS -->
+      <div class="camada status-bar" id="camada-04">
+        <span class="item-status" id="status-cena">Cena 1 de 60</span>
+        <span class="item-status hp" id="status-hp">❤️ HP 10/10</span>
+        <span class="item-status tempo" id="status-tempo">⏱️ --</span>
+      </div>
+
+      <!-- CAMADA 05 — IMAGEM DA CENA -->
+      <div class="camada bloco-imagem" id="camada-05">
+        <img id="imagem-cena" src="imagens/cena-acidente.jpg" alt="Cena de primeiros socorros" loading="eager">
+      </div>
+
+      <!-- CAMADA 06 — PERGUNTA -->
+      <div class="camada bloco-pergunta" id="camada-06">
+        <p class="texto-pergunta">Você chega ao local. O que faz <strong class="destaque-vermelho">PRIMEIRO</strong>?</p>
+      </div>
+
+      <!-- CAMADAS 07 a 11 — BOTÕES A-E -->
+      <div class="bloco-alternativas">
+        <button class="camada botao-opcao" id="camada-07" data-letra="A">
+          <span class="letra-botao">A</span>
+          <span class="texto-botao">Garanta a segurança do local</span>
+        </button>
+        <button class="camada botao-opcao" id="camada-08" data-letra="B">
+          <span class="letra-botao">B</span>
+          <span class="texto-botao">Verifique a consciência da vítima</span>
+        </button>
+        <button class="camada botao-opcao" id="camada-09" data-letra="C">
+          <span class="letra-botao">C</span>
+          <span class="texto-botao">Chame o socorro imediatamente</span>
+        </button>
+        <button class="camada botao-opcao" id="camada-10" data-letra="D">
+          <span class="letra-botao">D</span>
+          <span class="texto-botao">Procure materiais primeiro</span>
+        </button>
+        <button class="camada botao-opcao" id="camada-11" data-letra="E">
+          <span class="letra-botao">E</span>
+          <span class="texto-botao">Aproxime-se sem observar</span>
+        </button>
+      </div>
+
+      <!-- CAMADA 12 — PRODUTOS (SEMPRE APARECE) -->
+      <div class="camada card-produtos" id="camada-12">
+        <h3 class="titulo-produtos">📚 CONHEÇA NOSSOS PRODUTOS</h3>
+        <div class="lista-produtos">
+          <span>• Livro Impresso — Primeiros Socorros</span>
+          <span>• Apostila em PDF</span>
+          <span>• Curso Completo PRIME</span>
+        </div>
+      </div>
+
+      <!-- CAMADA 13 — AUTOR (SEMPRE APARECE) -->
+      <div class="camada card-autor" id="camada-13">
+        <p class="texto-autor">✍️ POR <strong>FRANCIVAL ALVES FARIAS</strong><br>Criador e Autor</p>
+        <button class="btn-plataforma">Ver Plataforma ▶</button>
+      </div>
+
+      <!-- CAMADA 14 — CONTROLES -->
+      <div class="camada barra-controles" id="camada-14">
+        <span class="controle-item">💾 Pontos: 0</span>
+        <button class="controle-btn">🏠 Sair</button>
+        <button class="controle-btn">⏸️ Pausa</button>
+      </div>
+    </div>
+
+    <!-- CAMADA 15 — PUBLICIDADE INFERIOR (some no PRIME) -->
+    <div class="camada ad-inferior" id="camada-15">
+      <div class="espaco-anuncio">
+        <span class="texto-anuncio">📢 Publicidade — Google AdMob</span>
+      </div>
+    </div>
+
+    <!-- CAMADA 16 — MENU INFERIOR -->
+    <nav class="camada menu-inferior" id="camada-16">
+      <button class="nav-item">📖 Estante</button>
+      <button class="nav-item">📊 Desempenho</button>
+      <button class="nav-item btn-jogar">🔴 Jogar</button>
+      <button class="nav-item">📄 Ranking</button>
+      <button class="nav-item">⚙️ Ajustes</button>
+    </nav>
+  </div>
+
+  <!-- ==============================================
+       TELA FINAL / FEEDBACK — APARECE APÓS CENA 60
+       ============================================== -->
+  <div class="tela-final" id="tela-final" style="display: none;">
+    <div class="caixa-final">
+      <h2 class="titulo-final">🏆 SESSÃO CONCLUÍDA</h2>
+      <p class="subtitulo-final">60/60 cenas completadas!</p>
+      
+      <div class="resultados">
+        <div class="item-resultado">✅ Acertos: <span id="res-acertos">--</span></div>
+        <div class="item-resultado">❌ Erros: <span id="res-erros">--</span></div>
+        <div class="item-resultado">🏅 Pontuação: <span id="res-pontos">--</span></div>
+        <div class="item-resultado">⏱️ Tempo médio: <span id="res-tempo">--</span></div>
+      </div>
+      
+      <h3 class="titulo-feedback">⭐ COMO VOCÊ AVALIA ESTA EXPERIÊNCIA?</h3>
+      <div class="opcoes-feedback">
+        <button class="btn-feedback" nota="1">BOM</button>
+        <button class="btn-feedback" nota="2">MUITO BOM</button>
+        <button class="btn-feedback" nota="3">ÓTIMO</button>
+        <button class="btn-feedback" nota="4">INCRÍVEL</button>
+      </div>
+      
+      <textarea class="campo-comentario" placeholder="Deixe seu comentário (opcional)..."></textarea>
+      
+      <button class="btn-jogar-novamente" id="btn-jogar-novamente">🔄 JOGAR NOVAMENTE</button>
+      
+      <p class="autor-capa">✍️ Por FRANCIVAL ALVES FARIAS</p>
+    </div>
+  </div>
+
   <script src="motor/core.js"></script>
-  <script src="motor/adapter.js"></script>
   <script src="js/app.js"></script>
-
 </body>
 </html>
