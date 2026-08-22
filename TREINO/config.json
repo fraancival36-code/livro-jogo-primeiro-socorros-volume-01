@@ -1,0 +1,8 @@
+{
+  "modo": "emergencia",
+  "tem_relogio": false,
+  "tem_pontos": false,
+  "tem_anuncio": false,
+  "tem_diagnostico": false,
+  "aviso_legal_obrigatorio": true
+}
