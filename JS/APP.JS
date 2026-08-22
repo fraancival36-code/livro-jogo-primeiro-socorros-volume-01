@@ -1,209 +1,138 @@
 /**
- * APP.JS — PONTE DE CONEXÃO: MOTOR ↔ ESTANTE
- * ==========================================
- * ⚠️ ESTE ARQUIVO NÃO ALTERA O MOTOR.
- * Apenas conecta a lógica já existente aos elementos visuais.
- * 
- * Regra de Ouro: Motor = intocável. Esta camada = apenas tradução visual.
+ * APP.JS — LÓGICA COMPLETA: CAPA · SISTEMA · FEEDBACK
+ * ================================================
+ * Não mexe no motor. Só controla telas e preferências.
  */
 
-// ==============================================
-// MAPEAMENTO DAS CAMADAS — NÃO MEXER NO MOTOR!
-// ==============================================
-const UI = {
-  // 04_STATUS
-  cena: document.getElementById('status-cena'),
-  hp: document.getElementById('status-hp'),
-  tempo: document.getElementById('status-tempo'),
-  
-  // 05_IMAGEM_CENA
-  imagemCena: document.getElementById('imagem-cena'),
-  
-  // 06_PERGUNTA
-  pergunta: document.querySelector('.texto-pergunta'),
-  
-  // 07 a 11 — BOTÕES A-E
-  botoes: {
-    A: document.getElementById('camada-07'),
-    B: document.getElementById('camada-08'),
-    C: document.getElementById('camada-09'),
-    D: document.getElementById('camada-10'),
-    E: document.getElementById('camada-11')
+const App = {
+  sistemaEscolhido: 'gratuito',
+
+  init() {
+    this.bindCapa();
+    this.bindSistema();
+    this.bindBotoesJogo();
+    this.bindFeedback();
+    this.aplicarSistema();
+    console.log('✅ App carregado — Capa, Sistema e Feedback ativos');
   },
-  
-  // 13_CONTROLES
-  pontos: document.querySelector('.controle-item'),
-  btnSair: document.querySelector('.controle-btn:nth-child(2)'),
-  btnPausa: document.querySelector('.controle-btn:nth-child(3)'),
-  
-  // 12_PRODUTOS — pode ser ligado/desligado
-  cardProdutos: document.getElementById('camada-12'),
-  btnPlataforma: document.querySelector('.btn-plataforma'),
-  
-  // 15_NAVEGAÇÃO
-  navegacao: {
-    estante: document.querySelector('.nav-item:nth-child(1)'),
-    desempenho: document.querySelector('.nav-item:nth-child(2)'),
-    jogar: document.querySelector('.btn-jogar'),
-    ranking: document.querySelector('.nav-item:nth-child(4)'),
-    ajustes: document.querySelector('.nav-item:nth-child(5)')
-  }
-};
 
-// ==============================================
-// INICIALIZAÇÃO — CONECTA E PREPARA
-// ==============================================
-function inicializarEstante() {
-  console.log('✅ Estante PRIME carregada — Camadas independentes ativas');
-  console.log('📦 Motor conectado — Intocável, funcionando');
-  
-  // Conectar eventos dos botões ao motor existente
-  registrarEventosBotoes();
-  
-  // Conectar navegação inferior
-  registrarNavegacao();
-  
-  // Carregar estado inicial do motor
-  sincronizarComMotor();
-}
+  // ===== CAPA → ENTRAR NO JOGO =====
+  bindCapa() {
+    const btn = document.getElementById('btn-iniciar');
+    if (btn) btn.addEventListener('click', () => {
+      document.getElementById('tela-inicial').style.display = 'none';
+      document.getElementById('tela-jogo').style.display = 'block';
+      if (window.MotorPrime && window.MotorPrime.iniciar) {
+        window.MotorPrime.iniciar();
+      }
+    });
+  },
 
-// ==============================================
-// CONECTAR BOTÕES AO MOTOR — SEM ALTERAR LÓGICA
-// ==============================================
-function registrarEventosBotoes() {
-  Object.entries(UI.botoes).forEach(([letra, elemento]) => {
-    if (elemento) {
-      elemento.addEventListener('click', () => {
-        // ✅ Chama a função do motor que JÁ EXISTE
+  // ===== ESCOLHA DO SISTEMA =====
+  bindSistema() {
+    const radios = document.querySelectorAll('input[name="sistema"]');
+    radios.forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        this.sistemaEscolhido = e.target.value;
+        this.aplicarSistema();
+        localStorage.setItem('prime-sistema', this.sistemaEscolhido);
+      });
+    });
+    // Carregar escolha salva
+    const salvo = localStorage.getItem('prime-sistema');
+    if (salvo) {
+      this.sistemaEscolhido = salvo;
+      document.querySelector(`input[value="${salvo}"]`).checked = true;
+      this.aplicarSistema();
+    }
+  },
+
+  aplicarSistema() {
+    const adTopo = document.getElementById('camada-01');
+    const adRodape = document.getElementById('camada-15');
+    
+    if (this.sistemaEscolhido === 'prime') {
+      // SEM anúncios do Google — só os nossos ficam
+      if (adTopo) adTopo.style.display = 'none';
+      if (adRodape) adRodape.style.display = 'none';
+      console.log('✨ Sistema PRIME ativo — anúncios Google removidos');
+    } else {
+      // Versão gratuita — anúncios aparecem
+      if (adTopo) adTopo.style.display = 'flex';
+      if (adRodape) adRodape.style.display = 'flex';
+      console.log('🆓 Versão Gratuita ativa');
+    }
+  },
+
+  // ===== FEEDBACK FINAL =====
+  mostrarTelaFinal(resultados) {
+    const tela = document.getElementById('tela-final');
+    if (!tela) return;
+    
+    // Preencher resultados
+    document.getElementById('res-acertos').textContent = resultados.acertos || '--';
+    document.getElementById('res-erros').textContent = resultados.erros || '--';
+    document.getElementById('res-pontos').textContent = resultados.pontos || '--';
+    document.getElementById('res-tempo').textContent = resultados.tempoMedio || '--';
+    
+    // Mostrar tela
+    tela.style.display = 'flex';
+  },
+
+  bindFeedback() {
+    const botoes = document.querySelectorAll('.btn-feedback');
+    botoes.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Desmarcar todos
+        botoes.forEach(b => b.classList.remove('selecionado'));
+        // Marcar selecionado
+        btn.classList.add('selecionado');
+        
+        // Salvar avaliação
+        const nota = btn.getAttribute('nota');
+        const texto = btn.textContent;
+        console.log('⭐ Avaliação do jogador:', nota, '-', texto);
+        localStorage.setItem('ultima-avaliacao', JSON.stringify({ nota, texto, data: new Date().toISOString() }));
+      });
+    });
+
+    // Jogar Novamente
+    const btnNovamente = document.getElementById('btn-jogar-novamente');
+    if (btnNovamente) btnNovamente.addEventListener('click', () => {
+      document.getElementById('tela-final').style.display = 'none';
+      // Reiniciar motor
+      if (window.MotorPrime && window.MotorPrime.reiniciar) {
+        window.MotorPrime.reiniciar();
+      }
+    });
+  },
+
+  // ===== BOTÕES DO JOGO =====
+  bindBotoesJogo() {
+    // Botão voltar → volta para capa
+    const btnVoltar = document.getElementById('btn-voltar');
+    if (btnVoltar) btnVoltar.addEventListener('click', () => {
+      document.getElementById('tela-jogo').style.display = 'none';
+      document.getElementById('tela-inicial').style.display = 'flex';
+    });
+
+    // Botões A-E → mandar escolha pro motor
+    document.querySelectorAll('.botao-opcao').forEach(botao => {
+      botao.addEventListener('click', () => {
+        const letra = botao.dataset.letra;
         if (window.MotorPrime && window.MotorPrime.escolherOpcao) {
           window.MotorPrime.escolherOpcao(letra);
         }
-        
-        // Efeito visual — sem afetar o motor
-        aplicarFeedbackVisual(elemento, letra);
+        // Feedback visual temporário
+        botao.style.transform = 'scale(0.95)';
+        setTimeout(() => botao.style.transform = 'scale(1)', 150);
       });
-    }
-  });
-}
-
-// ==============================================
-// FEEDBACK VISUAL INDEPENDENTE — NÃO TOCAR NO MOTOR
-// ==============================================
-function aplicarFeedbackVisual(elemento, letra) {
-  // Efeito de clique — só visual, não muda pontuação nem lógica
-  elemento.style.opacity = '0.8';
-  elemento.style.transform = 'scale(0.97)';
-  
-  setTimeout(() => {
-    elemento.style.opacity = '1';
-    elemento.style.transform = 'scale(1)';
-  }, 150);
-  
-  // O motor é que decide a cor final — aqui só escutamos
-  // Motor → verde = acertou, vermelho = errou
-}
-
-// ==============================================
-// SINCRONIZAR DADOS DO MOTOR → TELA
-// ==============================================
-function sincronizarComMotor() {
-  // Atualiza a tela com os dados que o motor já tem
-  // Exemplo — adaptar conforme o motor que já funciona:
-  
-  if (window.MotorPrime) {
-    const estado = window.MotorPrime.estadoAtual || {};
-    
-    // Atualizar Status (Camada 04)
-    if (UI.cena && estado.cenaAtual) {
-      UI.cena.textContent = `Cena ${estado.cenaAtual} de 60`;
-    }
-    if (UI.hp && estado.hp !== undefined) {
-      UI.hp.textContent = `❤️ HP ${estado.hp}/10`;
-    }
-    if (UI.tempo && estado.tempo !== undefined) {
-      UI.tempo.textContent = `⏱️ ${estado.tempo}s`;
-    }
-    
-    // Atualizar Pontos (Camada 13)
-    if (UI.pontos && estado.pontos !== undefined) {
-      UI.pontos.textContent = `💾 Pontos: ${estado.pontos}`;
-    }
-  }
-  
-  // Repetir a cada segundo — mantém a tela sincronizada
-  setTimeout(sincronizarComMotor, 1000);
-}
-
-// ==============================================
-// NAVEGAÇÃO INFERIOR — CAMADA 15 INDEPENDENTE
-// ==============================================
-function registrarNavegacao() {
-  // Botão Jogar — central e vermelho
-  if (UI.navegacao.jogar) {
-    UI.navegacao.jogar.addEventListener('click', () => {
-      if (window.MotorPrime && window.MotorPrime.iniciarJogo) {
-        window.MotorPrime.iniciarJogo();
-      }
     });
-  }
-  
-  // Botão Sair
-  if (UI.btnSair) {
-    UI.btnSair.addEventListener('click', () => {
-      if (window.MotorPrime && window.MotorPrime.sair) {
-        window.MotorPrime.sair();
-      }
-    });
-  }
-  
-  // Botão Pausa
-  if (UI.btnPausa) {
-    UI.btnPausa.addEventListener('click', () => {
-      if (window.MotorPrime && window.MotorPrime.pausar) {
-        window.MotorPrime.pausar();
-      }
-    });
-  }
-  
-  // Botão Ver Plataforma — Card Produtos
-  if (UI.btnPlataforma) {
-    UI.btnPlataforma.addEventListener('click', () => {
-      // Aqui abre a página de produtos — não afeta o jogo
-      alert('Plataforma PRIME — Em breve!');
-    });
-  }
-}
-
-// ==============================================
-// LIGAR QUANDO A PÁGINA CARREGAR
-// ==============================================
-document.addEventListener('DOMContentLoaded', inicializarEstante);
-
-// ==============================================
-// FUNÇÕES PARA AJUSTE FUTURO — CAMADAS INDEPENDENTES
-// ==============================================
-window.EstanteControle = {
-  // Ligar/desligar anúncio superior — sem tocar no jogo
-  toggleAnuncioSuperior: (ativo) => {
-    const el = document.getElementById('camada-02');
-    if (el) el.style.display = ativo ? 'block' : 'none';
-  },
-  
-  // Ligar/desligar card de produtos — sem tocar no jogo
-  toggleCardProdutos: (ativo) => {
-    if (UI.cardProdutos) UI.cardProdutos.style.display = ativo ? 'block' : 'none';
-  },
-  
-  // Ligar/desligar anúncio inferior — sem tocar no jogo
-  toggleAnuncioInferior: (ativo) => {
-    const el = document.getElementById('camada-14');
-    if (el) el.style.display = ativo ? 'block' : 'none';
-  },
-  
-  // Trocar imagem da cena — sem tocar no resto
-  trocarImagem: (caminho) => {
-    if (UI.imagemCena) UI.imagemCena.src = caminho;
   }
 };
 
-console.log('📚 EstanteControle carregado — ajustes visuais sem risco ao motor!');
+// Inicializar quando carregar
+document.addEventListener('DOMContentLoaded', () => App.init());
+
+// Disponibilizar para o motor
+window.App = App;
