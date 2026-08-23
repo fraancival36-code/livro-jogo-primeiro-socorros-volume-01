@@ -3,176 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRIME - Primeiros Socorros</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome para Ícones -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <title>Prime Primeiros Socorros</title>
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #030712;
+            background-color: #0b1120;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 400px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #b0c4de;
+            margin-bottom: 15px;
+        }
+        .lang-badge {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 12px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin: 0 auto 15px auto;
+            font-size: 14px;
+        }
+        .title-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .subtitle {
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: #38bdf8;
+            margin-bottom: 5px;
+        }
+        .main-title {
+            font-size: 26px;
+            font-weight: bold;
             color: #ffffff;
         }
-        .card-glow-blue:hover {
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        .red-text {
+            color: #ef4444;
         }
-        .card-glow-green:hover {
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+        .tagline {
+            font-size: 12px;
+            letter-spacing: 1px;
+            margin: 5px 0 15px 0;
         }
-        .card-glow-red:hover {
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+        .badge-knowledge {
+            border: 1px solid #38bdf8;
+            border-radius: 20px;
+            padding: 6px 15px;
+            font-size: 11px;
+            display: inline-block;
+            color: #e0f2fe;
+        }
+        .stats-bar {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 400px;
+            font-size: 10px;
+            text-align: center;
+            color: #94a3b8;
+            margin: 20px 0;
+        }
+        .stats-bar div {
+            flex: 1;
+        }
+        .card-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            width: 100%;
+            max-width: 400px;
+        }
+        .card {
+            background: rgba(15, 23, 42, 0.9);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        .card-blue {
+            border: 2px solid #38bdf8;
+        }
+        .card-green {
+            border: 2px solid #10b981;
+        }
+        .card-red {
+            border: 2px solid #ef4444;
+        }
+        .card h3 {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        .card p {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .btn-blue {
+            background-color: #0284c7;
+            color: white;
+        }
+        .btn-green {
+            background-color: #047857;
+            color: white;
+        }
+        .btn-red {
+            background-color: #b91c1c;
+            color: white;
+        }
+        .footer-author {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 11px;
+            color: #64748b;
+            letter-spacing: 1px;
         }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-0 md:p-4 bg-black">
+<body>
 
-    <!-- Container do App (Proporção 9:16 Responsiva) -->
-    <div class="w-full max-w-[450px] min-h-screen md:min-h-[800px] bg-slate-950 flex flex-col justify-between relative overflow-hidden shadow-2xl border border-slate-800 md:rounded-3xl">
+    <!-- Topo: Telefones e Idioma -->
+    <div class="header-top">
+        <span>SAMU: 192</span>
+        <span>CORPO DE BOMBEIROS: 193</span>
+    </div>
 
-        <!-- Banner Superior / Imagem de Fundo de Emergência -->
-        <div class="relative h-64 bg-cover bg-center flex flex-col justify-between p-4" style="background-image: linear-gradient(to bottom, rgba(3, 7, 18, 0.4), rgba(3, 7, 18, 1)), url('https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?q=80&w=800');">
-            
-            <!-- Botão Selecionar Idioma -->
-            <div class="flex justify-center z-10">
-                <button class="flex items-center gap-2 bg-slate-900/80 backdrop-blur-md px-4 py-1.5 rounded-full border border-slate-700 text-xs font-semibold hover:bg-slate-800 transition">
-                    <i class="fa-solid font-bold fa-globe text-slate-300"></i>
-                    <span>Idioma</span>
-                    <span class="text-base">🇵🇹</span>
-                </button>
-            </div>
+    <div class="lang-badge">
+        🌐 Idioma 🇧🇷 BR
+    </div>
 
-            <!-- Título & Slogan -->
-            <div class="text-center z-10">
-                <h2 class="tracking-[0.3em] text-cyan-400 text-xs font-bold mb-1">P R I M E</h2>
-                <h1 class="text-3xl font-black uppercase tracking-tight text-slate-100 leading-none">PRIMEIROS</h1>
-                <h1 class="text-4xl font-black uppercase tracking-tight text-red-600 leading-none mb-2">SOCORROS</h1>
-                
-                <p class="text-[11px] uppercase tracking-wider font-semibold text-slate-300">
-                    TREINE. <span class="text-red-500">DECIDA.</span> SALVE VIDAS.
-                </p>
-                
-                <div class="inline-flex items-center gap-1.5 bg-slate-900/80 px-3 py-1 rounded-full border border-slate-700/60 mt-2 text-[10px] text-slate-300">
-                    <i class="fa-solid fa-circle-check text-cyan-400"></i>
-                    <span>CONHECIMENTO QUE FAZ A DIFERENÇA</span>
-                </div>
-            </div>
+    <!-- Títulos Principais -->
+    <div class="title-container">
+        <div class="subtitle">PRIME</div>
+        <div class="main-title">PRIMEIROS <span class="red-text">SOCORROS</span></div>
+        <div class="tagline">TREINE. DECIDA. SALVE VIDAS.</div>
+        <div class="badge-knowledge">✔ CONHECIMENTO QUE FAZ A DIFERENÇA</div>
+    </div>
+
+    <!-- Barra de Ícones/Estatísticas -->
+    <div class="stats-bar">
+        <div>🎯<br>60 CENAS DESAFIADORAS</div>
+        <div>⏱<br>AVALIAÇÃO POR TEMPO</div>
+        <div>✳<br>PROTOCOLO XABCDE</div>
+        <div>🏆<br>EVOLUA SEU NÍVEL</div>
+    </div>
+
+    <!-- Cards Principais -->
+    <div class="card-container">
+        <!-- Começar o Jogo -->
+        <div class="card card-blue">
+            <h3>COMEÇAR O JOGO</h3>
+            <p>Inicie o treinamento simulado. Teste suas habilidades e aprenda a salvar vidas em 60 cenários desafiadores. Jogue agora!</p>
+            <a href="#" class="btn btn-blue">INICIAR JOGO &gt;</a>
         </div>
 
-        <!-- Recursos Rápidos em Ícones -->
-        <div class="grid grid-cols-4 gap-1 px-4 py-2 border-y border-slate-800/60 bg-slate-950/50 text-center text-[10px]">
-            <div class="flex flex-col items-center">
-                <i class="fa-solid fa-crosshairs text-cyan-400 text-base mb-1"></i>
-                <span class="text-slate-400 leading-tight">60 CENAS<br><strong class="text-slate-200">DESAFIADORAS</strong></span>
-            </div>
-            <div class="flex flex-col items-center">
-                <i class="fa-regular fa-clock text-cyan-400 text-base mb-1"></i>
-                <span class="text-slate-400 leading-tight">AVALIAÇÃO<br><strong class="text-slate-200">POR TEMPO</strong></span>
-            </div>
-            <div class="flex flex-col items-center">
-                <i class="fa-solid fa-star-of-life text-cyan-400 text-base mb-1"></i>
-                <span class="text-slate-400 leading-tight">PROTOCOLO<br><strong class="text-slate-200">XABCDE</strong></span>
-            </div>
-            <div class="flex flex-col items-center">
-                <i class="fa-solid fa-trophy text-cyan-400 text-base mb-1"></i>
-                <span class="text-slate-400 leading-tight">EVOLUA<br><strong class="text-slate-200">SEU NÍVEL</strong></span>
-            </div>
+        <!-- Consultar -->
+        <div class="card card-green">
+            <h3>CONSULTAR</h3>
+            <p>Protocolos, orientações e informações essenciais à mão.</p>
+            <a href="#" class="btn btn-green" style="background:transparent; border: 1px solid #10b981; color: #10b981;">CONHECIMENTO NA PRÁTICA &gt;</a>
         </div>
 
-        <!-- Cards Principais de Ação (Três Colunas) -->
-        <div class="grid grid-cols-3 gap-2 px-3 py-4">
-            
-            <!-- Card JOGAR -->
-            <div class="bg-slate-900/40 border border-blue-500/40 rounded-xl p-2.5 flex flex-col justify-between text-center transition card-glow-blue cursor-pointer">
-                <div>
-                    <div class="w-10 h-10 mx-auto mb-2 rounded-full border border-blue-500/50 flex items-center justify-center bg-blue-950/30">
-                        <i class="fa-solid fa-gamepad text-blue-400 text-lg"></i>
-                    </div>
-                    <h3 class="font-bold text-sm text-slate-100">JOGAR</h3>
-                    <p class="text-[10px] text-slate-400 mt-1 leading-tight">Responda às situações e tome as melhores decisões.</p>
-                </div>
-                <div class="mt-3 bg-blue-950/60 border border-blue-500/30 rounded-lg py-1 px-1 text-[9px] font-semibold text-blue-300 flex items-center justify-between">
-                    <span>TREINAMENTO INTERATIVO</span>
-                    <i class="fa-solid fa-chevron-right text-[8px]"></i>
-                </div>
-            </div>
-
-            <!-- Card CONSULTAR -->
-            <div class="bg-slate-900/40 border border-emerald-500/40 rounded-xl p-2.5 flex flex-col justify-between text-center transition card-glow-green cursor-pointer">
-                <div>
-                    <div class="w-10 h-10 mx-auto mb-2 rounded-full border border-emerald-500/50 flex items-center justify-center bg-emerald-950/30">
-                        <i class="fa-solid fa-book-open-reader text-emerald-400 text-lg"></i>
-                    </div>
-                    <h3 class="font-bold text-sm text-slate-100">CONSULTAR</h3>
-                    <p class="text-[10px] text-slate-400 mt-1 leading-tight">Protocolos, orientações e informações essenciais à mão.</p>
-                </div>
-                <div class="mt-3 bg-emerald-950/60 border border-emerald-500/30 rounded-lg py-1 px-1 text-[9px] font-semibold text-emerald-300 flex items-center justify-between">
-                    <span>CONHECIMENTO NA PRÁTICA</span>
-                    <i class="fa-solid fa-chevron-right text-[8px]"></i>
-                </div>
-            </div>
-
-            <!-- Card ATENDIMENTO REAL -->
-            <div class="bg-slate-900/40 border border-red-500/40 rounded-xl p-2.5 flex flex-col justify-between text-center transition card-glow-red cursor-pointer">
-                <div>
-                    <div class="w-10 h-10 mx-auto mb-2 rounded-full border border-red-500/50 flex items-center justify-center bg-red-950/30">
-                        <i class="fa-solid fa-notes-medical text-red-400 text-lg"></i>
-                    </div>
-                    <h3 class="font-bold text-xs text-slate-100 uppercase">Atendimento Real</h3>
-                    <p class="text-[10px] text-slate-400 mt-1 leading-tight">Avalie, registre e organize as informações de uma ocorrência.</p>
-                </div>
-                <div class="mt-3 bg-red-950/60 border border-red-500/30 rounded-lg py-1 px-1 text-[9px] font-semibold text-red-300 flex items-center justify-between">
-                    <span>FICHA TÉCNICA DA OCORRÊNCIA</span>
-                    <i class="fa-solid fa-chevron-right text-[8px]"></i>
-                </div>
-            </div>
-
+        <!-- Livro Oficial -->
+        <div class="card card-red">
+            <h3>LIVRO OFICIAL</h3>
+            <p>Conheça o livro sobre Primeiros para aprofundar seu conhecimento e apoiar a venda.</p>
+            <a href="#" class="btn btn-red" style="background:transparent; border: 1px solid #ef4444; color: #ef4444;">VER DETALHES DO LIVRO &gt;</a>
         </div>
 
-        <!-- Seção Preparado / Emergência -->
-        <div class="px-3 mb-2">
-            <div class="bg-slate-900/80 border border-slate-800 rounded-xl overflow-hidden flex items-center justify-between p-2">
-                <div class="flex items-center gap-2 pl-1">
-                    <i class="fa-solid fa-shield-halved text-slate-400 text-lg"></i>
-                    <div class="text-[10px]">
-                        <p class="font-bold text-slate-200">PREPARADO HOJE. <span class="text-red-500">CAPAZ SEMPRE.</span></p>
-                        <p class="text-slate-400 text-[9px]">Cada decisão correta pode salvar uma vida.</p>
-                    </div>
-                </div>
-                <div class="bg-red-950/80 border border-red-600/50 rounded-lg px-3 py-1 flex items-center gap-3">
-                    <div class="text-center">
-                        <span class="block text-[8px] text-slate-300 font-bold">SAMU</span>
-                        <a href="tel:192" class="text-xs font-black text-white hover:underline"><i class="fa-solid fa-phone text-[9px] text-red-400"></i> 192</a>
-                    </div>
-                    <div class="text-center border-l border-red-800/80 pl-3">
-                        <span class="block text-[8px] text-slate-300 font-bold">BOMBEIROS</span>
-                        <a href="tel:193" class="text-xs font-black text-white hover:underline"><i class="fa-solid fa-phone text-[9px] text-red-400"></i> 193</a>
-                    </div>
-                </div>
-            </div>
+        <!-- Apoiadores dos Jogos -->
+        <div class="card card-green" style="border-color: #34d399;">
+            <h3>APOIADORES DOS JOGOS</h3>
+            <p>Empresas parceiras que ajudam na estrutura, propaganda e desenvolvimento. Seu nome aqui no final do jogo!</p>
+            <a href="#" class="btn btn-green" style="background: #065f46;">COLABORE COM O JOGO &gt;</a>
         </div>
+    </div>
 
-        <!-- Rodapé Informativo -->
-        <div class="bg-slate-950 p-3 border-t border-slate-800/60 text-[9px] text-slate-400">
-            <div class="grid grid-cols-3 gap-1 mb-2 text-center">
-                <div class="flex items-center justify-center gap-1">
-                    <i class="fa-solid fa-wifi text-cyan-400"></i>
-                    <span>100% OFFLINE</span>
-                </div>
-                <div class="flex items-center justify-center gap-1">
-                    <i class="fa-solid fa-chart-simple text-cyan-400"></i>
-                    <span>SALVO LOCALMENTE</span>
-                </div>
-                <div class="flex items-center justify-center gap-1">
-                    <i class="fa-solid fa-code text-cyan-400"></i>
-                    <span>FRANCIVAL ALVES</span>
-                </div>
-            </div>
-            <p class="text-center text-slate-600 text-[8px]">© PRIME | Francival Alves Farias</p>
-        </div>
-
+    <!-- Rodapé Autor -->
+    <div class="footer-author">
+        AUTOR: FRANCIVAL ALVES FARIAS.<br>
+        CRIADOR & AUTOR OFICIAL.
     </div>
 
 </body>
