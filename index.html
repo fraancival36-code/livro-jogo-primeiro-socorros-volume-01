@@ -1,186 +1,179 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="author" content="Francival Alves Farias">
-  <title>Primeiros Socorros</title>
-  <link rel="stylesheet" href="css/estante.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRIME - Primeiros Socorros</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome para Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #030712;
+            color: #ffffff;
+        }
+        .card-glow-blue:hover {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+        .card-glow-green:hover {
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+        }
+        .card-glow-red:hover {
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+        }
+    </style>
 </head>
-<body>
+<body class="min-h-screen flex items-center justify-center p-0 md:p-4 bg-black">
 
-  <!-- ==============================================
-       TELA INICIAL / CAPA — APARECE PRIMEIRO
-       ============================================== -->
-  <div class="tela-inicial" id="tela-inicial">
-    <div class="capa-conteudo">
-      <div class="icone-capa">🚑</div>
-      <h1 class="titulo-capa">PRIMEIROS SOCORROS</h1>
-      <p class="subtitulo-capa">Treine. Decida. Salve.</p>
-      
-      <div class="destaques-capa">
-        <div class="item-destaque">⚡ 60 cenas reais</div>
-        <div class="item-destaque">⏱️ Cronômetro opcional</div>
-        <div class="item-destaque">📚 Aprenda praticando</div>
-      </div>
-      
-      <button class="btn-iniciar" id="btn-iniciar">▶️ INICIAR JOGO</button>
-      
-      <div class="caixa-sistema">
-        <p class="texto-sistema">Escolha o sistema:</p>
-        <label class="opcao-sistema">
-          <input type="radio" name="sistema" value="gratuito" checked>
-          <span>🆓 Gratuito — com anúncios</span>
-        </label>
-        <label class="opcao-sistema">
-          <input type="radio" name="sistema" value="prime">
-          <span>✨ Sistema PRIME — sem anúncios do Google</span>
-        </label>
-      </div>
-      
-      <p class="autor-capa">✍️ Por FRANCIVAL ALVES FARIAS</p>
-    </div>
-  </div>
+    <!-- Container do App (Proporção 9:16 Responsiva) -->
+    <div class="w-full max-w-[450px] min-h-screen md:min-h-[800px] bg-slate-950 flex flex-col justify-between relative overflow-hidden shadow-2xl border border-slate-800 md:rounded-3xl">
 
-  <!-- ==============================================
-       TELA DO JOGO — ESCONDIDA ATÉ CLICAR EM INICIAR
-       ============================================== -->
-  <div class="tela-jogo" id="tela-jogo" style="display: none;">
+        <!-- Banner Superior / Imagem de Fundo de Emergência -->
+        <div class="relative h-64 bg-cover bg-center flex flex-col justify-between p-4" style="background-image: linear-gradient(to bottom, rgba(3, 7, 18, 0.4), rgba(3, 7, 18, 1)), url('https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?q=80&w=800');">
+            
+            <!-- Botão Selecionar Idioma -->
+            <div class="flex justify-center z-10">
+                <button class="flex items-center gap-2 bg-slate-900/80 backdrop-blur-md px-4 py-1.5 rounded-full border border-slate-700 text-xs font-semibold hover:bg-slate-800 transition">
+                    <i class="fa-solid font-bold fa-globe text-slate-300"></i>
+                    <span>Idioma</span>
+                    <span class="text-base">🇵🇹</span>
+                </button>
+            </div>
 
-    <!-- CAMADA 01 — PUBLICIDADE SUPERIOR (some no PRIME) -->
-    <div class="camada ad-superior" id="camada-01">
-      <div class="espaco-anuncio">
-        <span class="texto-anuncio">📢 Publicidade — Google AdMob</span>
-      </div>
-    </div>
-
-    <!-- CAMADA 02 — NAVEGAÇÃO -->
-    <div class="camada navegacao-topo" id="camada-02">
-      <button class="btn-voltar" id="btn-voltar">←</button>
-    </div>
-
-    <div class="container-principal">
-
-      <!-- CAMADA 03 — TÍTULO CORRIGIDO -->
-      <header class="camada titulo-jogo" id="camada-03">
-        <h1>PRIMEIROS SOCORROS</h1>
-        <span class="status-online">🟢 ONLINE</span>
-      </header>
-
-      <!-- CAMADA 04 — STATUS -->
-      <div class="camada status-bar" id="camada-04">
-        <span class="item-status" id="status-cena">Cena 1 de 60</span>
-        <span class="item-status hp" id="status-hp">❤️ HP 10/10</span>
-        <span class="item-status tempo" id="status-tempo">⏱️ --</span>
-      </div>
-
-      <!-- CAMADA 05 — IMAGEM DA CENA -->
-      <div class="camada bloco-imagem" id="camada-05">
-        <img id="imagem-cena" src="imagens/cena-acidente.jpg" alt="Cena de primeiros socorros" loading="eager">
-      </div>
-
-      <!-- CAMADA 06 — PERGUNTA -->
-      <div class="camada bloco-pergunta" id="camada-06">
-        <p class="texto-pergunta">Você chega ao local. O que faz <strong class="destaque-vermelho">PRIMEIRO</strong>?</p>
-      </div>
-
-      <!-- CAMADAS 07 a 11 — BOTÕES A-E -->
-      <div class="bloco-alternativas">
-        <button class="camada botao-opcao" id="camada-07" data-letra="A">
-          <span class="letra-botao">A</span>
-          <span class="texto-botao">Garanta a segurança do local</span>
-        </button>
-        <button class="camada botao-opcao" id="camada-08" data-letra="B">
-          <span class="letra-botao">B</span>
-          <span class="texto-botao">Verifique a consciência da vítima</span>
-        </button>
-        <button class="camada botao-opcao" id="camada-09" data-letra="C">
-          <span class="letra-botao">C</span>
-          <span class="texto-botao">Chame o socorro imediatamente</span>
-        </button>
-        <button class="camada botao-opcao" id="camada-10" data-letra="D">
-          <span class="letra-botao">D</span>
-          <span class="texto-botao">Procure materiais primeiro</span>
-        </button>
-        <button class="camada botao-opcao" id="camada-11" data-letra="E">
-          <span class="letra-botao">E</span>
-          <span class="texto-botao">Aproxime-se sem observar</span>
-        </button>
-      </div>
-
-      <!-- CAMADA 12 — PRODUTOS (SEMPRE APARECE) -->
-      <div class="camada card-produtos" id="camada-12">
-        <h3 class="titulo-produtos">📚 CONHEÇA NOSSOS PRODUTOS</h3>
-        <div class="lista-produtos">
-          <span>• Livro Impresso — Primeiros Socorros</span>
-          <span>• Apostila em PDF</span>
-          <span>• Curso Completo PRIME</span>
+            <!-- Título & Slogan -->
+            <div class="text-center z-10">
+                <h2 class="tracking-[0.3em] text-cyan-400 text-xs font-bold mb-1">P R I M E</h2>
+                <h1 class="text-3xl font-black uppercase tracking-tight text-slate-100 leading-none">PRIMEIROS</h1>
+                <h1 class="text-4xl font-black uppercase tracking-tight text-red-600 leading-none mb-2">SOCORROS</h1>
+                
+                <p class="text-[11px] uppercase tracking-wider font-semibold text-slate-300">
+                    TREINE. <span class="text-red-500">DECIDA.</span> SALVE VIDAS.
+                </p>
+                
+                <div class="inline-flex items-center gap-1.5 bg-slate-900/80 px-3 py-1 rounded-full border border-slate-700/60 mt-2 text-[10px] text-slate-300">
+                    <i class="fa-solid fa-circle-check text-cyan-400"></i>
+                    <span>CONHECIMENTO QUE FAZ A DIFERENÇA</span>
+                </div>
+            </div>
         </div>
-      </div>
 
-      <!-- CAMADA 13 — AUTOR (SEMPRE APARECE) -->
-      <div class="camada card-autor" id="camada-13">
-        <p class="texto-autor">✍️ POR <strong>FRANCIVAL ALVES FARIAS</strong><br>Criador e Autor</p>
-        <button class="btn-plataforma">Ver Plataforma ▶</button>
-      </div>
+        <!-- Recursos Rápidos em Ícones -->
+        <div class="grid grid-cols-4 gap-1 px-4 py-2 border-y border-slate-800/60 bg-slate-950/50 text-center text-[10px]">
+            <div class="flex flex-col items-center">
+                <i class="fa-solid fa-crosshairs text-cyan-400 text-base mb-1"></i>
+                <span class="text-slate-400 leading-tight">60 CENAS<br><strong class="text-slate-200">DESAFIADORAS</strong></span>
+            </div>
+            <div class="flex flex-col items-center">
+                <i class="fa-regular fa-clock text-cyan-400 text-base mb-1"></i>
+                <span class="text-slate-400 leading-tight">AVALIAÇÃO<br><strong class="text-slate-200">POR TEMPO</strong></span>
+            </div>
+            <div class="flex flex-col items-center">
+                <i class="fa-solid fa-star-of-life text-cyan-400 text-base mb-1"></i>
+                <span class="text-slate-400 leading-tight">PROTOCOLO<br><strong class="text-slate-200">XABCDE</strong></span>
+            </div>
+            <div class="flex flex-col items-center">
+                <i class="fa-solid fa-trophy text-cyan-400 text-base mb-1"></i>
+                <span class="text-slate-400 leading-tight">EVOLUA<br><strong class="text-slate-200">SEU NÍVEL</strong></span>
+            </div>
+        </div>
 
-      <!-- CAMADA 14 — CONTROLES -->
-      <div class="camada barra-controles" id="camada-14">
-        <span class="controle-item">💾 Pontos: 0</span>
-        <button class="controle-btn">🏠 Sair</button>
-        <button class="controle-btn">⏸️ Pausa</button>
-      </div>
+        <!-- Cards Principais de Ação (Três Colunas) -->
+        <div class="grid grid-cols-3 gap-2 px-3 py-4">
+            
+            <!-- Card JOGAR -->
+            <div class="bg-slate-900/40 border border-blue-500/40 rounded-xl p-2.5 flex flex-col justify-between text-center transition card-glow-blue cursor-pointer">
+                <div>
+                    <div class="w-10 h-10 mx-auto mb-2 rounded-full border border-blue-500/50 flex items-center justify-center bg-blue-950/30">
+                        <i class="fa-solid fa-gamepad text-blue-400 text-lg"></i>
+                    </div>
+                    <h3 class="font-bold text-sm text-slate-100">JOGAR</h3>
+                    <p class="text-[10px] text-slate-400 mt-1 leading-tight">Responda às situações e tome as melhores decisões.</p>
+                </div>
+                <div class="mt-3 bg-blue-950/60 border border-blue-500/30 rounded-lg py-1 px-1 text-[9px] font-semibold text-blue-300 flex items-center justify-between">
+                    <span>TREINAMENTO INTERATIVO</span>
+                    <i class="fa-solid fa-chevron-right text-[8px]"></i>
+                </div>
+            </div>
+
+            <!-- Card CONSULTAR -->
+            <div class="bg-slate-900/40 border border-emerald-500/40 rounded-xl p-2.5 flex flex-col justify-between text-center transition card-glow-green cursor-pointer">
+                <div>
+                    <div class="w-10 h-10 mx-auto mb-2 rounded-full border border-emerald-500/50 flex items-center justify-center bg-emerald-950/30">
+                        <i class="fa-solid fa-book-open-reader text-emerald-400 text-lg"></i>
+                    </div>
+                    <h3 class="font-bold text-sm text-slate-100">CONSULTAR</h3>
+                    <p class="text-[10px] text-slate-400 mt-1 leading-tight">Protocolos, orientações e informações essenciais à mão.</p>
+                </div>
+                <div class="mt-3 bg-emerald-950/60 border border-emerald-500/30 rounded-lg py-1 px-1 text-[9px] font-semibold text-emerald-300 flex items-center justify-between">
+                    <span>CONHECIMENTO NA PRÁTICA</span>
+                    <i class="fa-solid fa-chevron-right text-[8px]"></i>
+                </div>
+            </div>
+
+            <!-- Card ATENDIMENTO REAL -->
+            <div class="bg-slate-900/40 border border-red-500/40 rounded-xl p-2.5 flex flex-col justify-between text-center transition card-glow-red cursor-pointer">
+                <div>
+                    <div class="w-10 h-10 mx-auto mb-2 rounded-full border border-red-500/50 flex items-center justify-center bg-red-950/30">
+                        <i class="fa-solid fa-notes-medical text-red-400 text-lg"></i>
+                    </div>
+                    <h3 class="font-bold text-xs text-slate-100 uppercase">Atendimento Real</h3>
+                    <p class="text-[10px] text-slate-400 mt-1 leading-tight">Avalie, registre e organize as informações de uma ocorrência.</p>
+                </div>
+                <div class="mt-3 bg-red-950/60 border border-red-500/30 rounded-lg py-1 px-1 text-[9px] font-semibold text-red-300 flex items-center justify-between">
+                    <span>FICHA TÉCNICA DA OCORRÊNCIA</span>
+                    <i class="fa-solid fa-chevron-right text-[8px]"></i>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Seção Preparado / Emergência -->
+        <div class="px-3 mb-2">
+            <div class="bg-slate-900/80 border border-slate-800 rounded-xl overflow-hidden flex items-center justify-between p-2">
+                <div class="flex items-center gap-2 pl-1">
+                    <i class="fa-solid fa-shield-halved text-slate-400 text-lg"></i>
+                    <div class="text-[10px]">
+                        <p class="font-bold text-slate-200">PREPARADO HOJE. <span class="text-red-500">CAPAZ SEMPRE.</span></p>
+                        <p class="text-slate-400 text-[9px]">Cada decisão correta pode salvar uma vida.</p>
+                    </div>
+                </div>
+                <div class="bg-red-950/80 border border-red-600/50 rounded-lg px-3 py-1 flex items-center gap-3">
+                    <div class="text-center">
+                        <span class="block text-[8px] text-slate-300 font-bold">SAMU</span>
+                        <a href="tel:192" class="text-xs font-black text-white hover:underline"><i class="fa-solid fa-phone text-[9px] text-red-400"></i> 192</a>
+                    </div>
+                    <div class="text-center border-l border-red-800/80 pl-3">
+                        <span class="block text-[8px] text-slate-300 font-bold">BOMBEIROS</span>
+                        <a href="tel:193" class="text-xs font-black text-white hover:underline"><i class="fa-solid fa-phone text-[9px] text-red-400"></i> 193</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rodapé Informativo -->
+        <div class="bg-slate-950 p-3 border-t border-slate-800/60 text-[9px] text-slate-400">
+            <div class="grid grid-cols-3 gap-1 mb-2 text-center">
+                <div class="flex items-center justify-center gap-1">
+                    <i class="fa-solid fa-wifi text-cyan-400"></i>
+                    <span>100% OFFLINE</span>
+                </div>
+                <div class="flex items-center justify-center gap-1">
+                    <i class="fa-solid fa-chart-simple text-cyan-400"></i>
+                    <span>SALVO LOCALMENTE</span>
+                </div>
+                <div class="flex items-center justify-center gap-1">
+                    <i class="fa-solid fa-code text-cyan-400"></i>
+                    <span>FRANCIVAL ALVES</span>
+                </div>
+            </div>
+            <p class="text-center text-slate-600 text-[8px]">© PRIME | Francival Alves Farias</p>
+        </div>
+
     </div>
 
-    <!-- CAMADA 15 — PUBLICIDADE INFERIOR (some no PRIME) -->
-    <div class="camada ad-inferior" id="camada-15">
-      <div class="espaco-anuncio">
-        <span class="texto-anuncio">📢 Publicidade — Google AdMob</span>
-      </div>
-    </div>
-
-    <!-- CAMADA 16 — MENU INFERIOR -->
-    <nav class="camada menu-inferior" id="camada-16">
-      <button class="nav-item">📖 Estante</button>
-      <button class="nav-item">📊 Desempenho</button>
-      <button class="nav-item btn-jogar">🔴 Jogar</button>
-      <button class="nav-item">📄 Ranking</button>
-      <button class="nav-item">⚙️ Ajustes</button>
-    </nav>
-  </div>
-
-  <!-- ==============================================
-       TELA FINAL / FEEDBACK — APARECE APÓS CENA 60
-       ============================================== -->
-  <div class="tela-final" id="tela-final" style="display: none;">
-    <div class="caixa-final">
-      <h2 class="titulo-final">🏆 SESSÃO CONCLUÍDA</h2>
-      <p class="subtitulo-final">60/60 cenas completadas!</p>
-      
-      <div class="resultados">
-        <div class="item-resultado">✅ Acertos: <span id="res-acertos">--</span></div>
-        <div class="item-resultado">❌ Erros: <span id="res-erros">--</span></div>
-        <div class="item-resultado">🏅 Pontuação: <span id="res-pontos">--</span></div>
-        <div class="item-resultado">⏱️ Tempo médio: <span id="res-tempo">--</span></div>
-      </div>
-      
-      <h3 class="titulo-feedback">⭐ COMO VOCÊ AVALIA ESTA EXPERIÊNCIA?</h3>
-      <div class="opcoes-feedback">
-        <button class="btn-feedback" nota="1">BOM</button>
-        <button class="btn-feedback" nota="2">MUITO BOM</button>
-        <button class="btn-feedback" nota="3">ÓTIMO</button>
-        <button class="btn-feedback" nota="4">INCRÍVEL</button>
-      </div>
-      
-      <textarea class="campo-comentario" placeholder="Deixe seu comentário (opcional)..."></textarea>
-      
-      <button class="btn-jogar-novamente" id="btn-jogar-novamente">🔄 JOGAR NOVAMENTE</button>
-      
-      <p class="autor-capa">✍️ Por FRANCIVAL ALVES FARIAS</p>
-    </div>
-  </div>
-
-  <script src="motor/core.js"></script>
-  <script src="js/app.js"></script>
 </body>
 </html>
