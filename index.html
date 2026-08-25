@@ -2,215 +2,343 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prime Primeiros Socorros</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PRIME — Primeiros Socorros</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
         body {
-            background-color: #0b1120;
-            color: #ffffff;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .tela {
+            width: 100%;
+            max-width: 430px;
+            height: 100vh;
+            max-height: 932px;
+            background: linear-gradient(180deg, #0F3460 0%, #1A5F7A 100%);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            color: #fff;
+        }
+
+        /* === FUNDO DA IMAGEM === */
+        .fundo-imagem {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 42%;
+            background: linear-gradient(180deg, rgba(15,52,96,0.3) 0%, rgba(26,95,122,0.95) 100%),
+                        url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80') center/cover no-repeat;
+            z-index: 1;
+        }
+
+        /* === CABEÇALHO — ETIQUETAS DE REFERÊNCIA === */
+        .cabecalho {
+            position: relative;
+            z-index: 3;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .menu-btn, .config-btn {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            backdrop-filter: blur(6px);
+            flex-shrink: 0;
+        }
+        .referencia-emergencia {
+            display: flex;
+            gap: 10px;
+        }
+        .etiqueta-ref {
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: #FF3B30;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(255,59,48,0.25);
+        }
+        .idioma-btn {
+            display: block;
+            margin: 8px auto 0;
+            padding: 8px 20px;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            backdrop-filter: blur(6px);
+            cursor: pointer;
+        }
+
+        /* === TÍTULO PRINCIPAL === */
+        .titulo-secao {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            padding: 12px 16px 8px;
+        }
+        .titulo {
+            font-size: 32px;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            margin-bottom: 6px;
+        }
+        .subtitulo {
+            font-size: 16px;
+            color: #E0F2F1;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        /* === INDICADORES === */
+        .indicadores {
+            position: relative;
+            z-index: 3;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
-            min-height: 100vh;
+            gap: 8px;
+            padding: 8px 16px 16px;
         }
-        .header-top {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            max-width: 400px;
-            font-size: 12px;
-            font-weight: bold;
-            color: #b0c4de;
-            margin-bottom: 15px;
-        }
-        .lang-badge {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 5px 12px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            margin: 0 auto 15px auto;
+        .indicador {
+            padding: 8px 20px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 18px;
             font-size: 14px;
-        }
-        .title-container {
+            font-weight: 600;
+            backdrop-filter: blur(6px);
+            width: 260px;
             text-align: center;
-            margin-bottom: 20px;
         }
-        .subtitle {
-            font-size: 11px;
-            letter-spacing: 2px;
-            color: #38bdf8;
-            margin-bottom: 5px;
-        }
-        .main-title {
-            font-size: 26px;
-            font-weight: bold;
-            color: #ffffff;
-        }
-        .red-text {
-            color: #ef4444;
-        }
-        .tagline {
-            font-size: 12px;
-            letter-spacing: 1px;
-            margin: 5px 0 15px 0;
-        }
-        .badge-knowledge {
-            border: 1px solid #38bdf8;
-            border-radius: 20px;
-            padding: 6px 15px;
-            font-size: 11px;
-            display: inline-block;
-            color: #e0f2fe;
-        }
-        .stats-bar {
-            display: flex;
-            justify-content: space-around;
-            width: 100%;
-            max-width: 400px;
-            font-size: 10px;
-            text-align: center;
-            color: #94a3b8;
-            margin: 20px 0;
-        }
-        .stats-bar div {
-            flex: 1;
-        }
-        .card-container {
+
+        /* === 4 BOTÕES PRINCIPAIS — MOTORES === */
+        .botoes-motores {
+            position: relative;
+            z-index: 3;
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-            width: 100%;
-            max-width: 400px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 0 16px 16px;
         }
-        .card {
-            background: rgba(15, 23, 42, 0.9);
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
+        .botao-motor {
+            background: #fff;
+            color: #0F3460;
+            border-radius: 20px;
+            padding: 20px 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: transform 0.2s, box-shadow 0.2s;
             position: relative;
         }
-        .card-blue {
-            border: 2px solid #38bdf8;
+        .botao-motor:active {
+            transform: scale(0.97);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
         }
-        .card-green {
-            border: 2px solid #10b981;
+        .botao-motor .icone {
+            font-size: 28px;
+            color: #0F3460;
         }
-        .card-red {
-            border: 2px solid #ef4444;
-        }
-        .card h3 {
+        .botao-motor .titulo-btn {
             font-size: 16px;
-            margin: 10px 0;
-        }
-        .card p {
-            font-size: 12px;
-            color: #94a3b8;
-            margin-bottom: 15px;
-            line-height: 1.4;
-        }
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .btn-blue {
-            background-color: #0284c7;
-            color: white;
-        }
-        .btn-green {
-            background-color: #047857;
-            color: white;
-        }
-        .btn-red {
-            background-color: #b91c1c;
-            color: white;
-        }
-        .footer-author {
-            margin-top: 30px;
+            font-weight: 800;
             text-align: center;
-            font-size: 11px;
-            color: #64748b;
-            letter-spacing: 1px;
+            line-height: 1.2;
+        }
+        .botao-motor .desc-btn {
+            font-size: 13px;
+            color: #4A6FA5;
+            text-align: center;
+            line-height: 1.3;
+        }
+        .topo-verde {
+            position: absolute;
+            top: 0; right: 0;
+            width: 30px; height: 30px;
+            background: #22C55E;
+            border-radius: 0 20px 0 8px;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .topo-verde-coracao { background: #EF4444; }
+
+        /* === CHECKLIST DE EMERGÊNCIA === */
+        .checklist-btn {
+            position: relative;
+            z-index: 3;
+            margin: 0 16px 16px;
+            background: #fff;
+            color: #0F3460;
+            border-radius: 16px;
+            padding: 16px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: transform 0.2s;
+        }
+        .checklist-btn:active { transform: scale(0.98); }
+        .checklist-esq {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .checklist-esq .icone { font-size: 24px; }
+        .checklist-titulo {
+            font-size: 17px;
+            font-weight: 800;
+        }
+        .checklist-seta {
+            font-size: 20px;
+            color: #4A6FA5;
+        }
+
+        /* === RODAPÉ === */
+        .rodape {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            padding: 8px 16px 24px;
+            font-size: 14px;
+            color: #B2EBF2;
+            font-weight: 600;
+            margin-top: auto;
         }
     </style>
 </head>
 <body>
 
-    <!-- Topo: Telefones e Idioma -->
-    <div class="header-top">
-        <span>SAMU: 192</span>
-        <span>CORPO DE BOMBEIROS: 193</span>
-    </div>
+<div class="tela">
 
-    <div class="lang-badge">
-        🌐 Idioma 🇧🇷 BR
-    </div>
+    <!-- Fundo da imagem -->
+    <div class="fundo-imagem"></div>
 
-    <!-- Títulos Principais -->
-    <div class="title-container">
-        <div class="subtitle">PRIME</div>
-        <div class="main-title">PRIMEIROS <span class="red-text">SOCORROS</span></div>
-        <div class="tagline">TREINE. DECIDA. SALVE VIDAS.</div>
-        <div class="badge-knowledge">✔ CONHECIMENTO QUE FAZ A DIFERENÇA</div>
-    </div>
-
-    <!-- Barra de Ícones/Estatísticas -->
-    <div class="stats-bar">
-        <div>🎯<br>60 CENAS DESAFIADORAS</div>
-        <div>⏱<br>AVALIAÇÃO POR TEMPO</div>
-        <div>✳<br>PROTOCOLO XABCDE</div>
-        <div>🏆<br>EVOLUA SEU NÍVEL</div>
-    </div>
-
-    <!-- Cards Principais -->
-    <div class="card-container">
-        <!-- Começar o Jogo -->
-        <div class="card card-blue">
-            <h3>COMEÇAR O JOGO</h3>
-            <p>Inicie o treinamento simulado. Teste suas habilidades e aprenda a salvar vidas em 60 cenários desafiadores. Jogue agora!</p>
-            <a href="#" class="btn btn-blue">INICIAR JOGO &gt;</a>
+    <!-- Cabeçalho - Referências, NÃO botões -->
+    <div class="cabecalho">
+        <button class="menu-btn">☰</button>
+        <div>
+            <div class="referencia-emergencia">
+                <div class="etiqueta-ref">🚑 SAMU 192</div>
+                <div class="etiqueta-ref">🚒 BOMBEIROS 193</div>
+            </div>
+            <button class="idioma-btn" onclick="mudarIdioma()">🌐 PT-BR</button>
         </div>
-
-        <!-- Consultar -->
-        <div class="card card-green">
-            <h3>CONSULTAR</h3>
-            <p>Protocolos, orientações e informações essenciais à mão.</p>
-            <a href="#" class="btn btn-green" style="background:transparent; border: 1px solid #10b981; color: #10b981;">CONHECIMENTO NA PRÁTICA &gt;</a>
-        </div>
-
-        <!-- Livro Oficial -->
-        <div class="card card-red">
-            <h3>LIVRO OFICIAL</h3>
-            <p>Conheça o livro sobre Primeiros para aprofundar seu conhecimento e apoiar a venda.</p>
-            <a href="#" class="btn btn-red" style="background:transparent; border: 1px solid #ef4444; color: #ef4444;">VER DETALHES DO LIVRO &gt;</a>
-        </div>
-
-        <!-- Apoiadores dos Jogos -->
-        <div class="card card-green" style="border-color: #34d399;">
-            <h3>APOIADORES DOS JOGOS</h3>
-            <p>Empresas parceiras que ajudam na estrutura, propaganda e desenvolvimento. Seu nome aqui no final do jogo!</p>
-            <a href="#" class="btn btn-green" style="background: #065f46;">COLABORE COM O JOGO &gt;</a>
-        </div>
+        <button class="config-btn">⚙️</button>
     </div>
 
-    <!-- Rodapé Autor -->
-    <div class="footer-author">
-        AUTOR: FRANCIVAL ALVES FARIAS.<br>
-        CRIADOR & AUTOR OFICIAL.
+    <!-- Título Principal -->
+    <div class="titulo-secao">
+        <h1 class="titulo">PRIMEIROS SOCORROS</h1>
+        <p class="subtitulo">TREINE. DECIDA. SALVE VIDAS.</p>
     </div>
+
+    <!-- Indicadores -->
+    <div class="indicadores">
+        <div class="indicador">🎮 60 CENAS</div>
+        <div class="indicador">⏱️ TREINAMENTO POR TEMPO</div>
+        <div class="indicador">📋 PROTOCOLO XABCDE</div>
+    </div>
+
+    <!-- 4 Botões Principais — Motores -->
+    <div class="botoes-motores">
+        <button class="botao-motor" onclick="abrirMotor('jogo')">
+            <span class="topo-verde">✓</span>
+            <span class="icone">🎮</span>
+            <span class="titulo-btn">COMEÇAR O JOGO</span>
+            <span class="desc-btn">Treinamento interativo</span>
+        </button>
+
+        <button class="botao-motor" onclick="abrirMotor('consulta')">
+            <span class="topo-verde">✓</span>
+            <span class="icone">🔍</span>
+            <span class="titulo-btn">CONSULTAR</span>
+            <span class="desc-btn">Conhecimentos e protocolos</span>
+        </button>
+
+        <button class="botao-motor" onclick="abrirMotor('livro')">
+            <span class="topo-verde">✓</span>
+            <span class="icone">📖</span>
+            <span class="titulo-btn">LIVRO OFICIAL</span>
+            <span class="desc-btn">Material completo</span>
+        </button>
+
+        <button class="botao-motor" onclick="abrirMotor('apoiadores')">
+            <span class="topo-verde topo-verde-coracao">❤️</span>
+            <span class="icone">🤝</span>
+            <span class="titulo-btn">APOIADORES</span>
+            <span class="desc-btn">Apoio aos projetos</span>
+        </button>
+    </div>
+
+    <!-- Checklist de Emergência -->
+    <button class="checklist-btn" onclick="abrirMotor('checklist')">
+        <div class="checklist-esq">
+            <span class="icone">📋</span>
+            <div class="checklist-texto">
+                <div class="checklist-titulo">CHECKLIST DE EMERGÊNCIA</div>
+            </div>
+        </div>
+        <span class="checklist-seta">›</span>
+    </button>
+
+    <!-- Rodapé -->
+    <div class="rodape">
+        AUTOR: FRANCIVAL ALVES FARIAS
+    </div>
+
+</div>
+
+<script>
+// 🌐 Idioma
+function mudarIdioma() {
+    alert('🌐 Selecionar Idioma\n\nAtual: Português (Brasil)');
+}
+
+// 🎯 ABRIR MOTORES — Cada botão leva para sua tela
+function abrirMotor(motor) {
+    const caminhos = {
+        jogo: 'cena-01.html',
+        consulta: 'consulta.html',
+        livro: 'livro.html',
+        apoiadores: 'apoiadores.html',
+        checklist: 'checklist.html'
+    };
+    const nomes = {
+        jogo: '🎮 COMEÇAR O JOGO',
+        consulta: '🔍 CONSULTAR',
+        livro: '📖 LIVRO OFICIAL',
+        apoiadores: '🤝 APOIADORES',
+        checklist: '📋 CHECKLIST DE EMERGÊNCIA'
+    };
+
+    alert(`Abrindo: ${nomes[motor]}`);
+    // window.location.href = caminhos[motor];
+}
+</script>
 
 </body>
 </html>
