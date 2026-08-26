@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PRIME — Primeiros Socorros</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
+        html, body { height: 100%; width: 100%; overflow: hidden; }
+        body { background: linear-gradient(180deg, #0F4C81 0%, #0A3D6E 100%); }
+
+        .tela {
+            width: 100%;
+            height: 100%;
+            max-width: 430px;
+            max-height: 932px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            padding: 8px 12px;
+            color: #fff;
+        }
+
+        .cabecalho {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+        .menu-btn, .config-btn {
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .emergencia {
+            display: flex;
+            gap: 6px;
+        }
+        .etiqueta-emergencia {
+            padding: 8px 14px;
+            border-radius: 12px;
+            background: #FF3B30;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            border: none;
+        }
+        .idioma {
+            text-align: center;
+            margin: 4px 0 8px;
+        }
+        .idioma-btn {
+            padding: 6px 18px;
+            border-radius: 14px;
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .titulo {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        .titulo h1 {
+            font-size: 30px;
+            font-weight: 900;
+            margin-bottom: 2px;
+        }
+        .titulo p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .indicadores {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .indicador {
+            padding: 6px 18px;
+            background: rgba(255,255,255,0.12);
+            border-radius: 14px;
+            font-size: 13px;
+            width: 240px;
+            text-align: center;
+        }
+
+        .botoes {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            flex: 1;
+            align-content: start;
+        }
+        .botao {
+            background: #fff;
+            color: #0F4C81;
+            border-radius: 20px;
+            padding: 12px 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.10);
+            transition: transform 0.15s;
+            min-height: 120px;
+        }
+        .botao:active { transform: scale(0.97); }
+        .botao .icone { font-size: 26px; }
+        .botao .titulo-btn {
+            font-size: 16px;
+            font-weight: 800;
+            text-align: center;
+        }
+        .botao .desc-btn {
+            font-size: 13px;
+            color: #4A6FA5;
+            text-align: center;
+        }
+
+        .rodape {
+            text-align: center;
+            padding-top: 6px;
+            font-size: 12px;
+            color: #B2EBF2;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+<div class="tela">
+    <div class="cabecalho">
+        <button class="menu-btn">☰</button>
+        <div class="emergencia">
+            <div class="etiqueta-emergencia">🚑 SAMU 192</div>
+            <div class="etiqueta-emergencia">🚒 BOMBEIROS 193</div>
+        </div>
+        <button class="config-btn">⚙️</button>
+    </div>
+
+    <div class="idioma">
+        <button class="idioma-btn">🌐 PT-BR</button>
+    </div>
+
+    <div class="titulo">
+        <h1>PRIMEIROS SOCORROS</h1>
+        <p>TREINE. DECIDA. SALVE VIDAS.</p>
+    </div>
+
+    <div class="indicadores">
+        <div class="indicador">🎮 60 CENAS</div>
+        <div class="indicador">⏱️ TREINAMENTO POR TEMPO</div>
+        <div class="indicador">📋 PROTOCOLO XABCDE</div>
+    </div>
+
+    <div class="botoes">
+        <!-- ✅ BOTÃO 1 → JÁ EXISTE: jogo.html -->
+        <button class="botao" onclick="window.location.href='jogo.html'">
+            <span class="icone">🎮</span>
+            <span class="titulo-btn">1 — COMEÇAR O JOGO</span>
+            <span class="desc-btn">Treinamento interativo</span>
+        </button>
+
+        <!-- ⚠️ BOTÃO 2 → Pasta TREINO existe, criar index.html dentro -->
+        <button class="botao" onclick="window.location.href='TREINO/index.html'">
+            <span class="icone">🔍</span>
+            <span class="titulo-btn">2 — CONSULTAR</span>
+            <span class="desc-btn">Conhecimentos e protocolos</span>
+        </button>
+
+        <!-- ✅ BOTÃO 3 → JÁ EXISTE: menu-volumes.html -->
+        <button class="botao" onclick="window.location.href='menu-volumes.html'">
+            <span class="icone">📖</span>
+            <span class="titulo-btn">3 — LIVRO OFICIAL</span>
+            <span class="desc-btn">Material completo</span>
+        </button>
+
+        <!-- ⏳ BOTÃO 4 → Em construção -->
+        <button class="botao" onclick="alert('Em breve — em desenvolvimento!')">
+            <span class="icone">🤝</span>
+            <span class="titulo-btn">4 — APOIADORES</span>
+            <span class="desc-btn">Apoio aos projetos</span>
+        </button>
+
+        <!-- ✅ BOTÃO 5 → JÁ EXISTE: guia-emergencia.html -->
+        <button class="botao" onclick="window.location.href='guia-emergencia.html'">
+            <span class="icone">📋</span>
+            <span class="titulo-btn">5 — CHECKLIST DE EMERGÊNCIA</span>
+            <span class="desc-btn">Verificação e registro</span>
+        </button>
+
+        <!-- ⏳ BOTÃO 6 → Em construção -->
+        <button class="botao" onclick="alert('Em breve — em desenvolvimento!')">
+            <span class="icone">📊</span>
+            <span class="titulo-btn">6 — MOTOR 6</span>
+            <span class="desc-btn">Reserva / Futuro</span>
+        </button>
+    </div>
+
+    <div class="rodape">
+        AUTOR: FRANCIVAL ALVES FARIAS
+    </div>
+</div>
+
+</body>
+</html>
