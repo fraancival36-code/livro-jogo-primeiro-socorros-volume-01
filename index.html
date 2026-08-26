@@ -6,173 +6,138 @@
     <title>PRIME — Primeiros Socorros</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
-        body, html {
-            height: 100%;
-            width: 100%;
-            overflow: hidden; /* SEM ROLAGEM — tudo numa tela só */
-        }
+        html, body { height: 100%; width: 100%; overflow: hidden; }
+        body { background: linear-gradient(180deg, #0F4C81 0%, #0A3D6E 100%); }
+
         .tela {
             width: 100%;
             height: 100%;
             max-width: 430px;
-            max-height: 932px; /* PROPORÇÃO 9:16 EXATA */
+            max-height: 932px;
             margin: 0 auto;
-            background: linear-gradient(180deg, #0F3460 0%, #1A5F7A 100%);
             display: flex;
             flex-direction: column;
-            position: relative;
+            padding: 8px 12px;
             color: #fff;
-            padding: 12px 16px 24px;
-        }
-
-        /* === FUNDO DA IMAGEM === */
-        .fundo-imagem {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%;
-            height: 38%;
-            background: linear-gradient(180deg, rgba(15,52,96,0.3) 0%, rgba(26,95,122,0.95) 100%),
-                        url('assets/fundo-medico.jpg') center/cover no-repeat;
-            z-index: 1;
         }
 
         /* === CABEÇALHO === */
         .cabecalho {
-            position: relative;
-            z-index: 3;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 8px 0;
+            margin-bottom: 4px;
         }
         .menu-btn, .config-btn {
-            width: 38px; height: 38px;
+            width: 36px; height: 36px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.15);
             border: none;
             color: #fff;
-            font-size: 17px;
+            font-size: 16px;
             cursor: pointer;
-            backdrop-filter: blur(6px);
-            flex-shrink: 0;
         }
-        .referencia-emergencia {
+        .emergencia {
             display: flex;
-            gap: 8px;
+            gap: 6px;
         }
-        .etiqueta-ref {
-            padding: 6px 12px;
-            border-radius: 16px;
+        .etiqueta-emergencia {
+            padding: 8px 14px;
+            border-radius: 12px;
             background: #FF3B30;
             color: #fff;
-            font-size: 13px;
-            font-weight: 600;
-            box-shadow: 0 2px 6px rgba(255,59,48,0.25);
+            font-size: 14px;
+            font-weight: 700;
+            border: none;
+        }
+        .idioma {
+            text-align: center;
+            margin: 4px 0 8px;
         }
         .idioma-btn {
-            padding: 6px 16px;
+            padding: 6px 18px;
             border-radius: 14px;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.15);
             color: #fff;
             border: none;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
-            backdrop-filter: blur(6px);
-            cursor: pointer;
         }
 
         /* === TÍTULO === */
-        .titulo-secao {
-            position: relative;
-            z-index: 3;
-            text-align: center;
-            padding: 6px 0 10px;
-        }
         .titulo {
-            font-size: 28px;
-            font-weight: 900;
-            color: #fff;
-            text-shadow: 0 2px 6px rgba(0,0,0,0.2);
-            margin-bottom: 4px;
+            text-align: center;
+            margin-bottom: 8px;
         }
-        .subtitulo {
+        .titulo h1 {
+            font-size: 30px;
+            font-weight: 900;
+            margin-bottom: 2px;
+        }
+        .titulo p {
             font-size: 14px;
-            color: #E0F2F1;
-            font-weight: 500;
-            letter-spacing: 0.5px;
+            opacity: 0.9;
         }
 
         /* === INDICADORES === */
         .indicadores {
-            position: relative;
-            z-index: 3;
             display: flex;
-            justify-content: center;
-            gap: 8px;
-            padding: 0 0 14px;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 5px;
+            align-items: center;
+            margin-bottom: 10px;
         }
         .indicador {
-            padding: 6px 14px;
-            background: rgba(255,255,255,0.15);
+            padding: 6px 18px;
+            background: rgba(255,255,255,0.12);
             border-radius: 14px;
-            font-size: 12px;
-            font-weight: 600;
-            backdrop-filter: blur(6px);
+            font-size: 13px;
+            width: 240px;
+            text-align: center;
         }
 
-        /* === 6 BOTÕES PRINCIPAIS — NOMES EXATOS, CAMINHOS FIXOS === */
-        .botoes-motores {
-            position: relative;
-            z-index: 3;
+        /* === 6 BOTÕES — TODOS CABENDO, SEM ROLAGEM === */
+        .botoes {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+            gap: 8px;
             flex: 1;
+            align-content: start;
         }
-        .botao-motor {
+        .botao {
             background: #fff;
-            color: #0F3460;
-            border-radius: 16px;
-            padding: 16px 10px;
+            color: #0F4C81;
+            border-radius: 20px;
+            padding: 12px 8px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 6px;
+            justify-content: center;
+            gap: 4px;
             border: none;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.12);
-            transition: transform 0.15s, box-shadow 0.15s;
-            min-height: 110px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.10);
+            transition: transform 0.15s;
+            min-height: 120px;
         }
-        .botao-motor:active {
-            transform: scale(0.97);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.12);
-        }
-        .botao-motor .icone {
-            font-size: 26px;
-            margin-bottom: 4px;
-        }
-        .botao-motor .titulo-btn {
-            font-size: 15px;
+        .botao:active { transform: scale(0.97); }
+        .botao .icone { font-size: 26px; }
+        .botao .titulo-btn {
+            font-size: 16px;
             font-weight: 800;
             text-align: center;
-            line-height: 1.2;
         }
-        .botao-motor .desc-btn {
-            font-size: 12px;
+        .botao .desc-btn {
+            font-size: 13px;
             color: #4A6FA5;
             text-align: center;
-            line-height: 1.3;
         }
 
         /* === RODAPÉ === */
         .rodape {
-            position: relative;
-            z-index: 3;
             text-align: center;
-            padding-top: 10px;
-            font-size: 13px;
+            padding-top: 6px;
+            font-size: 12px;
             color: #B2EBF2;
             font-weight: 600;
         }
@@ -182,75 +147,68 @@
 
 <div class="tela">
 
-    <!-- FUNDO -->
-    <div class="fundo-imagem"></div>
-
     <!-- CABEÇALHO -->
     <div class="cabecalho">
         <button class="menu-btn">☰</button>
-        <div style="text-align: center;">
-            <div class="referencia-emergencia">
-                <span class="etiqueta-ref">🚑 SAMU 192</span>
-                <span class="etiqueta-ref">🚒 BOMBEIROS 193</span>
-            </div>
-            <button class="idioma-btn" onclick="mudarIdioma()">🌐 PT-BR</button>
+        <div class="emergencia">
+            <div class="etiqueta-emergencia">🚑 SAMU 192</div>
+            <div class="etiqueta-emergencia">🚒 BOMBEIROS 193</div>
         </div>
         <button class="config-btn">⚙️</button>
     </div>
 
+    <!-- IDIOMA -->
+    <div class="idioma">
+        <button class="idioma-btn">🌐 PT-BR</button>
+    </div>
+
     <!-- TÍTULO -->
-    <div class="titulo-secao">
-        <h1 class="titulo">PRIMEIROS SOCORROS</h1>
-        <p class="subtitulo">TREINE. DECIDA. SALVE VIDAS.</p>
+    <div class="titulo">
+        <h1>PRIMEIROS SOCORROS</h1>
+        <p>TREINE. DECIDA. SALVE VIDAS.</p>
     </div>
 
     <!-- INDICADORES -->
     <div class="indicadores">
-        <span class="indicador">🎮 60 CENAS</span>
-        <span class="indicador">⏱️ TREINAMENTO POR TEMPO</span>
-        <span class="indicador">📋 PROTOCOLO XABCDE</span>
+        <div class="indicador">🎮 60 CENAS</div>
+        <div class="indicador">⏱️ TREINAMENTO POR TEMPO</div>
+        <div class="indicador">📋 PROTOCOLO XABCDE</div>
     </div>
 
-    <!-- 6 BOTÕES — NOMES EXATOS + CAMINHOS FIXOS -->
-    <div class="botoes-motores">
+    <!-- 6 BOTÕES — TODOS APARECENDO, SEM ROLAR -->
+    <div class="botoes">
 
-        <!-- BOTÃO 1 → MOTOR 01 JOGO -->
-        <button class="botao-motor" onclick="abrirMotor('motor01')">
+        <button class="botao" onclick="abrirMotor('motor01')">
             <span class="icone">🎮</span>
             <span class="titulo-btn">COMEÇAR O JOGO</span>
             <span class="desc-btn">Treinamento interativo</span>
         </button>
 
-        <!-- BOTÃO 2 → MOTOR 02 CONSULTA -->
-        <button class="botao-motor" onclick="abrirMotor('motor02')">
+        <button class="botao" onclick="abrirMotor('motor02')">
             <span class="icone">🔍</span>
             <span class="titulo-btn">CONSULTAR</span>
             <span class="desc-btn">Conhecimentos e protocolos</span>
         </button>
 
-        <!-- BOTÃO 3 → MOTOR 03 LIVRO -->
-        <button class="botao-motor" onclick="abrirMotor('motor03')">
+        <button class="botao" onclick="abrirMotor('motor03')">
             <span class="icone">📖</span>
             <span class="titulo-btn">LIVRO OFICIAL</span>
             <span class="desc-btn">Material completo</span>
         </button>
 
-        <!-- BOTÃO 4 → MOTOR 04 APOIADORES -->
-        <button class="botao-motor" onclick="abrirMotor('motor04')">
+        <button class="botao" onclick="abrirMotor('motor04')">
             <span class="icone">🤝</span>
             <span class="titulo-btn">APOIADORES</span>
             <span class="desc-btn">Apoio aos projetos</span>
         </button>
 
-        <!-- BOTÃO 5 → MOTOR 05 CHECKLIST -->
-        <button class="botao-motor" onclick="abrirMotor('motor05')">
+        <button class="botao" onclick="abrirMotor('motor05')">
             <span class="icone">📋</span>
             <span class="titulo-btn">CHECKLIST DE EMERGÊNCIA</span>
             <span class="desc-btn">Verificação e registro</span>
         </button>
 
-        <!-- BOTÃO 6 → MOTOR 06 EXPANSÃO -->
-        <button class="botao-motor" onclick="abrirMotor('motor06')">
+        <button class="botao" onclick="abrirMotor('motor06')">
             <span class="icone">📊</span>
             <span class="titulo-btn">MOTOR 6</span>
             <span class="desc-btn">Reserva / Futuro</span>
@@ -266,7 +224,7 @@
 </div>
 
 <script>
-// 🔒 CAMINHOS OFICIAIS — CONGELADOS. NÃO ALTERAR.
+// 🔒 CAMINHOS FIXOS — NÃO ALTERAR
 const CAMINHOS = {
     motor01: '../MOTOR_01_JOGO/index.html',
     motor02: '../MOTOR_02_CONSULTA/index.html',
@@ -276,20 +234,13 @@ const CAMINHOS = {
     motor06: '../MOTOR_06_EXPANSAO/index.html'
 };
 
-// 🎯 ABRIR MOTOR — SÓ SEGUE O CAMINHO FIXO
 function abrirMotor(motor) {
     const caminho = CAMINHOS[motor];
     if (caminho) {
-        // Em desenvolvimento: mostra para onde vai
-        // alert(`Abrindo: ${caminho}`);
         window.location.href = caminho;
     } else {
-        alert('❌ Caminho não definido: ' + motor);
+        alert('❌ Caminho não encontrado: ' + motor);
     }
-}
-
-function mudarIdioma() {
-    alert('🌐 Idioma atual: Português (Brasil)');
 }
 </script>
 
