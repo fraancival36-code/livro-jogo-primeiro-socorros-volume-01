@@ -175,40 +175,46 @@
         <div class="indicador">📋 PROTOCOLO XABCDE</div>
     </div>
 
-    <!-- 6 BOTÕES — TODOS APARECENDO, SEM ROLAR -->
+    <!-- 6 BOTÕES — CAMINHOS REAIS DO SEU PROJETO -->
     <div class="botoes">
 
-        <button class="botao" onclick="abrirMotor('motor01')">
+        <!-- BOTÃO 1 → Jogo (já existe) -->
+        <button class="botao" onclick="window.location.href='jogo.html'">
             <span class="icone">🎮</span>
             <span class="titulo-btn">COMEÇAR O JOGO</span>
             <span class="desc-btn">Treinamento interativo</span>
         </button>
 
-        <button class="botao" onclick="abrirMotor('motor02')">
+        <!-- BOTÃO 2 → Treino/Consulta (pasta já existe) -->
+        <button class="botao" onclick="window.location.href='TREINO/index.html'">
             <span class="icone">🔍</span>
             <span class="titulo-btn">CONSULTAR</span>
             <span class="desc-btn">Conhecimentos e protocolos</span>
         </button>
 
-        <button class="botao" onclick="abrirMotor('motor03')">
+        <!-- BOTÃO 3 → Livro/Volumes (já existe) -->
+        <button class="botao" onclick="window.location.href='menu-volumes.html'">
             <span class="icone">📖</span>
             <span class="titulo-btn">LIVRO OFICIAL</span>
             <span class="desc-btn">Material completo</span>
         </button>
 
-        <button class="botao" onclick="abrirMotor('motor04')">
+        <!-- BOTÃO 4 → Apoiadores (criar depois) -->
+        <button class="botao" onclick="alert('Em desenvolvimento — em breve!')">
             <span class="icone">🤝</span>
             <span class="titulo-btn">APOIADORES</span>
             <span class="desc-btn">Apoio aos projetos</span>
         </button>
 
-        <button class="botao" onclick="abrirMotor('motor05')">
+        <!-- BOTÃO 5 → Checklist/Ocorrência (já existe) -->
+        <button class="botao" onclick="window.location.href='guia-emergencia.html'">
             <span class="icone">📋</span>
             <span class="titulo-btn">CHECKLIST DE EMERGÊNCIA</span>
             <span class="desc-btn">Verificação e registro</span>
         </button>
 
-        <button class="botao" onclick="abrirMotor('motor06')">
+        <!-- BOTÃO 6 → Reserva/Futuro -->
+        <button class="botao" onclick="alert('Em desenvolvimento — em breve!')">
             <span class="icone">📊</span>
             <span class="titulo-btn">MOTOR 6</span>
             <span class="desc-btn">Reserva / Futuro</span>
@@ -222,27 +228,6 @@
     </div>
 
 </div>
-
-<script>
-// 🔒 CAMINHOS FIXOS — NÃO ALTERAR
-const CAMINHOS = {
-    motor01: '../MOTOR_01_JOGO/index.html',
-    motor02: '../MOTOR_02_CONSULTA/index.html',
-    motor03: '../MOTOR_03_LIVRO/index.html',
-    motor04: '../MOTOR_04_APOIADORES/index.html',
-    motor05: '../MOTOR_05_CHECKLIST/index.html',
-    motor06: '../MOTOR_06_EXPANSAO/index.html'
-};
-
-function abrirMotor(motor) {
-    const caminho = CAMINHOS[motor];
-    if (caminho) {
-        window.location.href = caminho;
-    } else {
-        alert('❌ Caminho não encontrado: ' + motor);
-    }
-}
-</script>
 
 </body>
 </html>
